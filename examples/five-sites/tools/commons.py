@@ -62,8 +62,29 @@ def get(title, out, width=1600):
     return meta
 
 
+def original_url(title):
+    """Commons stores originals at a path derived from the MD5 of the file name."""
+    import hashlib
+    name = title.removeprefix("File:").replace(" ", "_")
+    h = hashlib.md5(name.encode()).hexdigest()
+    return f"https://upload.wikimedia.org/wikipedia/commons/{h[0]}/{h[:2]}/{urllib.parse.quote(name)}"
+
+
+def download(title, out, width=1600):
+    """Fetch the original straight from upload.wikimedia.org (no API call) and resize."""
+    import io
+    from PIL import Image
+    im = Image.open(io.BytesIO(fetch(original_url(title)))).convert("RGB")
+    if im.width > width:
+        im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+    im.save(out, "JPEG", quality=82, optimize=True, progressive=True)
+    return im.size
+
+
 if __name__ == "__main__":
-    if sys.argv[1] == "search":
+    if sys.argv[1] == "download":
+        print(download(sys.argv[2], sys.argv[3], int(sys.argv[4]) if len(sys.argv) > 4 else 1600))
+    elif sys.argv[1] == "search":
         for r in search(sys.argv[2]):
             print(f'{r["title"][:72]} | {r["w"]}x{r["h"]} | {r["license"]} | {r["artist"][:40]}')
     else:
