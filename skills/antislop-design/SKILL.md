@@ -1,15 +1,22 @@
 ---
 name: antislop-design
-description: An end-to-end workflow for frontend design that does not look like an AI template. It starts from the product and audience, commits to a stated design concept, builds the page, audits it against eight generic patterns (palette as personality, the interchangeable hero, cards for everything, glass without a reason, bland type hierarchy, meaningless metrics, the endless icon grid, glow competing with content), then revises up to three decisions that are still generic, and none when the design is already specific. Gradients, cards, glass and glow are allowed when the design concept or audit records a reason. Demands specific copy, credible proof, varied layouts and a visual identity built for the project, plus checks for mobile layout, readability, contrast and interaction states. Use whenever building, redesigning, styling, reviewing, auditing, animating or polishing a website, landing page, web app, dashboard or component, or when the user says it looks AI-made, generic, templated or vibe-coded. Trigger even if they never say "slop".
+description: An end-to-end workflow for frontend design that does not look like an AI template. It starts from the product and audience, commits to a stated design concept, builds the page, audits it against eight generic patterns (palette as personality, the interchangeable hero, cards for everything, glass without a reason, bland type hierarchy, meaningless metrics, the endless icon grid, glow competing with content), then revises up to three decisions that are still generic, and none when the design is already specific. It asks at most four high-impact questions up front, studies real sites of the same kind for task order and composition, makes the rendered visual result a real gate (a scanner pass is not a visual pass), and requires honest primary actions with no invented photos or proof. Gradients, cards, glass and glow are allowed when the design concept or audit records a reason. Demands specific copy, credible proof, varied layouts and a visual identity built for the project, plus checks for mobile layout, readability, contrast and interaction states. Use whenever building, redesigning, styling, reviewing, auditing, animating or polishing a website, landing page, web app, dashboard or component, or when the user says it looks AI-made, generic, templated or vibe-coded. Trigger even if they never say "slop".
 argument-hint: "[build | audit | polish | motion | libs | copy] [target]"
 ---
 
 # antislop-design
 
-The visual reference for this skill is [references/visual-reference.pdf](references/visual-reference.pdf)
-("Beyond the AI website template"), written out in
-[references/generic-patterns.md](references/generic-patterns.md). **When any other file in
-this skill conflicts with the PDF, the PDF wins.**
+Two visual references drive this skill:
+
+- [references/visual-reference.pdf](references/visual-reference.pdf) ("Beyond the AI website
+  template"), written out in [references/generic-patterns.md](references/generic-patterns.md):
+  the eight generic patterns and the anti-template audit.
+- [references/real-sites.pdf](references/real-sites.pdf) ("24 real websites, 24 different
+  design jobs"), written out in [references/real-sites.md](references/real-sites.md): real
+  sites by type, what to borrow, what to ask, and the visual-judgment gate.
+
+**When any other file in this skill conflicts with these PDFs, the PDFs win.** Study
+them for principles; never recreate a screenshot.
 
 ## The rule everything else serves
 
@@ -26,16 +33,23 @@ what websites usually look like goes.
 The brief always wins. If the user asks for a purple gradient or a glass navbar, build it
 well and note the reason as "requested".
 
-The PDF's illustrations use one palette and type style. That is the PDF's own look, not a
-template. Each project gets an identity drawn from its own subject.
+The first PDF's illustrations use one palette and type style. That is the PDF's own look,
+not a template. Each project gets an identity drawn from its own subject.
+
+Two more rules hold everywhere:
+
+- **A scanner pass is not a visual pass.** The rendered page has to look right to a
+  person at the sizes it ships at (step 4). Clean scans never overrule a failed look.
+- **Primary actions are honest.** A missing stream, checkout or form must not appear to
+  work. Never invent photos, proof, customers or performance numbers.
 
 ## Commands
 
 | Command | What it runs | Steps |
 |---|---|---|
 | `build [feature]` (default for new work) | Full workflow | 0 to 8 |
-| `audit [target]` | Pattern audit, scans and quality checks on existing UI, no edits | 0, 5, 6, 7, report |
-| `polish [target]` | Audit, then revise and fix | 0, 5 to 8 |
+| `audit [target]` | Visual gate, pattern audit, scans and quality checks on existing UI, no edits | 0, 4 to 7, report |
+| `polish [target]` | Audit, then revise and fix | 0, 4 to 8 |
 | `motion [target]` | Motion review and tokenizing | motion reference only |
 | `libs [task]` | Library lookup | library reference only |
 | `copy [target]` | Copy and proof pass | step 3 copy rules plus the copy scan |
@@ -56,9 +70,15 @@ No argument and no obvious intent: ask which one, in one short question.
 
 ## Step 1. Understand the product and audience
 
-Write these down before any visual decision. Ask the user for what you cannot find; if
-they want you to proceed anyway, state your assumptions and mark them.
+Write these down before any visual decision:
 
+- **Site type.** Which of the jobs in [references/real-sites.md](references/real-sites.md)
+  this is closest to (cafe, radio, store, publication, civic service, software product,
+  portfolio...). It decides what the visitor expects to find first.
+- **Visual material.** What real imagery exists: photographs of the place, product,
+  people or work; product screens; artwork; footage; data for charts. List what exists
+  and what does not. A design without authentic material has to be carried by type,
+  structure and the task, and that changes the concept.
 - **Audience.** Who visits, what they already know, what situation they are in.
 - **Key task.** The one thing a visitor should understand or do. This becomes the single
   primary action per view.
@@ -71,9 +91,39 @@ they want you to proceed anyway, state your assumptions and mark them.
 Five-second target: a visitor should be able to tell who it serves, what it does and the
 next action. Write that sentence now; the hero has to deliver it.
 
-## Step 2. Choose a design concept
+### Ask only what changes the design
 
-State, in writing, before coding:
+If the brief or the project lacks decisive information, ask **at most four** focused
+questions, **together in one message**, chosen from:
+
+1. **Imagery.** Do you have real photos, product images, artwork or footage? May I source
+   licensed images online if needed?
+2. **Brand.** Are any colors, fonts, logo rules or visual references fixed? What should
+   this definitely not feel like?
+3. **Content and proof.** Which facts, product states, prices, dates, metrics and proof
+   are real and approved?
+4. **Task.** What should the visitor do first, and what happens after they click? (A
+   radio player, booking flow, checkout or form needs an honest working or demo state.)
+
+Rules:
+- Do not ask about anything the brief or the project already answers. Use those answers.
+- Make a recommendation with each question, so the user can just say yes.
+- If the user wants progress immediately, state reasonable assumptions and build.
+- A preferred color or font is a constraint to design with, not something to override
+  because a pattern checker dislikes it.
+- Never silently substitute generic stock imagery for real material.
+
+## Step 2. Study real sites, then choose a design concept
+
+**Study first.** Pick at least three entries from
+[references/real-sites.md](references/real-sites.md): the closest match to the site type,
+plus one or two from other categories in a different style whose task order or
+composition solves a similar problem. When a browser is available, open the live sites to
+see behavior and the mobile layout. Write down, for each, the principle you are borrowing
+(task order, how the primary action stays in sight, how imagery or type carries the
+mood) and what you will not copy (brand, photographs, exact layout).
+
+**Then the concept.** State, in writing, before coding:
 
 1. **Concept.** One sentence that ties the look to the subject ("a field notebook for
    small farms", "a ledger you can read at a glance"). Drawn from the product's world,
@@ -142,6 +192,15 @@ tempted to remove the effect, for example
 `/* unslop-ignore: gradient maps cold-to-warm across the forecast range */`. The scanners
 skip lines carrying `unslop-ignore`.
 
+**Honest actions and material.**
+- A primary action that is not connected (no stream, no checkout, no form endpoint)
+  shows that before anyone clicks: a visible offline, demo or "coming soon" state on or
+  beside the control, not a button that looks live and fails afterwards.
+- Use real imagery the user supplied, or licensed images the user agreed to (credit
+  them). Never invent photographs, people, customers or results. When there is no
+  imagery, design the page to stand without it and say what material would make it
+  stronger.
+
 **States.** Design the states each control actually has. Every interactive element
 needs a visible keyboard focus state. Beyond that, a link needs hover; a button needs
 hover, active and disabled if it can be disabled, and loading if it triggers slow work; a
@@ -153,10 +212,24 @@ empty and a loading state. Skip states a control cannot enter.
 [references/motion.md](references/motion.md): one authored moment per view, shared tokens,
 a `prefers-reduced-motion` guard.
 
-## Step 4. Render and look
+## Step 4. Render and judge (the visual gate)
 
-Render the page at desktop (about 1440px) and mobile (about 390px) widths with real copy.
-Batch your looking: note everything wrong in one pass, fix it, then look again.
+Render the page at desktop (about 1440px) and mobile (about 390px) widths with real copy,
+take screenshots and look at them. Batch your looking: note everything wrong in one pass.
+
+Then judge the actual visual result:
+
+1. Does it feel like this kind of place or product? Compare it with the real sites you
+   studied in step 2.
+2. Is there enough authentic visual material, or is the page leaning on decoration to
+   fill the space?
+3. Are scale, rhythm, imagery and type balanced across the whole page, not just the hero?
+4. Does it look good at the real viewport sizes, including what is visible before
+   scrolling?
+
+**If any answer is no, redesign the composition**, then render and judge again. Do not
+patch a failing composition with small tweaks, and do not move on because the scanners
+are clean. Steps 5 to 7 run on a page that has passed this gate.
 
 ## Step 5. Compare against the eight patterns
 
@@ -213,7 +286,7 @@ sh scripts/antislop_scan.sh <path>                       # styles, copy and code
 python3 scripts/devibe_scan.py <path> [--severity high]  # styles and markup only
 ```
 
-A scanner finding is a prompt to inspect, like the patterns. If the reason is already
+A clean scan does not pass the step 4 gate. A scanner finding is a prompt to inspect, like the patterns. If the reason is already
 recorded in the concept or audit, leave it. If it has no reason, fix it. Add an
 `unslop-ignore` comment only when it helps future maintainers or keeps CI quiet. For a fuller review, also apply the Vercel
 Web Interface Guidelines
@@ -225,14 +298,18 @@ and score the five dimensions in [references/audit.md](references/audit.md).
 Give the user, briefly:
 
 1. **The concept** in one sentence, and the palette, type and layout reasons.
-2. **The revisions** from step 6 (up to three): before, after and the tradeoff of each,
+2. **Sites studied** in step 2 and the principle borrowed from each.
+3. **The visual gate** from step 4: the answer to each question, and any composition
+   redesign it caused.
+4. **The revisions** from step 6 (up to three): before, after and the tradeoff of each,
    or a short note that none were needed and why.
-3. **Effects kept**, each with its reason.
-4. **Placeholders** the user must fill with real proof or content.
-5. **Defaults departed from** in step 7, with the reason.
-6. **Anything not checked** (no browser, no real device, no network), stated plainly
+5. **Effects kept**, each with its reason.
+6. **Demo states and placeholders.** Every action that is not connected, and every piece
+   of real proof, content or imagery the user must supply.
+7. **Defaults departed from** in step 7, with the reason.
+8. **Anything not checked** (no browser, no real device, no network), stated plainly
    rather than implied as passing.
 
-For `audit` without edits, report instead: the verdict on the central test, the
-eight-pattern table, up to three generic decisions with suggested replacements (or none), quality-check failures with
+For `audit` without edits, report instead: the verdict on the central test, the visual
+gate answers, the eight-pattern table, up to three generic decisions with suggested replacements (or none), quality-check failures with
 `file:line`, and the scanner results.

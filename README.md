@@ -23,7 +23,10 @@ AI-built sites look alike because they share default decisions: a purple gradien
 personality, a hero that fits any product, cards for everything, glass, a single bland
 type voice, unexplained metrics, an icon grid, glow behind the headline. The skill's
 visual reference is [visual-reference.pdf](skills/antislop-design/references/visual-reference.pdf),
-which pairs each of those eight patterns with a stronger direction.
+which pairs each of those eight patterns with a stronger direction. A second reference,
+[real-sites.pdf](skills/antislop-design/references/real-sites.pdf), covers 24 real sites
+by the visitor's job (cafe, radio, store, newsroom, government portal, docs, portfolio
+and more) with what to borrow and what to ask before designing.
 
 Nothing is banned. A gradient, card, glass panel or glow stays when the design concept
 records a reason tied to the product, and goes when it is only there because websites
@@ -36,10 +39,10 @@ doesn't force changes.
 | Step | What happens |
 |---|---|
 | 0. Triage | Refine or redesign, surface mode, read existing tokens and docs |
-| 1. Product and audience | Audience, key task, problem and outcome, proof on hand, content inventory |
-| 2. Design concept | One-line concept, palette with roles, display/body/utility type, imagery, section structures, effects budget with reasons |
+| 1. Product and audience | Site type, visual material, audience, key task, proof on hand; at most four questions in one message (imagery, brand, content and proof, task) |
+| 2. Study, then concept | Three or more real sites of the same and different types for task order and composition, then a one-line concept, palette with roles, display/body/utility type, imagery, section structures, effects budget with reasons |
 | 3. Build | Specific copy, labeled proof (no invented numbers), varied layouts, full theming, all interaction states |
-| 4. Render | Desktop and mobile with real copy |
+| 4. Visual gate | Render desktop and mobile, then judge the actual result: right kind of place, enough authentic material, balanced across the page, good at real sizes. If not, redesign the composition. A scanner pass is not a visual pass |
 | 5. Compare | Against the eight patterns, the eight-question audit and the remove-the-logo test |
 | 6. Revise | Up to three decisions that are still generic (none if the design already passes): decision, pattern, replacement, tradeoff |
 | 7. Quality checks | Hard requirements (no broken mobile layout, WCAG AA contrast, keyboard focus, the states each control can enter) plus defaults checked in context (16px body, 44px targets, 45 to 75 character lines) |
@@ -85,6 +88,8 @@ skills/antislop-design/
   references/
     visual-reference.pdf           the visual reference (overrides other files)
     generic-patterns.md            its eight patterns, audit and revise-three procedure
+    real-sites.pdf                 24 real sites by design job, with the visual-judgment gate
+    real-sites.md                  the same, as a lookup table
     choosing-a-look.md             how to pick color, type and layout without a default
     ui-tells.md                    catalog of visual tells, ranked by complaint data
     craft-floor.md                 quality floor and refusals for every UI edit
