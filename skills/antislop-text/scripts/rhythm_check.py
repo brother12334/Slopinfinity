@@ -12,6 +12,7 @@ Usage:
     python3 rhythm_check.py <file>            # report
     python3 rhythm_check.py <file> --json     # machine-readable
     python3 rhythm_check.py <file> --formal   # register D: skip the voice checks
+    python3 rhythm_check.py <file> --profile plain   # plain profile: flat, simple sentences
     python3 rhythm_check.py -                 # read from stdin
 
 Exit code is the number of flags raised (0 = rhythm looks varied).
@@ -60,7 +61,7 @@ def cv(values):
     return statistics.pstdev(values) / mean if mean else None
 
 
-def analyze(text, formal=False):
+def analyze(text, formal=False, profile="voice"):
     paras = prose_paragraphs(text)
     sents = [s for p in paras for s in split_sentences(p)]
     lengths = [len(WORD.findall(s)) for s in sents]
@@ -192,6 +193,33 @@ def analyze(text, formal=False):
             flags.append({"id": "no-speaker", "sev": "medium",
                           "msg": "No I, we, you or question anywhere. Nobody seems to be talking to anybody. Fine for a formal piece; for anything else, let the speaker show."})
 
+    if profile == "plain":
+        # The plain profile wants flatter, simpler prose: drop the burstiness and voice flags.
+        skip = {"uniform-length", "flat-length", "even-run", "no-short", "no-long",
+                "one-sentence-shape", "few-sentence-shapes", "no-contractions", "no-speaker",
+                "tidy-closers"}
+        flags[:] = [f for f in flags if f["id"] not in skip and not (
+            f["id"] == "repeated-opener" and f["msg"].split('"')[1] in {"this", "they", "he", "she", "it"}
+            and int(f["msg"].split()[0]) / len(sents) <= 0.3)]
+        joined = " ".join(sents)
+        semis = joined.count(";")
+        if semis:
+            flags.append({"id": "semicolon", "sev": "medium",
+                          "msg": f"{semis} semicolon(s). Split into separate sentences."})
+        cps = joined.count(",") / len(sents)
+        out["commas_per_sentence"] = round(cps, 2)
+        if cps > 0.9:
+            flags.append({"id": "embedded-clauses", "sev": "high" if cps > 1.3 else "medium",
+                          "msg": f"{cps:.2f} commas per sentence. Unpack appositives and tucked-in clauses into plain main clauses (aim for 0.9 or less)."})
+        longs = [i + 1 for i, n in enumerate(lengths) if n > 35]
+        if longs:
+            flags.append({"id": "long-sentence", "sev": "medium",
+                          "msg": f"Sentence(s) {', '.join(map(str, longs))} run over 35 words. Split them, one idea each."})
+        literary = re.findall(r"\b(?:Nor (?:was|is|did|does|has|had|were)|Rarely (?:has|have|is|was|does)|as far as it goes|in the long run|to be sure|more than it (?:explains|reveals|shows)|less (?:about|a question of) [^.]{1,40}? than)\b", joined)
+        if literary:
+            flags.append({"id": "literary-move", "sev": "medium",
+                          "msg": "Polished rhetorical move(s): " + "; ".join(sorted(set(literary))[:4]) + ". State the plain point instead."})
+
     return out
 
 
@@ -200,9 +228,11 @@ def main():
     ap.add_argument("path")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--formal", action="store_true", help="register D: skip voice and sentence-shape checks")
+    ap.add_argument("--profile", choices=["voice", "plain"], default="voice",
+                    help="voice: varied, speaker-led prose (default). plain: simple one-idea sentences (see references/plain-rewrite.md)")
     args = ap.parse_args()
     text = sys.stdin.read() if args.path == "-" else open(args.path, encoding="utf-8").read()
-    res = analyze(text, formal=args.formal)
+    res = analyze(text, formal=args.formal or args.profile == "plain", profile=args.profile)
     if args.json:
         print(json.dumps(res, indent=2))
     else:
@@ -218,8 +248,10 @@ def main():
                 k = res["sentence_kinds"]
                 print("  shapes: " + "   ".join(f"{a} {b}" for a, b in k.items()) +
                       f"   contractions/100w: {res['contractions_per_100_words']}")
+            if "commas_per_sentence" in res:
+                print(f"  commas per sentence: {res['commas_per_sentence']}")
             if not res["flags"]:
-                print("  verdict: rhythm looks varied\n")
+                print("  verdict: no flags\n")
             for f in res["flags"]:
                 print(f"  [{f['sev'].upper()}] {f['msg']}")
             print("  Numbers are a prompt to reread, not a verdict. Read it aloud.\n")

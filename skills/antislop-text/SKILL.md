@@ -1,7 +1,7 @@
 ---
 name: antislop-text
 description: Three-pass workflow that makes any writing read as written by a person. Pass 1 does the task normally and gets the substance right. Pass 2 runs a humanizer rewrite (pin a voice, cut the known AI tells, fix rhythm, add real specifics). Pass 3 checks the result for detail, wording, grammar and context, scans it, and fixes what is wrong before delivering. Use whenever writing or rewriting prose a person will read (essays, posts, emails, messages, cover letters, bios, product copy, READMEs, replies), and whenever the user says it sounds like AI or ChatGPT, is too polished, robotic or generic, asks to humanize it, make it sound like them, or make it pass an AI detector. Trigger even if they never say "AI".
-argument-hint: "[write <task> | humanize <text or file> | check <text or file> | finish <text or file>] [--style normal|structured|academic]"
+argument-hint: "[write <task> | humanize <text or file> | check <text or file> | finish <text or file>] [--style normal|structured|academic] [--profile voice|plain]"
 ---
 
 # antislop-text
@@ -43,6 +43,24 @@ Before writing, note four things (silently, unless the user needs to weigh in):
 - **Claim.** The one thing the piece asserts or achieves, in a sentence.
 - **Facts.** Everything the piece must contain. Pass 3 checks these survived.
 
+## Profiles
+
+Pass 2 runs one of two profiles. Pick from the request, or ask when detector scores
+matter and it is unclear.
+
+| Profile | Produces | Use for | Reference |
+|---|---|---|---|
+| `voice` (default) | Varied rhythm, a speaker with a stance, asides, questions | Posts, emails, essays with a point of view, copy | stages 1 to 7 below |
+| `plain` | One idea per sentence, few embedded clauses, everyday words, explicit links | Academic and informational text, reports, anything that should read as an ordinary person's writing rather than a polished writer's | [references/plain-rewrite.md](references/plain-rewrite.md) |
+
+The `plain` profile comes from comparing an academic paragraph that detectors flagged at
+100% with Clever AI Humanizer's rewrite of it. The rewrite was flatter and simpler, not
+more varied: polish was the giveaway. For academic text where detector scores matter,
+prefer `plain`.
+
+With `plain`, run stages 1 to 3 below, then replace stages 4 and 5 with the seven
+transformations in plain-rewrite.md, then stages 6 and 7.
+
 ## Pass 2. Humanize
 
 Rewrite the Pass 1 draft through the seven stages in
@@ -73,6 +91,7 @@ Run both scanners on the Pass 2 text (write it to a scratch file first if needed
 python3 scripts/unslop_text_scan.py <file>   # word-level tells; exit code = high-severity count
 python3 scripts/rhythm_check.py <file>       # rhythm, sentence shapes, voice, predictable structure; exit code = flags
 python3 scripts/rhythm_check.py <file> --formal   # register D: skips the voice checks
+python3 scripts/rhythm_check.py <file> --profile plain   # plain profile targets instead of voice ones
 ```
 
 Then read the whole piece against [references/review-checklist.md](references/review-checklist.md),

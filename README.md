@@ -130,6 +130,10 @@ You get the final text without a list of every change.
 ```
 
 Add `--style normal`, `--style structured` or `--style academic` to set the register.
+Add `--profile plain` for academic or informational text. It rewrites into simple
+one-idea sentences with everyday words instead of adding voice and variety. It's based
+on comparing a paragraph detectors flagged with Clever AI Humanizer's rewrite of it
+([plain-rewrite.md](skills/antislop-text/references/plain-rewrite.md)).
 
 `finish` is for pairing this skill with a humanizer that runs its own trained model.
 Write the draft here, run it through the humanizer, then bring the result back: Claude
@@ -166,7 +170,8 @@ planted typos). They damage the text and detectors now look for them.
 skills/antislop-text/
   SKILL.md                     the three-pass workflow
   references/
-    humanize-pass.md           the pass 2 rewrite, step by step
+    humanize-pass.md           the pass 2 rewrite, step by step (voice profile)
+    plain-rewrite.md           the plain profile, derived from Clever's output
     review-checklist.md        the pass 3 checklist
     tells.md                   catalog of writing tells, ranked by how often readers cite them
     writing-with-intent.md     picking a register, speaker and claim
