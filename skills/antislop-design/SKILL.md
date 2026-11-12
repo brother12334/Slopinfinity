@@ -14,6 +14,9 @@ Two visual references drive this skill:
 - [references/real-sites.pdf](references/real-sites.pdf) ("24 real websites, 24 different
   design jobs"), written out in [references/real-sites.md](references/real-sites.md): real
   sites by type, what to borrow, what to ask, and the visual-judgment gate.
+- [references/five-site-review.pdf](references/five-site-review.pdf) ("Clearer. Still not
+  finished."), a review of five test builds. Its lessons are in steps 1, 3, 4 and 8 and in
+  [references/assets.md](references/assets.md).
 
 **When any other file in this skill conflicts with these PDFs, the PDFs win.** Study
 them for principles; never recreate a screenshot.
@@ -36,12 +39,16 @@ well and note the reason as "requested".
 The first PDF's illustrations use one palette and type style. That is the PDF's own look,
 not a template. Each project gets an identity drawn from its own subject.
 
-Two more rules hold everywhere:
+Three more rules hold everywhere:
 
 - **A scanner pass is not a visual pass.** The rendered page has to look right to a
-  person at the sizes it ships at (step 4). Clean scans never overrule a failed look.
+  person at the sizes it ships at (step 4). Clean scans never overrule a failed look, and
+  a clean screenshot is not the same as a finished design.
 - **Primary actions are honest.** A missing stream, checkout or form must not appear to
   work. Never invent photos, proof, customers or performance numbers.
+- **Honesty supports the design; it does not overwhelm it.** Disclose a limitation once,
+  at the action it affects, with verbs that say what actually happens. Repeated warnings
+  in every section become part of the brand.
 
 ## Commands
 
@@ -90,6 +97,24 @@ Write these down before any visual decision:
 
 Five-second target: a visitor should be able to tell who it serves, what it does and the
 next action. Write that sentence now; the hero has to deliver it.
+
+### Check the content can carry the task
+
+Before any visual decision, check whether the available content and assets let the
+visitor complete the main task. A magazine whose stories cannot be read, a shop with no
+way to judge the products, or a café page with nothing to show of the food promises a
+task it cannot deliver, and no styling fixes that.
+
+- If content is missing that would change the result (story text, product photos or
+  dimensions, real imagery), ask for it (below).
+- For a fictional demo, representative content may be authored only when it is clearly
+  labeled as sample and, where it stands in for something substantial (an article, a
+  product description), only with the user's approval. Never imply sample facts, people
+  or imagery are real.
+- Decide the asset strategy now with the ladder in [references/assets.md](references/assets.md):
+  user-provided real material, then verified licensed imagery, then original
+  illustration or a labeled concept render, then an intentional text-led design. Choose
+  per project; do not carry one project's choice into the next.
 
 ### Ask only what changes the design
 
@@ -196,10 +221,18 @@ skip lines carrying `unslop-ignore`.
 - A primary action that is not connected (no stream, no checkout, no form endpoint)
   shows that before anyone clicks: a visible offline, demo or "coming soon" state on or
   beside the control, not a button that looks live and fails afterwards.
-- Use real imagery the user supplied, or licensed images the user agreed to (credit
-  them). Never invent photographs, people, customers or results. When there is no
-  imagery, design the page to stand without it and say what material would make it
-  stronger.
+- Disclose each limitation **once, at the relevant action**, with one concise note beside the
+  sample list, one at the form. Do not repeat the same warning on every card or section.
+- Use verbs that describe what actually happens. A form that only validates says "Check
+  request" or "Preview request", not "Send"; its result says "checked", not "sent". A
+  disabled purchase becomes a working "Add to demo bag" or a "Preview" with a label that
+  says what it does, rather than a dead end.
+- Imagery follows [references/assets.md](references/assets.md). Never invent photographs,
+  people, customers or results. Never leave an empty image slot.
+- Original illustration or a concept render must have the same conviction, scale and
+  detail as a strong photo-led design: composed at hero scale, with texture and real
+  detail of the subject. A small diagram-like drawing at the edge of the layout reads as
+  a placeholder.
 
 **States.** Design the states each control actually has. Every interactive element
 needs a visible keyboard focus state. Beyond that, a link needs hover; a button needs
@@ -222,14 +255,27 @@ Then judge the actual visual result:
 1. Does it feel like this kind of place or product? Compare it with the real sites you
    studied in step 2.
 2. Is there enough authentic visual material, or is the page leaning on decoration to
-   fill the space?
-3. Are scale, rhythm, imagery and type balanced across the whole page, not just the hero?
+   fill the space? Does the material have a deliberate role?
+3. Inspect the full composition: is there a clear **focal point**? Is the **whitespace**
+   intentional, or are there large empty fields? Do **hierarchy** and the **first task**
+   read in that order? Are scale, rhythm, imagery and type balanced across the whole page?
 4. Does it look good at the real viewport sizes, including what is visible before
-   scrolling?
+   scrolling? Does the opening claim push the main experience below the fold?
+5. **Does the first screen feel finished?** If the result only passes the checklist but
+   still feels unfinished (a layout awaiting a photo, a schematic standing in for a
+   product, warnings louder than content), it fails.
+6. Can the visitor actually **complete the promised task**, or is it accurately labeled
+   as a demo at the point of action?
 
 **If any answer is no, redesign the composition**, then render and judge again. Do not
 patch a failing composition with small tweaks, and do not move on because the scanners
 are clean. Steps 5 to 7 run on a page that has passed this gate.
+
+**Across projects.** When several sites are built in one session, compare the finished
+first screens side by side. Look for a shared skeleton, a shared illustration hand or a
+shared warning voice, and revise whichever site carries it least deliberately. Do not
+force expressive decoration onto public-service or operating interfaces that benefit
+from restraint.
 
 ## Step 5. Compare against the eight patterns
 
@@ -298,16 +344,18 @@ and score the five dimensions in [references/audit.md](references/audit.md).
 Give the user, briefly:
 
 1. **The concept** in one sentence, and the palette, type and layout reasons.
-2. **Sites studied** in step 2 and the principle borrowed from each.
-3. **The visual gate** from step 4: the answer to each question, and any composition
+2. **First questions** asked (or the assumptions used instead), and the **asset decision**, meaning
+   sources with license and credit, or which rung of the asset ladder was used and why.
+3. **Sites studied** in step 2 and the principle borrowed from each.
+4. **The visual gate** from step 4: the answer to each question, and any composition
    redesign it caused.
-4. **The revisions** from step 6 (up to three): before, after and the tradeoff of each,
+5. **The revisions** from step 6 (up to three): before, after and the tradeoff of each,
    or a short note that none were needed and why.
-5. **Effects kept**, each with its reason.
-6. **Demo states and placeholders.** Every action that is not connected, and every piece
+6. **Effects kept**, each with its reason.
+7. **Demo states and placeholders.** Every action that is not connected, and every piece
    of real proof, content or imagery the user must supply.
-7. **Defaults departed from** in step 7, with the reason.
-8. **Anything not checked** (no browser, no real device, no network), stated plainly
+8. **Defaults departed from** in step 7, with the reason.
+9. **Anything not checked** (no browser, no real device, no network), stated plainly
    rather than implied as passing.
 
 For `audit` without edits, report instead: the verdict on the central test, the visual
