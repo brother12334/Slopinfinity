@@ -1,5 +1,9 @@
 # Choosing a look (a method, not a palette)
 
+> Step 2 of SKILL.md (the design concept) and generic-patterns.md take precedence over
+> anything below. Cream, serif and green are allowed like any other choice when the
+> concept calls for them.
+
 This file used to be a list of recommended colors and fonts. That was a mistake. Any
 specific recommendation, repeated, becomes the next default and the next tell. The first
 version of this skill recommended cream backgrounds, a forest-green accent, and Fraunces,
@@ -31,8 +35,8 @@ are choosing, sample from something concrete (a product photo, a logo, a physica
 a place) so the palette has a source. Build a neutral ramp you actually picked rather than
 stock slate or stock cream. The test is not "is this color nice," it is "can I say why
 this project uses it." Avoid the current defaults on both ends: framework indigo/violet,
-and tasteful cream/sage. Either is fine as a *stated decision*, neither is fine as a
-fallback.
+and tasteful cream/sage. Either is fine as a *stated decision* with roles assigned,
+neither is fine as a fallback.
 
 ## Type
 

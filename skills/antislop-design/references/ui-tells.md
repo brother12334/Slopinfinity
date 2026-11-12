@@ -1,5 +1,12 @@
 # The vibe-coded tells: full catalog
 
+> **Override.** [generic-patterns.md](generic-patterns.md) (from visual-reference.pdf) is
+> the authority for this skill. Where this catalog conflicts with it, follow the patterns
+> file. In particular: no tell here is an automatic ban, each one is a prompt to ask for
+> a reason; cream, serif and green are not tells in themselves (the reference uses them),
+> they are only a problem when picked without a reason, like any palette; and glass is
+> one of the eight patterns to inspect, not "allowed by default".
+
 Each entry has the data evidence (so you can weight it), a real quote from the threads,
 the code-level signatures the scanner keys on, and the fix. Ordered by priority (comment
 share in the on-topic data, which is the cleanest signal). Source: ~3.2M posts across 47
@@ -31,6 +38,10 @@ historical data is still climbing. Treat tell 0 and tell 1 as co-top-priority.
 ---
 
 ## 0. The new "tasteful default" (cream + serif + sage)
+
+*Demoted by the override above. Keep this as background on why an unexplained palette
+reads as generated; it is not a reason to avoid these colors or typefaces when the
+concept calls for them.*
 
 **Why it leads:** this is the look the previous wave of anti-slop advice (including
 Claude's own frontend-design skill) converged on, so it is now the single most
@@ -341,7 +352,7 @@ Real but minor; fix if cheap, do not over-rotate.
 - **Gradient hero copy clichés**: "Transform your X," "Supercharge," "Unleash,"
   "Effortlessly," "Your X, reimagined." These pair with the gradient-text tell. Write
   specific copy about what the thing actually does.
-- **Glassmorphism** (0.2%) and **bento grids** (0.1%): low signal and contested. Allowed.
+- **Glassmorphism** (0.2%) and **bento grids** (0.1%): low in the complaint data, but glass is pattern 4 in generic-patterns.md. Inspect it and require a reason. Bento grids follow pattern 3: only for genuine peers.
 
 ---
 

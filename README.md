@@ -19,27 +19,29 @@ right order.
 
 ### What it does
 
-AI-built sites get spotted for specific reasons: an untouched shadcn theme, an indigo
-primary, gradient headline text, emoji icons, the centered hero above three identical
-feature cards. The fix most people reach for has become a tell too: a cream background,
-a Fraunces or Instrument Serif headline and a sage green accent.
+AI-built sites look alike because they share default decisions: a purple gradient for a
+personality, a hero that fits any product, cards for everything, glass, a single bland
+type voice, unexplained metrics, an icon grid, glow behind the headline. The skill's
+visual reference is [visual-reference.pdf](skills/antislop-design/references/visual-reference.pdf),
+which pairs each of those eight patterns with a stronger direction.
 
-The skill doesn't push a house style. It finds the defaults (both the old ones and the
-newer "tasteful" ones) and makes you replace each with a choice the project made and can
-explain. When the brief really does call for purple or serif, the skill keeps it.
+Nothing is banned. A gradient, card, glass panel or glow stays when it has a stated
+reason tied to the product, and goes when it is only there because websites usually look
+that way.
 
 ### The workflow
 
-| Phase | What happens | From |
-|---|---|---|
-| 0. Triage | Refine or redesign, surface mode, read existing tokens and docs | impeccable |
-| 1. Brief | Reference, color, type, layout intent, light or dark from the use scene | unslop-ui |
-| 2. Libraries | One curated pick per task, after checking what is installed | pick-ui-library |
-| 3. Build | Craft floor plus the catalog of visual tells to avoid | impeccable, unslop-ui |
-| 4. Motion | One authored moment, shared tokens, reduced-motion guards | transitions-dev (principles) |
-| 5. Scan | Three deterministic scanners: styles, copy, code | unslop-ui, unslop-text, unslop-code |
-| 6. Review | Eye check, Vercel Web Interface Guidelines, scored audit out of 20 | web-design-guidelines, impeccable |
-| 7. Polish | Fix by priority without swapping in a new default, rescan | all |
+| Step | What happens |
+|---|---|
+| 0. Triage | Refine or redesign, surface mode, read existing tokens and docs |
+| 1. Product and audience | Audience, key task, problem and outcome, proof on hand, content inventory |
+| 2. Design concept | One-line concept, palette with roles, display/body/utility type, imagery, section structures, effects budget with reasons |
+| 3. Build | Specific copy, labeled proof (no invented numbers), varied layouts, full theming, all interaction states |
+| 4. Render | Desktop and mobile with real copy |
+| 5. Compare | Against the eight patterns, the eight-question audit and the remove-the-logo test |
+| 6. Revise | The three most generic decisions: decision, pattern, replacement, tradeoff |
+| 7. Quality checks | Mobile layout, readability, WCAG AA contrast, interaction states, keyboard, reduced motion, scanners |
+| 8. Deliver | Concept, the three revisions, effects kept and why, placeholders to fill, anything not checked |
 
 ### Commands
 
@@ -79,6 +81,8 @@ puts a person (or Claude, looking at the render) on those.
 skills/antislop-design/
   SKILL.md                         the workflow
   references/
+    visual-reference.pdf           the visual reference (overrides other files)
+    generic-patterns.md            its eight patterns, audit and revise-three procedure
     choosing-a-look.md             how to pick color, type and layout without a default
     ui-tells.md                    catalog of visual tells, ranked by complaint data
     craft-floor.md                 quality floor and refusals for every UI edit

@@ -1,4 +1,6 @@
-<!-- Adapted from the impeccable skill (v4.8.1), Apache License 2.0. See NOTICE.md. -->
+<!-- Adapted from the impeccable skill (v4.8.1), Apache License 2.0. See NOTICE.md.
+     Revised to follow visual-reference.pdf: the "Refuse" list is now a list of patterns
+     that need a stated reason, not bans. -->
 
 # Craft floor
 
@@ -18,26 +20,26 @@ Each of these is a check on the built result, not an intention. Run them togethe
 - **Copy:** the product's own language. Controls name their action; errors name the problem and the recovery.
 - **Coverage:** every brief requirement present and findable within seconds.
 
-## Refuse
+## Needs a reason
 
-These are the category's defaults, not bans: the brief's own words can earn any of them. Reaching for one when the axis is free means you were not deciding; recognizing that means rewriting the element, not softening it.
+These are the category's defaults. None is banned: each is fine when you can state, in one sentence about this product, the job it does (see [generic-patterns.md](generic-patterns.md)). Reaching for one because the axis was free means you were not deciding; then rewrite the element, do not soften it.
 
 Page scaffolds:
 
-- Same-size cards of icon plus heading plus text as the page structure. Cards are the lazy container; nested cards are always wrong.
+- Same-size cards of icon plus heading plus text as the page structure. Cards are for genuine peers a visitor compares or picks between. Nested cards almost never have a reason.
 - The hero-metric template: big number, small label, supporting stats, accent.
-- A kicker or eyebrow above a heading. This one is a ban, not a default: no brief earns it back. The heading carries its own weight; delete the label and let the heading speak.
+- A kicker or eyebrow above a heading that only repeats the heading. A small utility label that carries real information (a section of the publication, an issue number, a date, a status) is part of the type system's utility voice and is fine.
 - Section numbers (01 / 02 / 03) unless the sequence itself carries information the reader needs.
 - A modal for a task that needs neither interruption nor protected focus.
 
 Surface habits:
 
-- Gradient text. Emphasis comes from weight or size.
-- Glass and blur as decoration rather than as a specific effect.
+- Gradient text. Emphasis normally comes from weight or size; gradient fill needs a brand or content reason, and the text must still meet contrast at every point.
+- Glass and blur as decoration. Glass is fine when something real sits behind it that the user benefits from seeing, and the text on it meets contrast.
 - A colored `border-left` or `border-right` above 1px on cards, list items, callouts, or alerts.
 - Hard offset shadows (`box-shadow: 4px 4px 0`) outside a world that is actually neobrutalist. The zero-blur block shadow is a costume, not a depth system; a world that did not choose it never earns it as a default.
 - Sparklines, progress rings, and soft-shadowed rounded rectangles standing in for content.
-- Monospace as a costume for "technical" rather than for code, data, or measurement.
+- Monospace as a costume for "technical". Mono is fine for code, data, measurement, or as the defined utility voice of the type system.
 - A system display face (Impact, Arial Black, the platform sans) as the display voice of an own-world page. Source and self-host a face whose character matches the approved lettering; the closest installed font is a failure, not a fallback.
 - Unicode glyphs or emoji standing in for an icon system. Icons are drawn, from a real library or authored SVG, in one consistent stroke and weight.
 - Geometric masks standing in for organic contours. A circle, polygon, or radial-gradient cutout approximating a photographic subject's edge is the cheap version of the effect and reads worse than omitting it. Derive an alpha matte from the actual image, or produce a cut-out asset.
