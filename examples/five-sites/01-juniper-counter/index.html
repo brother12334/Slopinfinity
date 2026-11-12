@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juniper Counter · 24 Willow Street · Wed–Sun 8 am–3 pm</title>
+<meta name="description" content="Juniper Counter is a neighborhood café at 24 Willow Street, open Wednesday to Sunday, 8 am to 3 pm. Espresso, cardamom buns and egg sandwiches.">
+<style>
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 500; font-display: swap; src: url(fonts/bricolage-grotesque-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 800; font-display: swap; src: url(fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2"); }
+@font-face { font-family: "Nunito Sans"; font-weight: 400; font-display: swap; src: url(fonts/nunito-sans-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Nunito Sans"; font-weight: 700; font-display: swap; src: url(fonts/nunito-sans-latin-700-normal.woff2) format("woff2"); }
+:root {
+  --yolk: #f6d365;
+  --juniper: #22305a;
+  --cardamom: #4f6b25;
+  --pod: #e9efd9;
+  --paper: #fffaf0;
+  --muted: #5c5a52;
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  --body: "Nunito Sans", system-ui, sans-serif;
+  --gutter: clamp(20px, 5vw, 56px);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--juniper); font: 400 1.125rem/1.55 var(--body); }
+::selection { background: var(--juniper); color: var(--yolk); }
+:focus-visible { outline: 3px solid var(--juniper); outline-offset: 3px; }
+a { color: inherit; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--gutter); }
+h1, h2 { font-family: var(--display); font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+
+header { background: var(--juniper); color: var(--yolk); }
+header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 60px; }
+.name { font: 800 1.35rem/1 var(--display); letter-spacing: -0.01em; }
+.street { font-weight: 700; font-size: 1rem; }
+
+.hero { display: grid; grid-template-columns: 1.1fr 1fr; background: var(--yolk); }
+.photo { margin: 0; position: relative; min-height: 100%; display: grid; grid-template-rows: 1fr auto; background: var(--juniper); }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 420px; }
+.photo figcaption { font-size: 0.8rem; line-height: 1.4; color: var(--yolk); padding: 10px 16px; }
+.photo figcaption a { color: var(--yolk); }
+.hero-text { padding: clamp(28px, 4.5vw, 64px) clamp(20px, 4.5vw, 64px); }
+.hero h1 { font-size: clamp(2.4rem, 4.4vw, 4rem); line-height: 0.98; margin-bottom: 16px; max-width: 13ch; }
+.lede { font-size: 1.2rem; margin: 0 0 32px; max-width: 32ch; }
+.week-title { font: 500 0.95rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px; }
+.week { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.week li { background: var(--paper); border-radius: 6px; padding: 10px 4px; text-align: center; display: grid; gap: 4px; }
+.week .day { font: 800 1.05rem/1 var(--display); }
+.week .t { font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+.week .closed { background: transparent; border: 2px dashed rgba(34,48,90,0.45); }
+.week .closed .t { font-size: 0.8rem; }
+.hours-line { margin: 10px 0 28px; font-weight: 700; }
+.where { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.addr { font: 800 1.5rem/1.1 var(--display); }
+button {
+  font: 700 1rem/1 var(--body); color: var(--yolk); background: var(--juniper); border: 2px solid var(--juniper);
+  border-radius: 999px; padding: 0 22px; min-height: 48px; cursor: pointer;
+}
+button:hover { background: #18213f; }
+button:active { transform: translateY(1px); }
+.copied { font-weight: 700; font-size: 0.95rem; min-height: 1.5em; margin: 10px 0 0; }
+
+.counter { padding: clamp(48px, 7vw, 88px) 0; }
+.counter h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); margin-bottom: 20px; }
+.board { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 32px; }
+.board li { display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 3px solid var(--juniper); font: 800 clamp(1.5rem, 2.6vw, 2.1rem)/1.05 var(--display); letter-spacing: -0.02em; }
+.board svg { width: 48px; height: 48px; flex: none; }
+footer { padding: 24px 0 40px; color: var(--muted); font-size: 0.95rem; border-top: 1px solid #e3dccb; }
+
+@media (max-width: 800px) {
+  .street { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .photo img { min-height: 0; aspect-ratio: 4 / 3; }
+  .board { grid-template-columns: 1fr; }
+  .week .day { font-size: 0.95rem; }
+  .week .t { font-size: 0.8rem; }
+  .week .closed .t { font-size: 0.7rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="name">Juniper Counter</span>
+    <span class="street">24 Willow Street</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="offer">
+    <figure class="photo">
+      <img src="images/cardamom-buns.jpg" alt="A tray of glazed cardamom buns" width="1600" height="1102">
+      <figcaption>Illustrative photo of cardamom buns, not taken at Juniper Counter. Photo: W.carter, <a href="https://commons.wikimedia.org/wiki/File:Cardamom_buns.jpg">Wikimedia Commons</a>, CC0.</figcaption>
+    </figure>
+    <div class="hero-text">
+      <h1 id="offer">Espresso, cardamom buns and egg sandwiches.</h1>
+      <p class="lede">A neighborhood café on Willow Street, open Wednesday to Sunday.</p>
+
+      <h2 class="week-title" id="hours">Hours</h2>
+      <ol class="week" aria-labelledby="hours">
+        <li class="closed"><span class="day">Mon</span><span class="t">Closed</span></li>
+        <li class="closed"><span class="day">Tue</span><span class="t">Closed</span></li>
+        <li><span class="day">Wed</span><span class="t">8–3</span></li>
+        <li><span class="day">Thu</span><span class="t">8–3</span></li>
+        <li><span class="day">Fri</span><span class="t">8–3</span></li>
+        <li><span class="day">Sat</span><span class="t">8–3</span></li>
+        <li><span class="day">Sun</span><span class="t">8–3</span></li>
+      </ol>
+      <p class="hours-line">Wednesday to Sunday, 8 am to 3 pm.</p>
+
+      <div class="where">
+        <span class="addr">24 Willow Street</span>
+        <button type="button" data-copy>Copy address</button>
+      </div>
+      <p class="copied" role="status" aria-live="polite" data-copied></p>
+    </div>
+  </section>
+
+  <section class="counter" aria-labelledby="counter-title">
+    <div class="wrap">
+      <h2 id="counter-title">On the counter</h2>
+      <ul class="board">
+        <li><svg viewBox="0 0 52 52" aria-hidden="true"><path d="M12 20h24v8a12 12 0 0 1-24 0z" fill="none" stroke="#22305a" stroke-width="3"/><path d="M36 22h4a5 5 0 0 1 0 10h-5" fill="none" stroke="#22305a" stroke-width="3"/><path d="M8 44h34" stroke="#22305a" stroke-width="3" stroke-linecap="round"/></svg>Espresso</li>
+        <li><svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="19" fill="#f6d365" stroke="#22305a" stroke-width="3"/><path d="M26 26c0-3 4-3 4 0s-4 7-8 4-2-11 6-11 12 9 7 15-17 6-18-4" fill="none" stroke="#22305a" stroke-width="3" stroke-linecap="round"/></svg>Cardamom buns</li>
+        <li><svg viewBox="0 0 52 52" aria-hidden="true"><path d="M8 24c0-8 8-12 18-12s18 4 18 12z" fill="#fffaf0" stroke="#22305a" stroke-width="3" stroke-linejoin="round"/><path d="M8 30h36" stroke="#4f6b25" stroke-width="3"/><ellipse cx="26" cy="27" rx="11" ry="3.5" fill="#f6d365" stroke="#22305a" stroke-width="2"/><path d="M8 34h36v4c0 2-2 4-4 4H12c-2 0-4-2-4-4z" fill="#fffaf0" stroke="#22305a" stroke-width="3" stroke-linejoin="round"/></svg>Egg sandwiches</li>
+      </ul>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">Juniper Counter, a neighborhood café. Fictional business, demo page.</div></footer>
+
+<script>
+(function () {
+  var btn = document.querySelector("[data-copy]"), out = document.querySelector("[data-copied]");
+  btn.addEventListener("click", function () {
+    var fail = function () { out.textContent = "Couldn't copy. The address is 24 Willow Street."; };
+    if (!navigator.clipboard || !navigator.clipboard.writeText) return fail();
+    navigator.clipboard.writeText("24 Willow Street").then(function () { out.textContent = "Address copied."; }, fail);
+  });
+})();
+</script>
+</body>
+</html>
