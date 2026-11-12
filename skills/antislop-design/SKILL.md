@@ -98,6 +98,13 @@ Write these down before any visual decision:
 Five-second target: a visitor should be able to tell who it serves, what it does and the
 next action. Write that sentence now; the hero has to deliver it.
 
+**Essentials.** From the key task, list the two to four facts or actions the visitor's
+decision depends on. They differ by site type: for a café, opening hours, address and
+what's served; for a shop, the product, its price and how to choose; for a service, the
+price, the area and the request action; for a magazine, a headline worth opening; for a
+tool, what it does and a way to try it. Every concept and every render is checked against
+this list.
+
 ### Check the content can carry the task
 
 Before any visual decision, check whether the available content and assets let the
@@ -165,9 +172,30 @@ mood) and what you will not copy (brand, photographs, exact layout).
 6. **Effects budget.** Every gradient, glass surface, glow, shadow style and animation you
    plan to use, each with its reason. At most one effect as a focal point per view.
 
-When the user has no reference and no preference, offer two or three distinct concepts in
-a few lines each and let them pick, or pick one and say why. Record the chosen concept in
-`DESIGN.md` so later work stays consistent.
+When the user has no reference and no preference, offer two or three distinct concepts, or
+pick one and say why. Record the chosen concept in `DESIGN.md` so later work stays
+consistent.
+
+**Judge each concept as an identity and as a website.** Render every concept at desktop
+and mobile before comparing them, and score both:
+
+- *Identity:* is it specific to this subject, memorable, and still recognizable with the
+  logo covered?
+- *Usability:* are the essentials in the first screen at both sizes, set as primary or
+  secondary text (not caption-sized labels), readable without depending on what's behind
+  them, and is the primary action visible?
+
+A striking poster, attractive illustration or new palette does not make up for an
+essential that is buried, tiny or unreadable. Only recommend a concept that passes
+usability; identity decides between the ones that pass. If a favorite fails usability,
+revise it before recommending it. Concepts may differ in how prominent the art is, but
+not in whether the visitor can find what they came for. Where the task is exploratory
+(a portfolio, a magazine, a gallery), the essential can be a clear entry point into the
+work rather than facts. `scripts/first_screen.js` measures this:
+
+```bash
+node scripts/first_screen.js page.html "8 am" "Willow Street" "Copy address"
+```
 
 More on choosing: [references/choosing-a-look.md](references/choosing-a-look.md).
 Library picks: [references/libraries.md](references/libraries.md) (check `package.json` first).
@@ -260,7 +288,8 @@ Then judge the actual visual result:
    intentional, or are there large empty fields? Do **hierarchy** and the **first task**
    read in that order? Are scale, rhythm, imagery and type balanced across the whole page?
 4. Does it look good at the real viewport sizes, including what is visible before
-   scrolling? Does the opening claim push the main experience below the fold?
+   scrolling? Does the opening claim, or the art, push the essentials below the fold on
+   mobile? Are the essentials set as readable text rather than small decorative labels?
 5. **Does the first screen feel finished?** If the result only passes the checklist but
    still feels unfinished (a layout awaiting a photo, a schematic standing in for a
    product, warnings louder than content), it fails.
