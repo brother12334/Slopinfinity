@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overprint Studio · 2027 calendar in two inks</title>
+<meta name="description" content="A 2027 A3 wall calendar, risograph printed in fluorescent pink and blue. Edition of 200, $38. Order by email.">
+<style>
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 400; font-display: swap; src: url(fonts/bricolage-grotesque-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 600; font-display: swap; src: url(fonts/bricolage-grotesque-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 800; font-display: swap; src: url(fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2"); }
+:root { --paper: #f3efe6; --blue: #2f56a6; --blue-ink: #24468c; --pink: #ff4fa8; --pink-text: #c4176f; --wall: #e4ded2; --font: "Bricolage Grotesque", system-ui, sans-serif; --pad: 44px; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--blue-ink); font: 400 1.0625rem/1.55 var(--font); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+svg { display: block; width: 100%; height: auto; }
+
+header { display: flex; justify-content: space-between; align-items: baseline; padding: 20px var(--pad); }
+.studio { font: 800 1.35rem/1 var(--font); margin: 0; }
+.studio span { font-weight: 400; font-size: 1rem; margin-left: 10px; }
+header a { font-weight: 600; text-decoration: none; }
+
+.hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 40px; align-items: center; padding: 24px var(--pad) 64px; }
+h1 { font: 800 clamp(3.2rem, 6.4vw, 6.2rem)/.9 var(--font); letter-spacing: -.035em; margin: 0 0 26px; }
+h1 em { font-style: normal; color: var(--pink); mix-blend-mode: multiply; }
+.spec { list-style: none; margin: 0 0 28px; padding: 0; border-top: 2px solid var(--blue); }
+.spec li { padding: 9px 0; border-bottom: 1px solid #cbc6d6; font-size: 1.1rem; }
+.buy { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 22px; }
+.price { font: 800 2.6rem/1 var(--font); letter-spacing: -.02em; margin: 0; }
+.btn { display: inline-flex; align-items: center; min-height: 54px; padding: 0 26px; background: var(--blue); color: var(--paper); font: 600 1.1rem/1 var(--font); text-decoration: none; border-radius: 3px; box-shadow: 3px 3px 0 var(--pink); transition: transform .12s, box-shadow .12s; }
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--pink); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--pink); }
+.ship { margin: 14px 0 0; }
+
+.fan { position: relative; aspect-ratio: 1 / 1.02; max-width: 640px; justify-self: center; width: 100%; }
+.fan .sheet { position: absolute; width: 62%; box-shadow: 0 2px 2px rgba(40,30,10,.12), 0 18px 34px rgba(40,30,10,.2); }
+.fan .s1 { left: 0; top: 7%; transform: rotate(-7deg); }
+.fan .s2 { right: 0; top: 5%; transform: rotate(6deg); }
+.fan .s3 { left: 19%; top: 0; transform: rotate(-1deg); }
+.label { font-size: .95rem; margin: 14px 0 0; text-align: center; color: var(--blue-ink); }
+
+.months { background: var(--wall); padding: 56px var(--pad) 64px; }
+h2 { font: 800 clamp(2rem, 3.4vw, 3rem)/1 var(--font); letter-spacing: -.025em; margin: 0 0 8px; }
+.months > p { margin: 0 0 28px; max-width: 60ch; }
+.grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px; }
+.grid figure { margin: 0; }
+.grid .sheet { box-shadow: 0 1px 2px rgba(40,30,10,.15), 0 8px 18px rgba(40,30,10,.12); }
+
+.details { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 56px; padding: 56px var(--pad) 64px; }
+dl { margin: 0; display: grid; grid-template-columns: 10rem 1fr; border-top: 2px solid var(--blue); }
+dt, dd { margin: 0; padding: 11px 0; border-bottom: 1px solid #cbc6d6; }
+dt { font-weight: 600; }
+.order p { margin: 0 0 18px; max-width: 46ch; }
+
+footer { border-top: 2px solid var(--blue); padding: 18px var(--pad) 32px; font-size: .95rem; }
+footer p { margin: 0 0 4px; }
+
+@media (max-width: 1100px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 860px) {
+  :root { --pad: 18px; }
+  header { padding-top: 14px; padding-bottom: 8px; }
+  .studio span { display: none; }
+  .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 8px; padding-bottom: 44px; }
+  h1 { font-size: 3.3rem; margin-bottom: 18px; }
+  .spec li { font-size: 1rem; padding: 7px 0; }
+  .price { font-size: 2.2rem; }
+  .btn { flex: 1 1 auto; justify-content: center; }
+  .fan { max-width: 420px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .months { padding: 40px var(--pad) 44px; }
+  .details { grid-template-columns: 1fr; gap: 36px; padding: 40px var(--pad) 48px; }
+  dl { grid-template-columns: 7.5rem 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+</style>
+</head>
+<body>
+<header><p class="studio">Overprint Studio<span>risograph printing</span></p><a href="#order">Order</a></header>
+
+<main>
+  <section class="hero">
+    <div>
+      <h1>2027, printed in <em>two inks.</em></h1>
+      <ul class="spec">
+        <li>A wall calendar: 12 months and a cover</li>
+        <li>A3, 297 × 420 mm</li>
+        <li>Fluorescent pink and blue risograph on off-white paper</li>
+        <li>Edition of 200</li>
+      </ul>
+      <div class="buy"><p class="price">$38</p><a class="btn" href="mailto:orders@example.com?subject=2027%20calendar%20order">Order by email</a></div>
+      <p class="ship">Calendars ship in December 2026.</p>
+    </div>
+    <figure>
+      <div class="fan">
+        <div class="sheet s1">{{JAN}}</div>
+        <div class="sheet s2">{{JUL}}</div>
+        <div class="sheet s3">{{COVER}}</div>
+      </div>
+      <figcaption class="label">The page designs. Photos of the printed calendar aren't available yet.</figcaption>
+    </figure>
+  </section>
+
+  <section class="months" aria-labelledby="months-h">
+    <h2 id="months-h">Every month</h2>
+    <p>Each month pairs a blue numeral with a pink shape. Where the two inks overlap, they print purple.</p>
+    <div class="grid">
+{{GRID}}
+    </div>
+  </section>
+
+  <section class="details" id="order" aria-labelledby="order-h">
+    <div class="order">
+      <h2 id="order-h">Ordering</h2>
+      <p>Orders are taken by email at <a href="mailto:orders@example.com?subject=2027%20calendar%20order">orders@example.com</a>. Calendars ship in December 2026.</p>
+      <a class="btn" href="mailto:orders@example.com?subject=2027%20calendar%20order">Order by email</a>
+    </div>
+    <dl>
+      <dt>Price</dt><dd>$38</dd>
+      <dt>Pages</dt><dd>12 months and a cover</dd>
+      <dt>Size</dt><dd>A3, 297 × 420 mm</dd>
+      <dt>Printing</dt><dd>Risograph, fluorescent pink and blue</dd>
+      <dt>Paper</dt><dd>Off-white</dd>
+      <dt>Edition</dt><dd>200 copies</dd>
+      <dt>Ships</dt><dd>December 2026</dd>
+    </dl>
+  </section>
+</main>
+
+<footer>
+  <p>Overprint Studio is a fictional studio made for a design concept; orders@example.com is not a real address.</p>
+  <p>The calendar pages shown are designs drawn for this concept, with real 2027 dates.</p>
+</footer>
+</body>
+</html>

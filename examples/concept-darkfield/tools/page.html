@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Darkfield Astronomy Club · observing on the darkest nights</title>
+<meta name="description" content="Free observing sessions on the Saturday nearest each new moon, at the Ridgeway car park. Members share their telescopes.">
+<style>
+@font-face { font-family: "IM Fell English"; font-weight: 400; font-display: swap; src: url(fonts/im-fell-english-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "IM Fell English"; font-style: italic; font-weight: 400; font-display: swap; src: url(fonts/im-fell-english-latin-400-italic.woff2) format("woff2"); }
+@font-face { font-family: "Public Sans"; font-weight: 400; font-display: swap; src: url(fonts/public-sans-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Public Sans"; font-weight: 600; font-display: swap; src: url(fonts/public-sans-latin-600-normal.woff2) format("woff2"); }
+:root { --night: #0b0f1a; --night2: #121a2c; --star: #ece9e0; --dim: #a9b2c6; --gold: #f2d27a; --line: #26304a; --fell: "IM Fell English", Georgia, serif; --sans: "Public Sans", system-ui, sans-serif; --pad: 48px; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--night); color: var(--star); font: 400 1.0625rem/1.6 var(--sans); }
+a { color: var(--gold); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+header { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 22px var(--pad); }
+.name { font: 400 1.6rem/1 var(--fell); margin: 0; }
+nav a { color: var(--star); text-decoration: none; margin-left: 28px; font-weight: 600; }
+nav a:hover { color: var(--gold); }
+
+.hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start; padding: 28px var(--pad) 40px; }
+h1 { font: 400 clamp(3rem, 5.6vw, 5.4rem)/.98 var(--fell); margin: 0 0 22px; letter-spacing: -.01em; }
+h1 em { color: var(--gold); }
+.lede { font-size: 1.25rem; max-width: 34ch; margin: 0 0 28px; color: #d9dce4; }
+.next { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 16px 0; margin: 0 0 28px; }
+.next p { margin: 0; }
+.next .label { font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; }
+.next .when { font: 400 1.9rem/1.15 var(--fell); }
+.next .where { color: #d9dce4; }
+.acts { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; min-height: 52px; padding: 0 22px; border-radius: 999px; background: var(--gold); color: #1a1405; font-weight: 600; text-decoration: none; }
+.btn:hover { background: #f7e09f; }
+.btn.alt { background: transparent; color: var(--star); box-shadow: inset 0 0 0 1.5px #56607a; }
+.btn.alt:hover { box-shadow: inset 0 0 0 1.5px var(--star); }
+figure { margin: 0; }
+.cal svg { width: 100%; height: auto; display: block; }
+.cal .compact { display: none; }
+figcaption { color: var(--dim); font-size: .95rem; margin-top: 10px; max-width: 60ch; }
+
+.month { padding: 8px 0 0; border-top: 1px solid var(--line); }
+.month .strip { padding: 22px var(--pad) 8px; overflow: hidden; }
+.month svg { width: 100%; height: auto; display: block; }
+.month .ends { display: flex; justify-content: space-between; padding: 0 var(--pad) 26px; color: var(--dim); font-size: .95rem; }
+
+.two { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 64px; padding: 56px var(--pad) 64px; border-top: 1px solid var(--line); }
+h2 { font: 400 clamp(2rem, 3.2vw, 2.8rem)/1.05 var(--fell); margin: 0 0 8px; }
+.two .intro { color: var(--dim); margin: 0 0 22px; max-width: 52ch; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 11px 0; border-bottom: 1px solid var(--line); font-weight: 400; }
+thead th { color: var(--dim); font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; }
+tbody th { font: 400 1.25rem/1.3 var(--fell); }
+td { color: var(--dim); text-align: right; white-space: nowrap; }
+.facts { margin: 0; }
+.facts div { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.facts dt { font: 400 1.45rem/1.2 var(--fell); color: var(--gold); }
+.facts dd { margin: 4px 0 0; color: #d9dce4; max-width: 40ch; }
+.contact { margin-top: 28px; }
+
+footer { border-top: 1px solid var(--line); padding: 22px var(--pad) 36px; color: var(--dim); font-size: .92rem; }
+footer p { margin: 0 0 6px; max-width: 95ch; }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; }
+  .two { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 640px) {
+  :root { --pad: 18px; }
+  header { padding-top: 16px; padding-bottom: 10px; }
+  .name { font-size: 1.35rem; }
+  nav { display: none; }
+  .hero { padding-top: 12px; }
+  h1 { font-size: 2.9rem; margin-bottom: 16px; }
+  .lede { font-size: 1.1rem; margin-bottom: 20px; }
+  .next .when { font-size: 1.6rem; }
+  .btn { flex: 1 1 auto; justify-content: center; }
+  .cal .wide { display: none; }
+  .cal .compact { display: block; }
+  .month .strip { padding-left: 0; padding-right: 0; }
+  .month { display: none; }
+  thead { display: none; }
+  tbody tr { display: block; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  tbody th, tbody td { display: block; border: 0; padding: 0; text-align: left; }
+  tbody td::before { content: "New moon "; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header>
+  <p class="name">Darkfield Astronomy Club</p>
+  <nav aria-label="Sections"><a href="#sessions">Sessions</a><a href="#first-night">Your first night</a><a href="#contact">Contact</a></nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <h1>We meet on the <em>darkest</em> nights.</h1>
+      <p class="lede">Free observing sessions on the Saturday nearest each new moon, when moonlight doesn't wash out the sky.</p>
+      <div class="next">
+        <p class="label">First session of the season</p>
+        <p class="when">Saturday 12 December 2026</p>
+        <p class="where">Ridgeway car park, one hour after sunset</p>
+      </div>
+      <div class="acts"><a class="btn" href="#sessions">All session dates</a><a class="btn alt" href="#first-night">What to bring</a></div>
+    </div>
+    <figure class="cal">
+      <div class="wide">{{CAL_WIDE}}</div>
+      <div class="compact">{{CAL_COMPACT}}</div>
+      <figcaption>December 2026: the Moon each evening. New moon falls on 9 December, so the session is Saturday the 12th, under a thin crescent.</figcaption>
+    </figure>
+  </section>
+
+  <section class="month" aria-label="One lunar month">
+    <div class="strip">{{STRIP}}</div>
+    <p class="ends"><span>New moon, 9 Dec 2026</span><span>Full moon</span><span>New moon, 7 Jan 2027</span></p>
+  </section>
+
+  <div class="two">
+    <section id="sessions" aria-labelledby="sessions-h">
+      <h2 id="sessions-h">Sessions, December 2026 to November 2027</h2>
+      <p class="intro">Each session is the Saturday nearest the new moon. Dates are worked out from new-moon times in UTC.</p>
+      <table>
+        <thead><tr><th>Session</th><td>New moon</td></tr></thead>
+        <tbody>
+{{ROWS}}
+        </tbody>
+      </table>
+    </section>
+
+    <section id="first-night" aria-labelledby="first-h">
+      <h2 id="first-h">Your first night</h2>
+      <dl class="facts">
+        <div><dt>Free</dt><dd>Sessions cost nothing.</dd></div>
+        <div><dt>No telescope needed</dt><dd>Members bring telescopes and share them.</dd></div>
+        <div><dt>Warm clothes and a red torch</dt><dd>White light spoils everyone's night vision, so use a red torch.</dd></div>
+        <div><dt>Starts one hour after sunset</dt><dd>At the Ridgeway car park.</dd></div>
+        <div><dt>Cloudy means cancelled</dt><dd>If the sky is cloudy at the start time, the session is cancelled.</dd></div>
+      </dl>
+      <div class="contact" id="contact"><h2>Contact</h2><p><a href="mailto:hello@example.org">hello@example.org</a></p></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Darkfield Astronomy Club is a fictional club made for a design concept.</p>
+  <p>The Moon drawings show the near side's main dark plains in approximate positions. Phases are calculated for 21:00 UTC each evening, and new-moon times follow Meeus, <i>Astronomical Algorithms</i>, chapter 49.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Legible · colour contrast checker</title>
+<meta name="description" content="Check the contrast between a text colour and a background colour against WCAG thresholds. Runs in your browser; nothing is uploaded.">
+<style>
+@font-face { font-family: "Atkinson"; font-weight: 400; font-display: swap; src: url(fonts/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson"; font-weight: 700; font-display: swap; src: url(fonts/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2"); }
+:root { --ink: #111; --paper: #fff; --line: #d9d9d9; --muted: #555; --pass: #0b6b3a; --fail: #b3261e; --fg: #14213d; --bg: #fca311; --font: "Atkinson", system-ui, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 400 1.0625rem/1.55 var(--font); color: var(--ink); background: var(--paper); }
+:focus-visible { outline: 3px solid #1a5fd6; outline-offset: 2px; }
+a { color: inherit; }
+
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 16px 32px; border-bottom: 1px solid var(--line); }
+.mark { font: 700 1.35rem/1 var(--font); letter-spacing: -.01em; margin: 0; }
+.mark span { font-weight: 400; color: var(--muted); font-size: 1rem; margin-left: 10px; letter-spacing: 0; }
+.top p { margin: 0; color: var(--muted); }
+
+.tool { display: grid; grid-template-columns: 380px minmax(0, 1fr); grid-template-areas: "controls ratio" "controls samples"; grid-template-rows: auto 1fr; min-height: calc(100vh - 58px); }
+.controls { grid-area: controls; padding: 28px 32px 32px; border-right: 1px solid var(--line); background: var(--paper); }
+.ratio { grid-area: ratio; background: var(--bg); color: var(--fg); padding: 40px 56px 32px; transition: background .2s, color .2s; }
+.samples { grid-area: samples; background: var(--bg); color: var(--fg); padding: 36px 56px 48px; border-top: 2px solid var(--fg); margin: 0 56px; padding-left: 0; padding-right: 0; box-shadow: 0 0 0 56px var(--bg); clip-path: inset(0 -56px -56px -56px); transition: background .2s, color .2s; }
+
+h1 { font: 700 1.5rem/1.2 var(--font); margin: 0 0 22px; }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-weight: 700; margin-bottom: 6px; }
+.pick { display: flex; gap: 10px; }
+.pick input[type=color] { width: 56px; height: 52px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: none; cursor: pointer; }
+.pick input[type=text] { flex: 1; min-width: 0; height: 52px; padding: 0 14px; font: 400 1.15rem var(--font); border: 1px solid #8a8a8a; border-radius: 6px; text-transform: lowercase; }
+.pick input[type=text][aria-invalid=true] { border-color: var(--fail); box-shadow: 0 0 0 1px var(--fail); }
+.err { color: var(--fail); font-size: .95rem; margin: 6px 0 0; min-height: 1.4em; }
+.swap { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid #8a8a8a; border-radius: 6px; background: #fff; font: 700 1rem var(--font); cursor: pointer; margin: 0 0 24px; }
+.swap:hover { background: #f2f2f2; }
+.results { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.results li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.results li small { grid-column: 1; color: var(--muted); font-size: .92rem; }
+.results b { grid-row: 1 / span 2; grid-column: 2; align-self: center; font-size: .95rem; padding: 4px 10px; border-radius: 4px; color: #fff; }
+.results b.pass { background: var(--pass); } .results b.fail { background: var(--fail); }
+
+.big { font: 700 clamp(5rem, 13vw, 12rem)/.9 var(--font); letter-spacing: -.04em; margin: 0; font-variant-numeric: tabular-nums; }
+.big span { font-size: .42em; letter-spacing: 0; margin-left: .06em; }
+.verdict { font: 700 1.4rem/1.3 var(--font); margin: 10px 0 0; max-width: 28ch; }
+.samples .s24 { font: 700 1.5rem/1.25 var(--font); margin: 0 0 10px; }
+.samples .s19 { font: 700 1.1875rem/1.3 var(--font); margin: 0 0 14px; }
+.samples .s16 { font-size: 1rem; margin: 0 0 14px; max-width: 60ch; }
+.samples .s14 { font-size: .875rem; margin: 0 0 22px; }
+.samples .ui { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 2px solid var(--fg); border-radius: 6px; font-weight: 700; }
+.note { font-size: .875rem; opacity: 1; margin: 22px 0 0; }
+
+.explain { max-width: 1100px; margin: 0 auto; padding: 56px 32px 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 56px; }
+h2 { font: 700 1.6rem/1.2 var(--font); margin: 0 0 14px; }
+.explain p { margin: 0 0 14px; max-width: 52ch; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 11px 12px 11px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-size: .9rem; color: var(--muted); border-bottom: 2px solid var(--ink); }
+td.r { font-weight: 700; white-space: nowrap; }
+footer { border-top: 1px solid var(--line); padding: 20px 32px 32px; color: var(--muted); font-size: .95rem; }
+
+@media (max-width: 860px) {
+  .top { padding: 12px 16px; flex-direction: column; gap: 2px; }
+  .tool { grid-template-columns: 1fr; grid-template-areas: "ratio" "controls" "samples"; min-height: 0; }
+  .ratio { padding: 24px 16px 22px; }
+  .big { font-size: 5.2rem; }
+  .verdict { font-size: 1.2rem; }
+  .controls { border-right: 0; padding: 22px 16px 24px; }
+  h1 { font-size: 1.25rem; margin-bottom: 16px; }
+  .samples { padding: 24px 0 32px; margin: 0 16px; box-shadow: 0 0 0 16px var(--bg); clip-path: inset(-16px -16px -32px -16px); border-top: 0; }
+  .explain { grid-template-columns: 1fr; gap: 32px; padding: 40px 16px 48px; }
+  footer { padding: 18px 16px 28px; }
+}
+@media (prefers-reduced-motion: reduce) { .ratio, .samples { transition: none; } }
+</style>
+</head>
+<body>
+<header class="top"><p class="mark">Legible<span>colour contrast checker</span></p><p>Runs in your browser. Nothing is uploaded, no account.</p></header>
+
+<main>
+  <section class="tool" aria-label="Contrast checker">
+    <div class="ratio" aria-live="polite">
+      <p class="big" id="ratio">7.9<span>:1</span></p>
+      <p class="verdict" id="verdict">Passes AA and AAA for text of any size.</p>
+    </div>
+
+    <form class="controls" onsubmit="return false">
+      <h1>Check two colours</h1>
+      <div class="field">
+        <label for="fg-hex">Text colour</label>
+        <div class="pick"><input type="color" id="fg-pick" value="#14213d" aria-label="Pick text colour"><input type="text" id="fg-hex" value="#14213d" spellcheck="false" autocomplete="off" aria-describedby="fg-err"></div>
+        <p class="err" id="fg-err"></p>
+      </div>
+      <div class="field">
+        <label for="bg-hex">Background colour</label>
+        <div class="pick"><input type="color" id="bg-pick" value="#fca311" aria-label="Pick background colour"><input type="text" id="bg-hex" value="#fca311" spellcheck="false" autocomplete="off" aria-describedby="bg-err"></div>
+        <p class="err" id="bg-err"></p>
+      </div>
+      <button class="swap" type="button" id="swap">Swap colours</button>
+      <ul class="results" id="results"></ul>
+    </form>
+
+    <div class="samples" aria-label="Preview in your colours">
+      <p class="s24">Large text, 24px regular or bigger</p>
+      <p class="s19">Bold text at 19px also counts as large</p>
+      <p class="s16">Normal body text at 16px. This is the size most paragraphs on the web are set at, so it is the one to check first.</p>
+      <p class="s14">Small text at 14px, the kind used for captions and footnotes.</p>
+      <span class="ui">Button outline</span>
+      <p class="note">Everything in this panel uses your two colours.</p>
+    </div>
+  </section>
+
+  <section class="explain">
+    <div>
+      <h2>What the numbers mean</h2>
+      <p>Contrast ratio compares how light two colours are, from 1:1 (identical) to 21:1 (black on white). The Web Content Accessibility Guidelines (WCAG) set minimum ratios so text stays readable for people with low vision.</p>
+      <p>Large text means at least 24px, or at least 18.66px when bold.</p>
+    </div>
+    <table>
+      <thead><tr><th>Check</th><th>Applies to</th><th>Minimum</th></tr></thead>
+      <tbody>
+        <tr><td>AA</td><td>Normal text</td><td class="r">4.5:1</td></tr>
+        <tr><td>AA</td><td>Large text</td><td class="r">3:1</td></tr>
+        <tr><td>AAA</td><td>Normal text</td><td class="r">7:1</td></tr>
+        <tr><td>AAA</td><td>Large text</td><td class="r">4.5:1</td></tr>
+        <tr><td>AA</td><td>Interface parts and graphics, such as input borders and icons</td><td class="r">3:1</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<footer>Legible is a design concept. Ratios use the WCAG 2 relative-luminance formula and are rounded down to one decimal place, so a pair is never shown as passing when it falls just short.</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const state = { fg: "#14213d", bg: "#fca311" };
+const CHECKS = [
+  ["AA, normal text", "4.5:1 minimum", 4.5],
+  ["AA, large text", "3:1 minimum", 3],
+  ["AAA, normal text", "7:1 minimum", 7],
+  ["AAA, large text", "4.5:1 minimum", 4.5],
+  ["Interface parts", "3:1 minimum", 3]
+];
+function parse(v) {
+  v = v.trim().toLowerCase(); if (!v.startsWith("#")) v = "#" + v;
+  if (/^#[0-9a-f]{3}$/.test(v)) v = "#" + [...v.slice(1)].map(c => c + c).join("");
+  return /^#[0-9a-f]{6}$/.test(v) ? v : null;
+}
+function lum(hex) {
+  const c = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255).map(v => v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+}
+function ratio(a, b) { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); }
+function render() {
+  const r = ratio(state.fg, state.bg), shown = Math.floor(r * 10) / 10;
+  document.documentElement.style.setProperty("--fg", state.fg);
+  document.documentElement.style.setProperty("--bg", state.bg);
+  $("ratio").innerHTML = shown.toFixed(1) + "<span>:1</span>";
+  const pass = CHECKS.map(c => r >= c[2]);
+  $("results").innerHTML = CHECKS.map((c, i) => `<li>${c[0]}<small>${c[1]}</small><b class="${pass[i] ? "pass" : "fail"}">${pass[i] ? "Pass" : "Fail"}</b></li>`).join("");
+  $("verdict").textContent = r >= 7 ? "Passes AA and AAA for text of any size." :
+    r >= 4.5 ? "Passes AA for all text. Large text also passes AAA." :
+    r >= 3 ? "Large text and interface parts pass AA. Normal text fails." :
+    "Fails every check. Text in these colours will be hard to read.";
+}
+function bind(key) {
+  const pick = $(key + "-pick"), hex = $(key + "-hex"), err = $(key + "-err");
+  pick.addEventListener("input", () => { state[key] = pick.value; hex.value = pick.value; hex.removeAttribute("aria-invalid"); err.textContent = ""; render(); });
+  hex.addEventListener("input", () => {
+    const v = parse(hex.value);
+    if (v) { state[key] = v; pick.value = v; hex.removeAttribute("aria-invalid"); err.textContent = ""; render(); }
+    else { hex.setAttribute("aria-invalid", "true"); err.textContent = "Use a hex colour, such as #1a2b3c."; }
+  });
+}
+bind("fg"); bind("bg");
+$("swap").addEventListener("click", () => { [state.fg, state.bg] = [state.bg, state.fg]; $("fg-hex").value = $("fg-pick").value = state.fg; $("bg-hex").value = $("bg-pick").value = state.bg; render(); });
+render();
+</script>
+</body>
+</html>
