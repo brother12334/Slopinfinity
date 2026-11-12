@@ -1,0 +1,29 @@
+# Kite Objects
+
+- **Visitor's job:** explore the objects and choose one.
+- **Content used:** walnut tray $48, ceramic pen cup $38, brass bookmark $24. No dimensions,
+  descriptions or stock levels (none supplied).
+- **Real sites studied:** Areaware (the object's form shapes the page), teenage engineering
+  (precise small labels beside the object), Rapha (object in context, then price).
+- **Concept:** the desk from above. The three objects lie together on one surface so they
+  are compared as a set; choosing one (on the desk or in the list) opens it large with its
+  price. Color comes only from the materials: walnut, glaze, brass.
+- **Visual material:** drawn demo product visuals, labeled "demo product drawings, not
+  photographs, not to scale". No photos: a photo of a real tray would imply it is the product.
+- **Type (chosen last):** Syne for the wordmark and names, Hanken Grotesk for everything else.
+
+## Problems found after rendering, and revisions
+
+1. The drawings read as flat placeholders (the cup looked like a plate). Rebuilt as shared
+   drawings with form and a cast shadow so they sit on the desk.
+2. Detail panel had a large empty gap between price and Add to bag. The panel now opens
+   with a large view of the selected object and the button sits directly under the price.
+3. Mobile: header wrapped, desk labels were unreadable, the demo note overlapped the
+   bookmark. Desk labels hidden on mobile (the list names everything), note moved out of
+   the drawing, header text shortened.
+4. Shadows were clipped at the drawing edges. Drawings allowed to overflow.
+
+## Actions
+
+- Choosing an object works (desk or list, mouse or keyboard).
+- Add to bag is disabled and says checkout isn't connected. The header says the same.
