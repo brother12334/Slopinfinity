@@ -187,6 +187,11 @@ mood) and what you will not copy (brand, photographs, exact layout).
    yours: call it a **proposed identity** in the concept and delivery, and justify it
    from the subject and audience. Do not invent facts about the business (history,
    materials, people, neighbourhood, methods) to make the proposal sound grounded.
+   A photograph of another real business cannot carry the identity of the business
+   you are designing, even with a caption saying it is somewhere else. Judge the
+   impression the page makes before anyone reads the caption: if the borrowed photo is
+   the hero, the page reads as that place. Use such photos as research, or as clearly
+   secondary illustration, never as the dominant evidence for this business.
 
 When the user has no reference and no preference, offer two or three distinct concepts, or
 pick one and say why. **Concepts must differ in art direction, not arrangement**: in the
@@ -214,7 +219,10 @@ idea. Put the deciding facts up front and the rest one clear step away. A striki
 poster, attractive illustration or new palette does not make up for a decisive fact that
 is buried, tiny or unreadable. Only recommend a concept that passes usability; identity
 decides between the ones that pass. If a favorite fails usability, revise it before
-recommending it. Where the task is exploratory (a portfolio, a magazine, a gallery), the
+recommending it. Don't discard a direction with an idea of its own because its first
+execution is weak: refine its typography, composition and mobile treatment until it is
+as finished as the other options, then compare. That is a craft iteration only; it adds
+no business facts. Where the task is exploratory (a portfolio, a magazine, a gallery), the
 deciding element can be a clear entry point into the work rather than facts.
 `scripts/first_screen.js` reports where each fact lands; read a "below fold" result as a
 question (is there a clear path to it?), not an automatic failure:

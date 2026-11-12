@@ -55,6 +55,15 @@ would invent what each service includes.
 - **Mobile:** the photo now opens the page, but at 230px tall with a two-line credit over
   it, the credit covers a fair part of the image.
 
+## Status: failed visual test
+
+This page remains a failed visual test. Two skill changes came from it afterwards:
+another real business's photo cannot be the hero evidence for this one (the caption is
+read after the impression is made), and a distinctive direction is refined before being
+compared with a polished one. Neither change alters this page. Here the borrowed photo is
+still the hero, and the repair-tag direction (B) was set aside after one rough execution
+without that refinement.
+
 ## Fact audit
 
 | Displayed | Source in the brief |
