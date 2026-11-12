@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lowgear Bike Repair · Concept B, Repair tag</title><style>@font-face{font-family:"Schibsted Grotesk";font-weight:400;src:url(fonts/schibsted-grotesk-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Schibsted Grotesk";font-weight:700;src:url(fonts/schibsted-grotesk-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Schibsted Grotesk";font-weight:800;src:url(fonts/schibsted-grotesk-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"Courier Prime";font-weight:400;src:url(fonts/courier-prime-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Courier Prime";font-weight:700;src:url(fonts/courier-prime-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:600;src:url(fonts/barlow-condensed-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:800;src:url(fonts/barlow-condensed-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"Alfa Slab One";font-weight:400;src:url(fonts/alfa-slab-one-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Work Sans";font-weight:400;src:url(fonts/work-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Work Sans";font-weight:600;src:url(fonts/work-sans-latin-600-normal.woff2) format("woff2")}
+*{box-sizing:border-box}
+
+body{margin:0;background:#c9b083 url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22240%22 height=%22240%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.8%22 numOctaves=%223%22/%3E%3CfeColorMatrix values=%220 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .1 0 0 0 .18 0%22/%3E%3C/filter%3E%3Crect width=%22240%22 height=%22240%22 filter=%22url(%23n)%22/%3E%3C/svg%3E");color:#1d2a52;font:400 1.0625rem/1.45 "Courier Prime",monospace}
+.wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center;min-height:100vh;padding:40px 56px}
+.tag{position:relative;background:#f4f1e8;padding:56px 36px 32px;transform:rotate(-1.6deg);box-shadow:0 2px 0 #d9d2c0,0 22px 40px rgba(60,40,10,.35);border-radius:4px 4px 4px 4px;clip-path:polygon(0 30px,30px 0,calc(100% - 30px) 0,100% 30px,100% 100%,0 100%)}
+.tag::before{content:"";position:absolute;top:22px;left:50%;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:#c9b083;box-shadow:inset 0 0 0 5px #e2d6b8}
+.tag .co{display:flex;justify-content:space-between;border-bottom:3px solid #2b4aa0;padding-bottom:10px;margin-bottom:6px;font:800 1.9rem/1 "Barlow Condensed";letter-spacing:.04em;color:#2b4aa0}
+.tag .co span{font:400 .95rem/1.2 "Courier Prime";letter-spacing:0;text-align:right;color:#2b4aa0}
+.row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #9fb0dc}
+.row .box{display:inline-block;width:18px;height:18px;border:2px solid #2b4aa0;margin-right:10px;vertical-align:-3px}
+.row b{font-weight:700}
+.lbl{font:600 .85rem/1 "Barlow Condensed";letter-spacing:.12em;color:#2b4aa0;margin:18px 0 4px}
+.stamp{position:absolute;right:26px;bottom:70px;transform:rotate(-9deg);border:4px solid #c2372b;color:#c2372b;font:800 1.8rem/1 "Barlow Condensed";letter-spacing:.06em;padding:8px 12px;opacity:.85;mix-blend-mode:multiply}
+h1{font:800 clamp(3.2rem,6.4vw,6.4rem)/.88 "Barlow Condensed";text-transform:uppercase;margin:0 0 18px;color:#1d2a52;letter-spacing:-.005em}
+.side p{max-width:34ch;font-size:1.1rem}
+.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 22px;background:#1d2a52;color:#f4f1e8;text-decoration:none;font:700 1.05rem/1 "Courier Prime";border-radius:2px;margin:8px 10px 0 0}
+.btn.alt{background:transparent;color:#1d2a52;box-shadow:inset 0 0 0 2px #1d2a52}
+@media(max-width:860px){.wrap{grid-template-columns:1fr;padding:20px 16px;gap:24px;min-height:0}.side{order:-1}.tag{transform:none;padding:52px 18px 24px}.tag .co{font-size:1.5rem}h1{font-size:3.2rem}.stamp{font-size:1.3rem;bottom:auto;top:96px;right:14px}}
+</style></head><body><div class="wrap"><div class="tag">
+<div class="co">LOWGEAR<span>41 Canal Row<br>555-0142</span></div>
+<p class="lbl">SERVICE REQUIRED</p>
+<div class="row"><span><i class="box"></i>Safety check</span><b>$25</b></div>
+<div class="row"><span><i class="box"></i>Puncture repair</span><b>$15</b></div>
+<div class="row"><span><i class="box"></i>&nbsp;&nbsp;+ new inner tube, if needed</span><b>$8</b></div>
+<div class="row"><span><i class="box"></i>Standard service</span><b>$75</b></div>
+<div class="row"><span><i class="box"></i>Full service</span><b>$140</b></div>
+<p class="lbl">READY</p><div class="row"><span>Most repairs within 2 working days</span></div>
+<p class="lbl">PAYMENT</p><div class="row"><span>When you collect</span></div>
+<div class="stamp">NO BOOKING</div></div>
+<div class="side"><h1>Bring your bike in.</h1><p>Tuesday to Saturday, 9 am–6 pm, at 41 Canal Row. No booking needed. Closed Sunday and Monday.</p>
+<a class="btn" href="tel:5550142">Call 555-0142</a><a class="btn alt" href="#">How drop-off works</a></div></div></body></html>

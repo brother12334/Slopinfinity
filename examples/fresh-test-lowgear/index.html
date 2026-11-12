@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lowgear Bike Repair · 41 Canal Row</title>
+<meta name="description" content="Bicycle repairs at 41 Canal Row, Tuesday to Saturday. No booking needed; most repairs ready within 2 working days.">
+<style>
+@font-face { font-family: "Schibsted Grotesk"; font-weight: 400; font-display: swap; src: url(fonts/schibsted-grotesk-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Schibsted Grotesk"; font-weight: 700; font-display: swap; src: url(fonts/schibsted-grotesk-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Schibsted Grotesk"; font-weight: 800; font-display: swap; src: url(fonts/schibsted-grotesk-latin-800-normal.woff2) format("woff2"); }
+:root {
+  --paper: #f2efe9; --ink: #1b1a18; --muted: #57524a; --rule: #b9b3a8; --night: #141414; --yellow: #f0c419;
+  --pad: 40px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.55 "Schibsted Grotesk", system-ui, sans-serif; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #2b5fd9; outline-offset: 3px; }
+.btn { display: inline-flex; align-items: center; min-height: 52px; padding: 0 22px; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 700; border-radius: 4px; transition: background .15s; }
+.btn:hover { background: #3a372f; }
+.btn.alt { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+.btn.alt:hover { background: var(--ink); color: var(--paper); }
+
+.bar { display: flex; justify-content: space-between; gap: 16px; padding: 16px var(--pad); font-weight: 700; border-bottom: 1px solid var(--ink); }
+.bar span:last-child { font-weight: 400; }
+
+.hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); min-height: calc(100vh - 58px); }
+.copy { padding: 48px var(--pad) 40px; }
+h1 { font: 800 clamp(2.4rem, 4.2vw, 4rem)/1 "Schibsted Grotesk"; letter-spacing: -.03em; margin: 0 0 20px; }
+.lede { font-size: 1.2rem; margin: 0 0 24px; max-width: 32ch; }
+.acts { display: flex; gap: 12px; flex-wrap: wrap; margin: 0 0 36px; }
+.rates { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.rates li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 1.1rem; }
+.rates b { font-weight: 800; font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.rates small { display: block; color: var(--muted); font-size: .95rem; }
+.rates-note { margin: 12px 0 0; color: var(--muted); }
+
+figure { margin: 0; position: relative; background: var(--night); overflow: hidden; }
+figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 16px; background: rgba(20,20,20,.84); color: #e8e4dc; font-size: .85rem; }
+.hero figure img { object-position: 30% 40%; }
+
+/* drop-off: dark band with the second photo */
+.drop { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); background: var(--night); color: #efebe3; }
+.drop figure { min-height: 560px; }
+.drop figure img { object-position: 40% 50%; }
+.drop-text { padding: 56px var(--pad) 56px 56px; }
+.drop h2 { font: 800 clamp(1.9rem, 3vw, 2.8rem)/1.05 "Schibsted Grotesk"; letter-spacing: -.025em; margin: 0 0 28px; }
+.facts { margin: 0; display: grid; gap: 0; }
+.facts div { padding: 16px 0; border-top: 1px solid #4a4741; }
+.facts dt { font-weight: 800; font-size: 1.25rem; color: var(--yellow); }
+.facts dd { margin: 4px 0 0; max-width: 40ch; }
+
+/* find */
+.find { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0; border-bottom: 1px solid var(--ink); }
+.find > div { padding: 48px var(--pad); }
+.find > div + div { border-left: 1px solid var(--ink); }
+.find h2 { font: 800 clamp(2rem, 3.4vw, 3.2rem)/1 "Schibsted Grotesk"; letter-spacing: -.03em; margin: 0 0 8px; }
+.find p { margin: 0 0 20px; }
+table { border-collapse: collapse; width: 100%; max-width: 460px; }
+th, td { text-align: left; padding: 10px 0; border-bottom: 1px solid var(--rule); font-weight: 400; }
+td { text-align: right; font-weight: 700; }
+tr.closed td { color: var(--muted); font-weight: 400; }
+
+footer { padding: 24px var(--pad) 36px; font-size: .9rem; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; }
+
+@media (max-width: 860px) {
+  :root { --pad: 20px; }
+  .bar { flex-direction: column; gap: 0; padding: 12px var(--pad); }
+  .hero { display: flex; flex-direction: column; min-height: 0; }
+  .hero figure { order: -1; height: 230px; }
+  .hero figcaption { font-size: .78rem; padding: 6px 12px; }
+  .copy { padding: 22px var(--pad) 32px; }
+  h1 { font-size: 2.15rem; margin-bottom: 12px; }
+  .lede { font-size: 1.1rem; margin-bottom: 18px; }
+  .acts { margin-bottom: 28px; }
+  .drop { grid-template-columns: 1fr; }
+  .drop figure { min-height: 0; height: 280px; }
+  .drop-text { padding: 32px var(--pad) 36px; }
+  .find { grid-template-columns: 1fr; }
+  .find > div { padding: 32px var(--pad); }
+  .find > div + div { border-left: 0; border-top: 1px solid var(--ink); }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+</style>
+</head>
+<body>
+<header class="bar"><span>LOWGEAR BIKE REPAIR</span><span>41 Canal Row · Tuesday to Saturday, 9 am–6 pm</span></header>
+
+<main>
+  <section class="hero">
+    <div class="copy">
+      <h1>Bike repairs on Canal Row. No booking needed.</h1>
+      <p class="lede">Bring your bike in Tuesday to Saturday. Most repairs are ready within 2 working days, and you pay when you collect.</p>
+      <div class="acts"><a class="btn" href="tel:5550142">Call 555-0142</a><a class="btn alt" href="#drop-off">Drop-off details</a></div>
+      <ul class="rates" aria-label="Prices">
+        <li>Safety check<b>$25</b></li>
+        <li><span>Puncture repair<small>+ $8 if it needs a new inner tube</small></span><b>$15</b></li>
+        <li>Standard service<b>$75</b></li>
+        <li>Full service<b>$140</b></li>
+      </ul>
+      <p class="rates-note">Repairs only. We don't sell bikes.</p>
+    </div>
+    <figure>
+      <img src="img/tool-wall.jpg" alt="A workshop tool wall: spanners and cone wrenches hung over painted outlines, with handwritten labels on a yellow board">
+      <figcaption>Photo of Bicycle Kitchen, Los Angeles, a different workshop. Downtowngal, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="drop" id="drop-off">
+    <figure>
+      <img src="img/repair-stand.jpg" alt="Two people working on a red bicycle frame clamped in a repair stand">
+      <figcaption>Photo of Bicycle Kitchen, Los Angeles, a different workshop. Downtowngal, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></figcaption>
+    </figure>
+    <div class="drop-text">
+      <h2>Dropping off a bike</h2>
+      <dl class="facts">
+        <div><dt>No booking needed</dt><dd>Bring the bike in during opening hours.</dd></div>
+        <div><dt>Most repairs ready within 2 working days</dt></div>
+        <div><dt>Pay when you collect</dt></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="find">
+    <div>
+      <h2>41 Canal Row</h2>
+      <a class="btn" href="tel:5550142">Call 555-0142</a>
+    </div>
+    <div>
+      <table aria-label="Opening hours">
+        <tr class="closed"><th scope="row">Monday</th><td>Closed</td></tr>
+        <tr><th scope="row">Tuesday</th><td>9 am–6 pm</td></tr>
+        <tr><th scope="row">Wednesday</th><td>9 am–6 pm</td></tr>
+        <tr><th scope="row">Thursday</th><td>9 am–6 pm</td></tr>
+        <tr><th scope="row">Friday</th><td>9 am–6 pm</td></tr>
+        <tr><th scope="row">Saturday</th><td>9 am–6 pm</td></tr>
+        <tr class="closed"><th scope="row">Sunday</th><td>Closed</td></tr>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Lowgear Bike Repair · 41 Canal Row · 555-0142</span>
+  <span>Demo page for a fictional workshop. Photos show Bicycle Kitchen, Los Angeles, credited above.</span>
+</footer>
+</body>
+</html>
