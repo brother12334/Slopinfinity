@@ -40,3 +40,7 @@ What a visitor couldn't see: the food up close, and the counter front was an emp
 ## Critical review: view vs evidence
 
 The menu tiles are a new view of the menu, not evidence about the food: they repeat the item names and show nothing about quality or portion. Unresolved: real food photos (see ../UNRESOLVED.md).
+
+## Final review
+
+The tiles stay because they help identify the menu. They show what is served; they cannot establish portion size, quality or taste, and the page labels the food as illustrations. See ../UNRESOLVED.md.

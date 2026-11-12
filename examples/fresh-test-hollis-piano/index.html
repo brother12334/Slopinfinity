@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hollis Piano Tuning · Home visits around Elm Grove</title>
+<meta name="description" content="Piano tuning at your home, Monday to Friday, within 20 miles of Elm Grove. Standard tuning $140.">
+<style>
+@font-face { font-family: "Literata"; font-weight: 500; font-display: swap; src: url(fonts/literata-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Literata"; font-weight: 700; font-display: swap; src: url(fonts/literata-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Work Sans"; font-weight: 400; font-display: swap; src: url(fonts/work-sans-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Work Sans"; font-weight: 600; font-display: swap; src: url(fonts/work-sans-latin-600-normal.woff2) format("woff2"); }
+:root {
+  --ebony: #17140f;
+  --white: #ffffff;
+  --felt: #9c2a1f;
+  --felt-dark: #7e2118;
+  --muted: #5b554c;
+  --keyline: #d9d3c8;
+  --card: #f1ede6;
+  --serif: "Literata", Georgia, serif;
+  --sans: "Work Sans", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--white); color: var(--ebony); font: 400 1.125rem/1.55 var(--sans); }
+::selection { background: var(--ebony); color: var(--white); }
+:focus-visible { outline: 3px solid var(--felt); outline-offset: 3px; }
+a { color: var(--ebony); text-underline-offset: 0.2em; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+
+/* A strip of keys: the one decorative element, taken from the subject. */
+.keys { height: 18px; background:
+  repeating-linear-gradient(90deg, var(--white) 0 26px, var(--ebony) 26px 27px); border-bottom: 1px solid var(--ebony); position: relative; }
+.keys::after { content: ""; position: absolute; inset: 0 0 6px 0; background:
+  repeating-linear-gradient(90deg, transparent 0 18px, var(--ebony) 18px 34px, transparent 34px 45px, var(--ebony) 45px 61px, transparent 61px 99px, var(--ebony) 99px 115px, transparent 115px 126px, var(--ebony) 126px 142px, transparent 142px 153px, var(--ebony) 153px 169px, transparent 169px 189px); }
+
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
+.name { font: 700 1.3rem/1 var(--serif); }
+.nav { display: flex; gap: 22px; }
+.nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 12px 0; }
+.nav a:hover { text-decoration: underline; }
+
+.hero { padding: clamp(32px, 6vw, 72px) 0 clamp(40px, 6vw, 72px); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero h1 { font-size: clamp(2.4rem, 4.6vw, 3.9rem); line-height: 1.04; margin-bottom: 18px; }
+.lede { font-size: 1.25rem; color: var(--muted); margin: 0 0 22px; max-width: 34ch; }
+.facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-weight: 600; }
+.facts li::before { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--felt); margin-right: 10px; vertical-align: 2px; }
+
+.estimate { background: var(--card); border-top: 6px solid var(--ebony); padding: 26px 28px 28px; }
+.estimate h2 { font-size: 1.5rem; margin-bottom: 4px; }
+.estimate > p { margin: 0 0 14px; color: var(--muted); }
+fieldset { border: 0; padding: 0; margin: 0; }
+legend { font-weight: 600; margin-bottom: 8px; }
+.choice { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; border: 1px solid var(--keyline); background: var(--white); margin-bottom: 8px; cursor: pointer; }
+.choice:hover { border-color: var(--ebony); }
+.choice input { width: 20px; height: 20px; accent-color: var(--felt); margin: 0; }
+.choice:has(input:checked) { border-color: var(--ebony); box-shadow: inset 4px 0 0 var(--felt); }
+.total { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 18px 0 4px; }
+.total strong { font: 700 2.6rem/1 var(--serif); font-variant-numeric: tabular-nums; }
+.total span { color: var(--muted); }
+.breakdown { margin: 0 0 18px; font-size: 1rem; color: var(--muted); min-height: 1.5em; }
+.btn { display: inline-flex; align-items: center; justify-content: center; font: 600 1.05rem/1 var(--sans); min-height: 52px; padding: 0 24px; background: var(--felt); color: var(--white); border: 0; text-decoration: none; cursor: pointer; }
+.btn:hover { background: var(--felt-dark); color: var(--white); }
+.btn:active { transform: translateY(1px); }
+
+section.band { border-top: 1px solid var(--keyline); padding: clamp(40px, 6vw, 64px) 0; }
+.band h2 { font-size: clamp(1.8rem, 3vw, 2.3rem); margin-bottom: 18px; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 14px 0; border-bottom: 1px solid var(--keyline); vertical-align: top; }
+th { font-weight: 600; }
+td.num { text-align: right; font: 700 1.25rem/1.2 var(--serif); white-space: nowrap; }
+td small { display: block; color: var(--muted); font-size: 0.95rem; font-weight: 400; }
+.where p { margin: 0 0 12px; }
+.where strong { font-family: var(--serif); font-size: 1.3rem; }
+
+.request .wrap { max-width: 760px; }
+form { display: grid; gap: 20px; margin-top: 8px; }
+.field { display: grid; gap: 6px; }
+label, .label { font-weight: 600; }
+.hint { color: var(--muted); font-size: 0.95rem; margin: 0; }
+input[type=text], input[type=email], select, textarea { font: inherit; font-size: 1.05rem; border: 1.5px solid var(--ebony); border-radius: 0; padding: 10px 12px; min-height: 50px; background: var(--white); color: var(--ebony); width: 100%; }
+textarea { min-height: 96px; resize: vertical; }
+.days { display: flex; flex-wrap: wrap; gap: 8px; }
+.day { display: flex; align-items: center; gap: 8px; border: 1px solid var(--keyline); padding: 0 12px; min-height: 46px; cursor: pointer; }
+.day input { width: 18px; height: 18px; accent-color: var(--felt); margin: 0; }
+.err { color: var(--felt); font-weight: 600; margin: 0; }
+.err:empty { display: none; }
+[aria-invalid="true"] { border-color: var(--felt) !important; }
+.submit-row { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.submit-row p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.result { border-left: 6px solid var(--ebony); background: var(--card); padding: 16px 18px; }
+.result:empty { display: none; }
+.result h3 { font-size: 1.25rem; margin-bottom: 4px; }
+.result p { margin: 0; }
+footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(--muted); font-size: 0.95rem; }
+
+@media (max-width: 860px) {
+  .nav { display: none; }
+  .hero .wrap, .two { grid-template-columns: 1fr; }
+  .estimate { padding: 22px 20px; }
+  .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="keys" aria-hidden="true"></div>
+<header>
+  <div class="wrap">
+    <span class="name">Hollis Piano Tuning</span>
+    <nav class="nav" aria-label="Sections"><a href="#prices">Prices</a><a href="#area">Area and hours</a><a href="#request">Request a tuning</a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Piano tuning at your home, on weekdays around Elm Grove.</h1>
+        <p class="lede">Standard tuning is $140 and takes about 90 minutes. Pianos that haven't been tuned in over two years need a pitch raise first.</p>
+        <ul class="facts">
+          <li>Monday to Friday, 9 am to 5 pm</li>
+          <li>Within 20 miles of Elm Grove</li>
+        </ul>
+      </div>
+
+      <form class="estimate" aria-labelledby="est-title" onsubmit="return false">
+        <h2 id="est-title">What will it cost?</h2>
+        <p>Based on when your piano was last tuned.</p>
+        <fieldset>
+          <legend>Last tuned</legend>
+          <label class="choice"><input type="radio" name="last" value="recent" checked> Within the last 2 years</label>
+          <label class="choice"><input type="radio" name="last" value="old"> More than 2 years ago</label>
+          <label class="choice"><input type="radio" name="last" value="unsure"> Not sure</label>
+        </fieldset>
+        <div class="total" aria-live="polite"><strong data-total>$140</strong><span data-time>about 90 minutes</span></div>
+        <p class="breakdown" data-breakdown>Standard tuning.</p>
+        <a class="btn" href="#request" data-to-form>Request a tuning</a>
+      </form>
+    </div>
+  </section>
+
+  <section class="band" id="prices" aria-labelledby="prices-title">
+    <div class="wrap two">
+      <div>
+        <h2 id="prices-title">Prices</h2>
+        <table>
+          <tbody>
+            <tr><th scope="row">Standard tuning<small>About 90 minutes</small></th><td class="num">$140</td></tr>
+            <tr><th scope="row">Pitch raise, added for pianos not tuned in over 2 years<small>Adds about 30 minutes</small></th><td class="num">+ $60</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="where" id="area">
+        <h2>Area and hours</h2>
+        <p><strong>Within 20 miles of Elm Grove</strong></p>
+        <p>Home visits Monday to Friday, between 9 am and 5 pm.</p>
+        <p class="hint">If you're not sure your address is in range, say so in your request.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band request" id="request" aria-labelledby="req-title">
+    <div class="wrap">
+      <h2 id="req-title">Request a tuning</h2>
+      <p class="hint">Tell the tuner where you are and which days suit you. In the live service the tuner replies by email to confirm a time.</p>
+      <form novalidate data-form>
+        <div class="field" data-f="name"><label for="name">Your name</label><input type="text" id="name" autocomplete="name"><p class="err" id="name-err"></p></div>
+        <div class="field" data-f="email"><label for="email">Email</label><input type="email" id="email" autocomplete="email"><p class="err" id="email-err"></p></div>
+        <div class="field" data-f="town"><label for="town">Town or street</label><p class="hint">So the tuner can check it's within 20 miles of Elm Grove.</p><input type="text" id="town" autocomplete="address-level2"><p class="err" id="town-err"></p></div>
+        <div class="field"><label for="last">Last tuned</label>
+          <select id="last"><option value="recent">Within the last 2 years</option><option value="old">More than 2 years ago</option><option value="unsure">Not sure</option></select></div>
+        <div class="field" data-f="days"><span class="label" id="days-label">Days that suit you</span>
+          <div class="days" role="group" aria-labelledby="days-label">
+            <label class="day"><input type="checkbox" value="Monday"> Mon</label><label class="day"><input type="checkbox" value="Tuesday"> Tue</label><label class="day"><input type="checkbox" value="Wednesday"> Wed</label><label class="day"><input type="checkbox" value="Thursday"> Thu</label><label class="day"><input type="checkbox" value="Friday"> Fri</label>
+          </div><p class="err" id="days-err"></p></div>
+        <div class="field"><label for="note">Anything the tuner should know? <span class="hint">(optional)</span></label><textarea id="note" placeholder="Type of piano, stairs, parking"></textarea></div>
+        <div class="submit-row"><button class="btn" type="submit">Check request</button><p>Demo: checking doesn't send anything to the tuner.</p></div>
+        <div class="result" role="status" aria-live="polite" data-result></div>
+      </form>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">Hollis Piano Tuning is a fictional business on a demo page.</div></footer>
+
+<script>
+(function () {
+  var est = {
+    recent: ["$140", "about 90 minutes", "Standard tuning."],
+    old: ["$200", "about 2 hours", "Standard tuning $140 plus a $60 pitch raise."],
+    unsure: ["$140 or $200", "90 minutes to 2 hours", "$200 if it needs a pitch raise, which applies when it hasn't been tuned in over 2 years."]
+  };
+  var picked = "recent";
+  function show(v) {
+    picked = v;
+    document.querySelector("[data-total]").textContent = est[v][0];
+    document.querySelector("[data-time]").textContent = est[v][1];
+    document.querySelector("[data-breakdown]").textContent = est[v][2];
+  }
+  document.querySelectorAll('input[name=last]').forEach(function (r) { r.addEventListener("change", function () { show(r.value); }); });
+  document.querySelector("[data-to-form]").addEventListener("click", function () { document.getElementById("last").value = picked; });
+
+  var form = document.querySelector("[data-form]");
+  function set(k, msg, el) { document.getElementById(k + "-err").textContent = msg; if (el) el.setAttribute("aria-invalid", msg ? "true" : "false"); return !msg; }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = form.querySelector("#name"), email = form.querySelector("#email"), town = form.querySelector("#town");
+    var days = [].slice.call(form.querySelectorAll(".day input:checked")).map(function (c) { return c.value; });
+    var ok = [set("name", name.value.trim() ? "" : "Enter your name.", name),
+      set("email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()) ? "" : "Enter an email address, like name@example.com.", email),
+      set("town", town.value.trim() ? "" : "Enter your town or street.", town),
+      set("days", days.length ? "" : "Choose at least one day.")];
+    var res = document.querySelector("[data-result]");
+    if (ok.indexOf(false) !== -1) { res.innerHTML = ""; var bad = form.querySelector('[aria-invalid="true"]'); (bad || form.querySelector(".day input")).focus(); return; }
+    var last = form.querySelector("#last").value;
+    res.innerHTML = "<h3>Request checked</h3><p>" + name.value.trim() + ", " + town.value.trim() + ". " + days.join(", ") +
+      ". Estimate: " + est[last][0] + ", " + est[last][1] + ".</p>";
+  });
+})();
+</script>
+</body>
+</html>

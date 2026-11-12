@@ -41,3 +41,7 @@ What a visitor couldn't scan on mobile: four repeated path diagrams. Fix: on mob
 ## Critical review: view vs evidence
 
 The working demo is real evidence of the mechanism. Nothing essential is unresolved for a product demo.
+
+## Final review
+
+The demo demonstrates the handoff mechanism; it does not prove results for real teams, and the page makes no such claim. No page change. See ../UNRESOLVED.md.

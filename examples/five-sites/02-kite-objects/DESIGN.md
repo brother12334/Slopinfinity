@@ -39,3 +39,7 @@ What a visitor couldn't assess: form and finish from a single top view. Fix: thr
 ## Critical review: view vs evidence
 
 The three concept views help a visitor picture the kind of object, but they are not evidence of size, finish or color. Captions that stated unsupplied facts ('unglazed foot', 'brushed brass', 'rim and depth', 'walnut grain') were removed, and the drawn unglazed foot band was taken out. Unresolved: product photos and dimensions.
+
+## Final review
+
+Close-up views removed and the bookmark hole taken out of every drawing: finish and construction were never in the brief. Views are now Top/Side (tray, cup) and Flat/In use (bookmark). The note under the desk says what the drawings show and what remains unknown. See ../UNRESOLVED.md.

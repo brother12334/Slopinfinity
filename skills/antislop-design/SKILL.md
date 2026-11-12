@@ -284,16 +284,9 @@ still cannot **see, assess, read or complete**. Fix the most important gap first
 fixed well beats several touched lightly. These are prompts to check, not rules every
 design must satisfy:
 
-- **Is it a new view, or new evidence?** Ask what the visitor needs to judge (quality,
-  size, finish, taste, condition, credibility) and whether the material on the page can
-  show it. A drawing, a concept render or sample copy can show the *kind* of thing and
-  how the page will work; it cannot show the real thing's quality, material, finish or
-  size. Adding more drawings adds views, not evidence. When the decision depends on
-  evidence you don't have (real photos, dimensions, real editorial copy, real data),
-  record it as an **unresolved content need** in the delivery and in `DESIGN.md`. Do not
-  claim the illustration solved it.
-- **Do captions state only supplied facts?** A drawing captioned "unglazed foot" or
-  "brushed brass" invents a product fact. Caption concept imagery as concept imagery.
+- **What decision does this visual support, what does it actually show, and what
+  remains unknown?** Answer all three for each image, drawing or sample. Record what
+  remains unknown as an unresolved content need instead of implying the visual settles it.
 - **Can they assess what's offered?** A single view rarely lets someone judge an object
   they might buy. Real photos are best; several labeled concept views can help a visitor
   picture the object, but they remain views. Never imply a scale you don't know: ask
