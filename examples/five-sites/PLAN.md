@@ -15,3 +15,15 @@ time zone is given). Photos are decided per site.
 | Density and tone | Warm, loose, few words | Calm catalog, generous space around objects | Dense editorial, strong headlines | Dense, plain, utilitarian | Interface-dense, precise |
 | Color logic | Egg-yolk yellow, juniper-berry blue, cardamom green | Neutral desk surface; color only from the materials (walnut, glaze, brass) | Street-sign green masthead, black and white newsprint | Civic blue on white, status colors for availability | Neutral UI with three state colors (review, blocked, owner) |
 | Type (chosen last) | Bricolage Grotesque + Nunito Sans | Syne + Hanken Grotesk | Overpass (street-sign lettering) + Newsreader | Public Sans | Schibsted Grotesk + JetBrains Mono |
+
+## Changes to the plan during the build
+
+- No live "open now" status on the café or library (no time zone given). Hours shown as stated.
+- Photos: Juniper Counter and Side Street were planned with licensed Wikimedia Commons photos.
+  Commons rate-limited this machine (HTTP 429, Retry-After 600s), so both use original
+  illustrations instead. No photos appear on any of the five sites.
+
+## Side-by-side review
+
+`five-sites-desktop-compare.png` and `five-sites-mobile-compare.png` put the five first
+screens together. See the delivery notes for the judgment.
