@@ -42,6 +42,10 @@ header .wrap { display: flex; justify-content: space-between; align-items: cente
 .hero h1 { font-size: clamp(2.1rem, 3vw, 2.9rem); line-height: 0.98; margin: 0 0 14px; }
 .lede { font-size: 1.15rem; margin: 0 0 18px; }
 .hours { margin: 0 0 22px; font-size: 1.1rem; }
+.menu { position: absolute; z-index: 1; bottom: 26px; right: max(20px, calc((100vw - 1160px) / 2 + 56px)); width: min(600px, 52%); list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.menu li { background: #fffaf0; border-radius: 8px; padding: 6px 6px 8px; box-shadow: 0 6px 0 rgba(10,16,36,.28); }
+.menu svg { display: block; width: 100%; height: auto; border-radius: 4px; }
+.menu span { display: block; font: 800 0.95rem/1.2 var(--display); padding: 8px 4px 0; }
 .where { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
 .addr { font: 800 1.5rem/1.1 var(--display); }
 button {
@@ -64,9 +68,12 @@ footer strong { color: var(--juniper); }
 @media (max-width: 800px) {
   .street { display: none; }
   .hero { display: flex; flex-direction: column-reverse; align-items: stretch; min-height: 0; background: var(--yolk); }
-  .scene-box { position: relative; inset: auto; height: 250px; overflow: hidden; background: var(--juniper); }
-  .scene { position: absolute; width: 900px; height: auto; left: calc(50% - 630px); bottom: 0; }
+  .scene-box { position: relative; inset: auto; height: 200px; overflow: hidden; background: var(--juniper); }
+  .scene { position: absolute; width: 900px; height: auto; left: calc(50% - 630px); bottom: -112px; }
   .sign { width: auto; box-shadow: none; border-radius: 0; margin: 0; padding: 28px 0 24px; }
+  .menu { position: static; width: auto; order: -1; padding: 16px 20px 20px; background: var(--cardamom); gap: 10px; }
+  .menu li { box-shadow: none; }
+  .menu span { font-size: 0.85rem; }
   .board { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -141,6 +148,11 @@ footer strong { color: var(--juniper); }
         <ellipse cx="1284" cy="476" rx="30" ry="6" fill="#b07a45"/>
         <path d="M1272 452c-9-16 9-24 0-40M1306 452c-9-16 9-24 0-40" fill="none" stroke="#fffaf0" stroke-width="5" stroke-linecap="round" opacity=".6"/>
       </svg></div>
+    <ul class="menu" aria-label="On the counter">
+      <li><svg viewBox="0 0 160 110" aria-hidden="true"><rect width="160" height="110" fill="#fffaf0"/><ellipse cx="80" cy="58" rx="62" ry="40" fill="#d99a3a"/><ellipse cx="80" cy="58" rx="52" ry="31" fill="#f3d9a4"/><path d="M80 58c0-5 7-5 7 0s-7 12-14 7-4-19 11-19 22 15 13 26-31 11-33-7 10-27 30-27" fill="none" stroke="#a8691f" stroke-width="5" stroke-linecap="round"/><g fill="#2f4a12"><circle cx="60" cy="48" r="2"/><circle cx="98" cy="70" r="2"/><circle cx="104" cy="46" r="2"/><circle cx="66" cy="72" r="1.8"/></g><path d="M30 40c18-14 52-20 84-8" stroke="#fff6dc" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/></svg><span>Cardamom buns</span></li>
+      <li><svg viewBox="0 0 160 110" aria-hidden="true"><rect width="160" height="110" fill="#fffaf0"/><circle cx="80" cy="55" r="44" fill="#ffffff" stroke="#e3dccb" stroke-width="3"/><circle cx="80" cy="55" r="30" fill="#5a3a22"/><circle cx="80" cy="55" r="25" fill="#b07a45"/><path d="M80 40c10 4 12 14 0 18s-10 14 0 18M70 46c-4 8 0 14 10 14s14 6 10 14" fill="none" stroke="#e7c79a" stroke-width="3" stroke-linecap="round"/><path d="M124 48h10a8 8 0 0 1 0 16h-10" fill="none" stroke="#ffffff" stroke-width="6"/></svg><span>Espresso</span></li>
+      <li><svg viewBox="0 0 160 110" aria-hidden="true"><rect width="160" height="110" fill="#fffaf0"/><path d="M22 30h116l-6 14H28z" fill="#f2e2bf"/><path d="M28 44h104v8H28z" fill="#86a648"/><path d="M28 52h104v16H28z" fill="#f6d365"/><ellipse cx="62" cy="60" rx="12" ry="6" fill="#f0a92e"/><ellipse cx="102" cy="60" rx="12" ry="6" fill="#f0a92e"/><path d="M28 68h104l-6 14H34z" fill="#f2e2bf"/><path d="M22 30h116M34 82h92" stroke="#e1cfa6" stroke-width="2"/></svg><span>Egg sandwiches</span></li>
+    </ul>
     <div class="wrap hero-wrap">
       <div class="sign">
         <h1 id="offer">Espresso, cardamom buns and egg sandwiches.</h1>

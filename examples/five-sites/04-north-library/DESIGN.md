@@ -33,3 +33,7 @@
 ## Review pass (five-site-review.pdf)
 
 Two long notices replaced by one short note at the room list and one at the form. Per-row Sample badges removed. 'Check and send request' became 'Check request', and the result says 'Your request is ready ... On this demo page it stops here.'
+
+## Content and imagery pass
+
+What a visitor couldn't trust: instructions that said send and request while the form only checks. Fix: heading, lede, room buttons ('Choose this room'), steps, form heading ('Check a room request'), button and result ('Request checked') all describe checking; the demo note sits once beside the button. Fixed 'Room C ,' and the other room labels.

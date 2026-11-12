@@ -31,3 +31,7 @@
 ## Review pass (five-site-review.pdf)
 
 Disabled Add to bag replaced by a working Add to demo bag with a bag count, disclosed once at the button. Close-up insets of each material (wood grain and edge, glaze rim, brushed brass and hole). Repeated warnings removed. Still needs real photos and dimensions for true scale cues.
+
+## Content and imagery pass
+
+What a visitor couldn't assess: form and finish from a single top view. Fix: three concept views per object, switchable in the panel (tray: top, three-quarter, corner and grain; cup: top, side with glaze and unglazed foot, rim; bookmark: flat, in use in a book, hole and brushed brass). Labeled as concept drawings, not to scale because dimensions haven't been supplied.

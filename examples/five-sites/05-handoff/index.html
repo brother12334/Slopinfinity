@@ -107,6 +107,16 @@ footer { border-top: 1px solid var(--line); padding: 20px 0 32px; font-size: 0.9
   .lab { display: inline; color: var(--muted); font-weight: 400; font-size: 0.85rem; }
   .act { margin-top: 6px; }
   .row { grid-template-columns: 1fr; gap: 8px; }
+  /* Mobile: the path becomes one line of names, so four cards don't repeat four diagrams. */
+  .path { gap: 6px; flex-wrap: wrap; font-size: 0.9rem; }
+  .node { display: inline; min-width: 0; }
+  .node b { display: none; }
+  .node i { font-size: 0.9rem; color: var(--muted); }
+  .node.now i { color: var(--relay); font-weight: 700; }
+  .node.wait i { color: var(--blocked); }
+  .link { flex: 0 0 auto; width: auto; height: auto; background: none; margin: 0; min-width: 0; }
+  .link::after { content: "\2192"; position: static; border: 0; color: var(--muted); }
+  .path::before { content: "Path:"; color: var(--muted); }
   .you { margin-left: 0; width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .task { transition: none; } }

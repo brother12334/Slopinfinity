@@ -33,3 +33,7 @@
 ## Review pass (five-site-review.pdf)
 
 Claim shortened to 'Know who has it next.' so the board rises (first task and its action are on the first mobile screen). Each task now shows its relay path, previous holder, current holder (lit) and next owner, and the light moves on handoff. Request access carries a demo tag before it is clicked.
+
+## Content and imagery pass
+
+What a visitor couldn't scan on mobile: four repeated path diagrams. Fix: on mobile the path is one line of names ('Path: Leo → You → Priya') with the current holder highlighted; the full diagram stays on desktop.

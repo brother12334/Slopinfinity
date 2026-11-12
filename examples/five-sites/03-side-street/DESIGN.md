@@ -31,3 +31,7 @@ Layout, balance and mobile passed on the first render.
 ## Review pass (five-site-review.pdf)
 
 The 'not yet supplied' line removed from every card; the limitation is stated once beside the story index and in the dialog. Still needs one approved story (real, or approved sample copy) to be readable.
+
+## Content and imagery pass
+
+What a visitor couldn't do: read anything. Fix: a complete sample story, 'The last independent cinema' (article-cinema.html), labeled at the top as written for this demo, with a fictional cinema, people and quotes. The lead card and index link to it; the notice now says one sample story is readable.

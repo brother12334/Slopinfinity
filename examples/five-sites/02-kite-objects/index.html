@@ -52,14 +52,16 @@ symbol, use { overflow: visible; }
 .desk-note { margin: 0; padding: 0 16px 12px; font-size: 0.85rem; color: var(--grey); }
 
 .detail { border-left: 1px solid var(--line); padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 12px; }
-.view { background: var(--desk); aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 24px; margin: -24px -28px 8px; }
+.view { background: var(--desk); aspect-ratio: 4 / 3; display: block; margin: -24px -28px 8px; position: relative; }
 .view { position: relative; }
-.view > svg { width: 100%; height: 100%; }
-.close { position: absolute; right: 14px; bottom: 12px; margin: 0; display: grid; justify-items: center; gap: 4px; }
-.ring { display: block; width: 82px; height: 82px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,.22); overflow: hidden; }
-.close svg { display: block; width: 76px; height: 76px; overflow: hidden !important; clip-path: circle(50%); }
-.close use { overflow: hidden !important; }
-.close figcaption { font-size: 0.75rem; color: var(--grey); }
+.view > svg { position: absolute; left: 24px; right: 24px; top: 20px; bottom: 34px; width: calc(100% - 48px); height: calc(100% - 54px); }
+.view figcaption { position: absolute; left: 12px; bottom: 10px; font-size: 0.8rem; color: var(--grey); }
+.view.is-detail > svg { overflow: hidden !important; }
+.view.is-detail use { overflow: hidden !important; }
+.views { display: flex; gap: 8px; margin: -2px 0 6px; }
+.views button { font: 600 0.9rem/1 var(--body); background: var(--white); color: var(--ink); border: 1px solid var(--line); min-height: 40px; padding: 0 12px; cursor: pointer; }
+.views button:hover { border-color: var(--ink); }
+.views button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 -3px 0 var(--ink); }
 .detail .kicker { font-size: 0.85rem; color: var(--grey); margin: 0; }
 .detail h2 { font: 700 2rem/1.05 var(--display); margin: 0; }
 .price { font: 600 1.75rem/1 var(--body); font-variant-numeric: tabular-nums; margin: 0; }
@@ -132,23 +134,50 @@ footer { border-top: 1px solid var(--line); padding: 20px 0 32px; color: var(--g
             <path d="M44 72a66 66 0 0 1 104 -12" fill="none" stroke="#6f8389" stroke-width="10" stroke-linecap="round" opacity=".6"/>
             <circle cx="96" cy="96" r="66" fill="none" stroke="#f3f7f8" stroke-width="3"/>
           </symbol>
-          <symbol overflow="hidden" id="close-tray" viewBox="0 0 120 120">
+          <clipPath id="clip120"><rect width="120" height="120" rx="6"/></clipPath>
+          <symbol overflow="hidden" id="close-tray" viewBox="0 0 120 120"><g clip-path="url(#clip120)">
             <rect width="120" height="120" fill="#704831"/>
             <g fill="none" stroke="#5b3a24" stroke-width="2.2"><path d="M-5 20c30-8 50 10 80 2s40-10 50-4"/><path d="M-5 42c26 6 52-12 82-4s36 8 48 2"/><path d="M-5 64c34-10 54 12 84 2s30-8 46-2"/><path d="M-5 86c28 8 50-8 80-2s38 8 50 0"/></g>
             <g fill="none" stroke="#86593a" stroke-width="1.2" opacity=".8"><path d="M-5 30c30-6 50 8 80 2s40-8 50-3"/><path d="M-5 74c30-8 52 10 82 2s34-6 48-2"/></g>
             <path d="M0 98h120v22H0z" fill="#5b3a24"/><path d="M0 98h120" stroke="#9a6a45" stroke-width="3"/>
-          </symbol>
-          <symbol overflow="hidden" id="close-cup" viewBox="0 0 120 120">
+          </g></symbol>
+          <symbol overflow="hidden" id="close-cup" viewBox="0 0 120 120"><g clip-path="url(#clip120)">
             <rect width="120" height="120" fill="#dfe7e9"/>
             <circle cx="60" cy="130" r="92" fill="#8fa3a8"/>
             <circle cx="60" cy="130" r="92" fill="none" stroke="#f3f7f8" stroke-width="5"/>
             <circle cx="60" cy="130" r="100" fill="none" stroke="#c4d0d3" stroke-width="2"/>
             <g fill="#ffffff" opacity=".5"><circle cx="24" cy="22" r="2"/><circle cx="90" cy="16" r="1.6"/><circle cx="104" cy="40" r="1.4"/><circle cx="40" cy="12" r="1.2"/></g>
-          </symbol>
-          <symbol overflow="hidden" id="close-bookmark" viewBox="0 0 120 120">
+          </g></symbol>
+          <symbol overflow="hidden" id="close-bookmark" viewBox="0 0 120 120"><g clip-path="url(#clip120)">
             <rect width="120" height="120" fill="#c9a34a"/>
             <g stroke="#b8923d" stroke-width="1.4"><path d="M0 14h120M0 26h120M0 38h120M0 50h120M0 62h120M0 74h120M0 86h120M0 98h120M0 110h120"/></g>
             <circle cx="60" cy="56" r="20" fill="#ecebe7"/><circle cx="60" cy="56" r="20" fill="none" stroke="#a8862f" stroke-width="4"/>
+          </g></symbol>
+          <symbol overflow="visible" id="side-tray" viewBox="0 0 440 300">
+            <ellipse cx="220" cy="232" rx="200" ry="22" fill="#5d574c" opacity=".25"/>
+            <path d="M70 120 L370 120 Q400 120 410 140 L440 196 Q446 210 430 210 L10 210 Q-6 210 0 196 L30 140 Q40 120 70 120Z" fill="#6e4730"/>
+            <path d="M58 136 L382 136 Q396 136 402 148 L424 192 L16 192 L38 148 Q44 136 58 136Z" fill="#7d5338"/>
+            <g stroke="#5b3a24" stroke-width="2" fill="none" opacity=".55"><path d="M60 156c90-6 180 8 320-2"/><path d="M40 176c120 6 240-8 360 2"/></g>
+            <path d="M0 210h440v24c0 6-4 8-10 8H10c-6 0-10-2-10-8z" fill="#4a2e1c"/>
+            <path d="M0 210h440" stroke="#9a6a45" stroke-width="3"/>
+          </symbol>
+          <symbol overflow="visible" id="side-cup" viewBox="0 0 200 230">
+            <ellipse cx="100" cy="214" rx="74" ry="10" fill="#5d574c" opacity=".25"/>
+            <path d="M34 34 L166 34 L160 196 Q160 206 150 206 L50 206 Q40 206 40 196 Z" fill="#dfe7e9"/>
+            <path d="M40 186 L160 186 L160 196 Q160 206 150 206 L50 206 Q40 206 40 196 Z" fill="#c8ad8a"/>
+            <path d="M40 186 Q100 194 160 186" fill="none" stroke="#a9b9bd" stroke-width="3"/>
+            <rect x="58" y="44" width="10" height="132" rx="5" fill="#ffffff" opacity=".6"/>
+            <ellipse cx="100" cy="34" rx="66" ry="14" fill="#c4d0d3"/>
+            <ellipse cx="100" cy="35" rx="56" ry="10" fill="#7d9197"/>
+          </symbol>
+          <symbol overflow="visible" id="use-bookmark" viewBox="0 0 300 240">
+            <ellipse cx="150" cy="224" rx="130" ry="10" fill="#5d574c" opacity=".2"/>
+            <path d="M20 92 L150 110 L150 218 L20 200 Z" fill="#f4f1ea" stroke="#c8c3b8" stroke-width="2"/>
+            <path d="M280 92 L150 110 L150 218 L280 200 Z" fill="#fbf9f4" stroke="#c8c3b8" stroke-width="2"/>
+            <g stroke="#d7d2c7" stroke-width="2"><path d="M36 120l100 14M36 136l100 14M36 152l100 14M36 168l100 14M164 134l100-14M164 150l100-14M164 166l100-14M164 182l100-14"/></g>
+            <rect x="146" y="18" width="20" height="110" rx="2" fill="#c9a34a" transform="rotate(4 156 70)"/>
+            <rect x="149" y="20" width="5" height="104" fill="#e6c97b" transform="rotate(4 156 70)"/>
+            <circle cx="157" cy="32" r="4" fill="#f4f1ea"/>
           </symbol>
           <symbol overflow="visible" id="sym-bookmark" viewBox="0 0 80 220">
             <g filter="url(#shadow)"><rect x="22" y="10" width="36" height="196" rx="3" fill="#c9a34a"/></g>
@@ -177,13 +206,15 @@ footer { border-top: 1px solid var(--line); padding: 20px 0 32px; color: var(--g
           <text class="tag" x="768" y="520">Brass bookmark</text><text class="tag-price" x="768" y="538">$24</text>
         </g>
       </svg>
-      <p class="desk-note">Demo product drawings, not photographs, not to scale.</p>
+      <p class="desk-note">Concept drawings, not photographs. Not to scale: dimensions haven't been supplied.</p>
     </div>
 
     <aside class="detail" aria-live="polite">
-      <div class="view"><svg viewBox="0 0 440 300" aria-hidden="true"><use data-view href="#sym-tray" x="0" y="0" width="440" height="300"/></svg>
-        <figure class="close"><span class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><use data-close href="#close-tray" width="120" height="120"/></svg></span><figcaption>Close-up</figcaption></figure>
-      </div>
+      <figure class="view">
+        <svg viewBox="0 0 440 300" aria-hidden="true" data-view-svg><use data-view href="#sym-tray" x="0" y="0" width="440" height="300"/></svg>
+        <figcaption data-view-cap>Top view</figcaption>
+      </figure>
+      <div class="views" role="group" aria-label="Views of this object" data-views></div>
       <p class="kicker" data-k>Selected object</p>
       <h2 data-name>Walnut tray</h2>
       <p class="price" data-price>$48</p>
@@ -218,16 +249,11 @@ footer { border-top: 1px solid var(--line); padding: 20px 0 32px; color: var(--g
     document.querySelector("[data-name]").textContent = it.name;
     document.querySelector("[data-price]").textContent = it.price;
     document.querySelector("[data-mat]").textContent = it.mat;
-    var v = document.querySelector("[data-view]"), box = { tray: "0 0 440 300", cup: "-120 -50 440 300", bookmark: "-180 -40 440 300" };
-    v.setAttribute("href", "#sym-" + id);
-    document.querySelector("[data-close]").setAttribute("href", "#close-" + id);
+    renderViews(id, 0);
     var add = document.querySelector("[data-add]");
     var inBag = bag.indexOf(id) !== -1;
     add.textContent = inBag ? "In demo bag" : "Add to demo bag"; add.classList.toggle("added", inBag);
     current = id;
-    v.closest("svg").setAttribute("viewBox", id === "tray" ? box.tray : id === "cup" ? "-60 -10 320 240" : "-110 -10 300 240");
-    v.setAttribute("width", id === "tray" ? 440 : id === "cup" ? 200 : 80);
-    v.setAttribute("height", id === "tray" ? 300 : id === "cup" ? 200 : 220);
     document.querySelectorAll(".obj").forEach(function (g) {
       var on = g.dataset.id === id;
       g.classList.toggle("is-on", on);
@@ -243,6 +269,26 @@ footer { border-top: 1px solid var(--line); padding: 20px 0 32px; color: var(--g
       if (el.classList.contains("obj") && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); select(el.dataset.id); }
     });
   });
+  var views = {
+    tray: [["Top", "Top view", "sym-tray", "-10 -10 460 320", 440, 300], ["Side", "Three-quarter view: rim and depth", "side-tray", "-10 90 460 170", 440, 300], ["Detail", "Close-up: corner and walnut grain", "close-tray", "0 0 120 120", 120, 120]],
+    cup: [["Top", "Top view", "sym-cup", "-30 -30 260 260", 200, 200], ["Side", "Side view: glaze and unglazed foot", "side-cup", "-50 10 300 230", 200, 230], ["Detail", "Close-up: glazed rim", "close-cup", "0 0 120 120", 120, 120]],
+    bookmark: [["Flat", "Flat view", "sym-bookmark", "-70 -10 220 240", 80, 220], ["In use", "In use: marking a page", "use-bookmark", "0 0 300 240", 300, 240], ["Detail", "Close-up: hole and brushed brass", "close-bookmark", "0 0 120 120", 120, 120]]
+  };
+  function renderViews(id, i) {
+    var v = views[id][i], use = document.querySelector("[data-view]"), svg = document.querySelector("[data-view-svg]");
+    use.setAttribute("href", "#" + v[2]); use.setAttribute("width", v[4]); use.setAttribute("height", v[5]);
+    svg.setAttribute("viewBox", v[3]);
+    svg.closest(".view").classList.toggle("is-detail", v[0] === "Detail");
+    document.querySelector("[data-view-cap]").textContent = v[1];
+    var box = document.querySelector("[data-views]");
+    box.innerHTML = "";
+    views[id].forEach(function (w, k) {
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.textContent = w[0]; btn.setAttribute("aria-pressed", k === i ? "true" : "false");
+      btn.addEventListener("click", function () { renderViews(id, k); });
+      box.appendChild(btn);
+    });
+  }
   var bag = [], current = "tray";
   document.querySelector("[data-add]").addEventListener("click", function () {
     if (bag.indexOf(current) === -1) bag.push(current);

@@ -277,6 +277,32 @@ shared warning voice, and revise whichever site carries it least deliberately. D
 force expressive decoration onto public-service or operating interfaces that benefit
 from restraint.
 
+### Content and imagery pass
+
+After the page passes the gate, look at it from the visitor's side and list what they
+still cannot **see, assess, read or complete**. Fix the most important gap first; one gap
+fixed well beats several touched lightly. These are prompts to check, not rules every
+design must satisfy:
+
+- **Can they assess what's offered?** A single view rarely lets someone judge an object
+  they might buy. Real photos are best; otherwise several labeled concept views (top,
+  side, detail, in use) answer more than one. Never imply a scale you don't know: ask
+  for dimensions.
+- **Can they read what's promised?** When reading is the task, at least one complete
+  piece should be readable: real content, or sample content the user approved and that
+  is labeled as sample.
+- **Does every instruction match the real action?** Read the lede, steps, headings,
+  buttons and result messages together. If the action only checks or previews, none of
+  them should say send, book or buy.
+- **Does rendered text survive real data?** Read the actual text in every state, not
+  the template. Edits and string joins leave artifacts like stray spaces before commas.
+- **Does a visual that works once still work when repeated?** A diagram that explains
+  one desktop row can clutter a stack of mobile cards. Compress it or show it once.
+- **Does every large region have a job?** Give empty space a role that serves the task
+  (showing the product up close, for instance) or crop it.
+- **Did image sourcing respect the source?** Honor rate limits and Retry-After headers;
+  one attempt per source, then move down the asset ladder.
+
 ## Step 5. Compare against the eight patterns
 
 Go through [references/generic-patterns.md](references/generic-patterns.md) section by
