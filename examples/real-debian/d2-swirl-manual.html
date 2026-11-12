@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Debian · Direction 2, swirl and manual (concept)</title><style>@font-face{font-family:"Fira Sans";font-weight:400;src:url(fonts/fira-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:600;src:url(fonts/fira-sans-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:800;src:url(fonts/fira-sans-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Mono";font-weight:400;src:url(fonts/fira-mono-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Serif 4";font-weight:400;src:url(fonts/source-serif-4-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Serif 4";font-weight:600;src:url(fonts/source-serif-4-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Sans 3";font-weight:400;src:url(fonts/source-sans-3-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Sans 3";font-weight:600;src:url(fonts/source-sans-3-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Sans 3";font-weight:700;src:url(fonts/source-sans-3-latin-700-normal.woff2) format("woff2")}
+*{box-sizing:border-box}
+
+:root{--red:#ce0056;--ink:#1d1b1c;--muted:#5d5759;--rule:#e2dcdd;--paper:#fff}
+body{margin:0;font:400 1.125rem/1.6 "Source Sans 3",system-ui,sans-serif;color:var(--ink);background:var(--paper);overflow-x:hidden}
+.notice{border-bottom:1px solid var(--rule);color:var(--muted);font-size:.9rem;padding:8px 40px}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 40px}
+header img{height:56px;display:block}
+nav a{margin-left:28px;color:var(--ink);text-decoration:none;font-weight:600}
+.hero{position:relative;padding:40px 40px 64px;overflow:hidden;min-height:620px}
+.swirl{position:absolute;right:-90px;top:-40px;width:620px;opacity:1;pointer-events:none}
+.hero .in{position:relative;max-width:640px}
+.rel{font:700 .95rem/1 "Source Sans 3";letter-spacing:.08em;color:var(--red);margin:24px 0 18px;text-transform:uppercase}
+h1{font:600 clamp(3rem,5.4vw,5rem)/1.02 "Source Serif 4",Georgia,serif;letter-spacing:-.02em;margin:0 0 20px}
+.lede{font-size:1.3rem;max-width:34ch;margin:0 0 30px}
+.dl{display:inline-flex;align-items:center;gap:14px;min-height:60px;padding:0 26px;background:var(--red);color:#fff;text-decoration:none;font:700 1.2rem/1 "Source Sans 3";border-radius:4px}
+.sub{margin:12px 0 0;color:var(--muted)}
+.sub a{color:var(--ink)}
+table{border-collapse:collapse;width:100%;max-width:1180px;margin:0 auto}
+.which{padding:48px 40px 64px;border-top:1px solid var(--rule)}
+.which h2{font:600 2.3rem/1.1 "Source Serif 4",serif;margin:0 auto 22px;max-width:1180px}
+th,td{text-align:left;vertical-align:top;padding:16px 18px 16px 0;border-bottom:1px solid var(--rule)}
+thead th{font:700 .85rem/1.2 "Source Sans 3";letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tbody th{font:600 1.3rem/1.2 "Source Serif 4",serif;width:22%}
+td a{color:var(--red);font-weight:700}
+@media(max-width:860px){.notice,header{padding-left:16px;padding-right:16px}nav{display:none}header img{height:46px}.hero{padding:8px 16px 40px;min-height:0}.swirl{width:300px;right:-110px;top:-30px;opacity:.9}.in{max-width:none}h1{font-size:2.6rem;max-width:9ch}.lede{font-size:1.15rem}.dl{display:flex;justify-content:center}.which{padding:36px 16px 48px}
+thead{display:none}tr{display:block;padding:14px 0;border-bottom:1px solid var(--rule)}tbody th,td{display:block;border:0;padding:3px 0;width:auto}td[data-l]::before{content:attr(data-l) ": ";font-weight:700;color:var(--muted)}}
+</style></head><body><p class="notice">Design concept by an independent designer. Not affiliated with or endorsed by the Debian project. Debian is a registered trademark owned by Software in the Public Interest, Inc.</p>
+<header><a href="https://www.debian.org/"><img src="brand/openlogo-debian.svg" alt="Debian"></a><nav><a href="#">Why Debian</a><a href="#">Support</a><a href="#">Get involved</a></nav></header>
+<section class="hero"><img class="swirl" src="brand/openlogo-nd.svg" alt=""><div class="in"><p class="rel">Debian 13 “trixie” · 13.7, released 12 September 2026</p>
+<h1>The universal operating system</h1><p class="lede">A complete Free Operating System, made by a community of people.</p>
+<a class="dl" href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso">Download Debian 13.7</a><p class="sub">64-bit PC network installer. <a href="#which">Which image do I need?</a></p></div></section>
+<section class="which" id="which"><h2>Which image do I need?</h2><table>
+<thead><tr><th>Image</th><th>Internet during install</th><th>What it is</th><th>Download</th></tr></thead><tbody>
+<tr><th>Network installer</th><td data-l="Internet">Needed</td><td data-l="What">A small image that downloads quickly.</td><td><a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso">netinst ISO</a></td></tr>
+<tr><th>Complete image</th><td data-l="Internet">Not needed</td><td data-l="What">A larger image with packages for all desktop environments.</td><td><a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-13.7.0-amd64-DVD-1.iso">DVD-1 ISO</a></td></tr>
+<tr><th>Live image</th><td data-l="Internet">Not needed to try</td><td data-l="What">Run Debian from a USB key or disc without installing, then install with Calamares. 64-bit PC only.</td><td><a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-gnome.iso">GNOME</a> · <a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-xfce.iso">Xfce</a> · <a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-kde.iso">KDE</a></td></tr>
+</tbody></table></section></body></html>

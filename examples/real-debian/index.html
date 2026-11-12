@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Debian, the universal operating system (unofficial design concept)</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face { font-family: "Source Serif 4"; font-weight: 400; font-display: swap; src: url(fonts/source-serif-4-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Source Serif 4"; font-weight: 600; font-display: swap; src: url(fonts/source-serif-4-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 400; font-display: swap; src: url(fonts/source-sans-3-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 600; font-display: swap; src: url(fonts/source-sans-3-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 700; font-display: swap; src: url(fonts/source-sans-3-latin-700-normal.woff2) format("woff2"); }
+:root {
+  --red: #ce0056; --red-dark: #a30045; --ink: #1d1b1c; --muted: #5d5759; --rule: #e4dfe0; --wash: #faf7f7;
+  --deep: #1f3d4f; --sky: #51a1d0;
+  --serif: "Source Serif 4", Georgia, serif; --sans: "Source Sans 3", system-ui, sans-serif;
+  --pad: 40px; --max: 1200px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font: 400 1.125rem/1.6 var(--sans); color: var(--ink); background: #fff; overflow-x: clip; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
+.wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+.notice { background: var(--ink); color: #f2eeee; font-size: .95rem; padding: 8px var(--pad); }
+.notice b { font-weight: 700; }
+
+header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 18px; padding-bottom: 18px; }
+header img { height: 58px; display: block; }
+nav a { margin-left: 28px; text-decoration: none; font-weight: 600; }
+nav a:hover { color: var(--red); }
+
+/* hero */
+.hero { position: relative; overflow-x: clip; }
+.hero .wrap { position: relative; padding-top: 36px; padding-bottom: 72px; min-height: 600px; }
+.swirl { position: absolute; right: -110px; top: -10px; width: 540px; pointer-events: none; }
+.hero .in { position: relative; max-width: 650px; }
+.rel { font: 700 .95rem/1.3 var(--sans); letter-spacing: .08em; color: var(--red); margin: 0 0 18px; text-transform: uppercase; }
+h1 { font: 600 clamp(3rem, 5.4vw, 5rem)/1.02 var(--serif); letter-spacing: -.02em; margin: 0 0 20px; }
+.lede { font-size: 1.3rem; max-width: 34ch; margin: 0 0 32px; }
+.dl { display: inline-flex; flex-direction: column; justify-content: center; min-height: 64px; padding: 10px 28px; background: var(--red); color: #fff; text-decoration: none; border-radius: 4px; font: 700 1.25rem/1.15 var(--sans); transition: background .15s; }
+.dl small { font: 400 .95rem/1.3 var(--sans); }
+.dl:hover { background: var(--red-dark); }
+.dl-notes { margin: 14px 0 0; color: var(--muted); max-width: 46ch; }
+.dl-notes a { color: var(--ink); font-weight: 600; }
+
+/* which image */
+.which { border-top: 1px solid var(--rule); padding: 56px 0 64px; }
+h2 { font: 600 clamp(2rem, 3.2vw, 2.6rem)/1.1 var(--serif); letter-spacing: -.015em; margin: 0 0 10px; }
+.which > .wrap > p { margin: 0 0 26px; max-width: 62ch; color: var(--muted); }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; vertical-align: top; padding: 18px 20px 18px 0; border-bottom: 1px solid var(--rule); }
+thead th { font: 700 .85rem/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 0; }
+tbody th { font: 600 1.35rem/1.2 var(--serif); width: 21%; }
+tbody th span { display: block; font: 600 .95rem/1.3 var(--sans); color: var(--red); margin-top: 4px; }
+td.net { width: 16%; font-weight: 600; }
+td.get { width: 22%; }
+td.get a { display: inline-block; color: var(--red); font-weight: 700; margin: 0 10px 6px 0; min-height: 28px; }
+tr.first { background: var(--wash); }
+tr.first th { padding-left: 14px; box-shadow: inset 4px 0 0 var(--red); }
+.more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 40px; }
+.more h3 { font: 600 1.25rem/1.2 var(--serif); margin: 0 0 6px; }
+.more p { margin: 0 0 8px; }
+.more a { color: var(--red); font-weight: 700; }
+
+/* release */
+.release { color: #fff; background: var(--deep) url(brand/ceratopsian-wallpaper_1920x1200.svg) 50% 60%/cover no-repeat; padding: 64px 0 56px; }
+.release h2 { color: #fff; }
+.release .sub { margin: 0 0 36px; color: #d6e8f2; max-width: 60ch; }
+.timeline { position: relative; margin: 0 0 14px; height: 18px; display: flex; border-radius: 3px; overflow: hidden; }
+.timeline .full { flex: 0 0 61.4%; background: #fff; }
+.timeline .lts { flex: 1; background: var(--sky); }
+.marks { position: relative; height: 92px; font-size: 1rem; }
+.mark { position: absolute; top: 0; border-left: 2px solid #fff; padding: 4px 0 0 10px; line-height: 1.3; }
+.mark b { display: block; font-weight: 700; }
+.mark.end { border-left: 0; border-right: 2px solid #fff; padding: 4px 10px 0 0; text-align: right; }
+.legend { display: flex; gap: 28px; flex-wrap: wrap; margin: 6px 0 36px; color: #e8f2f8; }
+.legend i { display: inline-block; width: 14px; height: 14px; border-radius: 2px; margin-right: 8px; vertical-align: -1px; }
+.arch { margin: 0; color: #e8f2f8; max-width: 70ch; }
+.release a { color: #fff; font-weight: 700; }
+.credit { margin: 28px 0 0; font-size: .9rem; color: #c3dbe8; }
+
+/* news and community */
+.lower { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; padding-top: 56px; padding-bottom: 64px; }
+.news { list-style: none; margin: 18px 0 0; padding: 0; }
+.news li { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.news time { color: var(--muted); }
+.news a { font-weight: 600; text-decoration: none; }
+.news a:hover { color: var(--red); text-decoration: underline; }
+.community p { margin: 12px 0 18px; }
+.community ul { list-style: none; margin: 0; padding: 0; }
+.community li { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.community li a { font-weight: 700; color: var(--red); }
+.community li span { display: block; color: var(--muted); }
+
+footer { border-top: 1px solid var(--rule); padding-top: 24px; padding-bottom: 40px; color: var(--muted); font-size: .95rem; }
+footer p { margin: 0 0 8px; max-width: 90ch; }
+
+@media (max-width: 960px) {
+  .more { grid-template-columns: 1fr; gap: 20px; }
+  .lower { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 760px) {
+  :root { --pad: 18px; }
+  .notice { font-size: .88rem; }
+  header { padding-top: 12px; padding-bottom: 6px; }
+  header img { height: 48px; }
+  nav { display: none; }
+  .hero .wrap { padding-top: 0; padding-bottom: 44px; min-height: 0; }
+  .swirl { position: relative; display: block; width: 210px; right: auto; top: auto; margin: -40px -70px 6px auto; }
+  h1 { font-size: 2.55rem; }
+  .lede { font-size: 1.15rem; margin-bottom: 24px; }
+  .dl { display: flex; width: 100%; text-align: center; align-items: center; }
+  .which { padding: 40px 0 48px; }
+  thead { display: none; }
+  table, tbody, tr { display: block; }
+  tr { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+  tr.first { padding: 16px 14px; margin: 0 -14px; }
+  tbody th, td { display: block; border: 0; padding: 3px 0; width: auto !important; }
+  tr.first th { padding-left: 0; box-shadow: none; }
+  tr.first { box-shadow: inset 4px 0 0 var(--red); }
+  td[data-l]::before { content: attr(data-l) ": "; font-weight: 700; color: var(--muted); }
+  td.get { padding-top: 8px; }
+  .release { padding: 44px 0 40px; background-position: 30% 50%; }
+  .marks { height: auto; display: grid; gap: 10px; margin-top: 4px; font-size: .95rem; }
+  .mark, .mark.end { position: static; border-left: 2px solid #fff; border-right: 0; padding: 0 0 0 10px; text-align: left; }
+  .mark b { display: inline; margin-right: 8px; }
+  .news li { grid-template-columns: 1fr; gap: 0; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .dl { transition: none; } }
+</style>
+</head>
+<body>
+<p class="notice"><b>Unofficial design concept.</b> Not affiliated with or endorsed by the Debian project.</p>
+
+<header class="wrap">
+  <a href="https://www.debian.org/"><img src="brand/openlogo-debian.svg" alt="Debian"></a>
+  <nav aria-label="Concept sections"><a href="#which">Download options</a><a href="#release">Debian 13</a><a href="#news">News</a><a href="#community">Community</a></nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <img class="swirl" src="brand/openlogo-nd.svg" alt="">
+      <div class="in">
+        <p class="rel">Debian 13 “trixie” · 13.7, released 12 September 2026</p>
+        <h1>The universal operating system</h1>
+        <p class="lede">Debian is a complete Free Operating System, made by a community of people.</p>
+        <a class="dl" href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso">Download Debian 13.7<small>64-bit PC network installer (netinst ISO)</small></a>
+        <p class="dl-notes">The network installer needs an Internet connection while it installs. <a href="#which">Which image do I need?</a> · <a href="https://www.debian.org/CD/verify">Verify your download</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="which" id="which">
+    <div class="wrap">
+      <h2>Which image do I need?</h2>
+      <p>All three install Debian 13.7, the stable release, on a 64-bit PC.</p>
+      <table>
+        <thead><tr><th>Image</th><th>Internet</th><th>What it is</th><th>Download</th></tr></thead>
+        <tbody>
+          <tr class="first"><th>Network installer<span>The download above</span></th><td class="net" data-l="Internet">Needed to install</td><td data-l="What it is">A small installation image that downloads quickly. The rest is fetched during installation.</td><td class="get"><a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso">netinst ISO</a><a href="https://cdimage.debian.org/debian-cd/current/amd64/bt-cd/">torrents</a></td></tr>
+          <tr><th>Complete image</th><td class="net" data-l="Internet">Not needed</td><td data-l="What it is">A larger image with packages for all desktop environments, for machines without an Internet connection.</td><td class="get"><a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-13.7.0-amd64-DVD-1.iso">DVD-1 ISO</a><a href="https://cdimage.debian.org/debian-cd/current/amd64/bt-dvd/debian-13.7.0-amd64-DVD-1.iso.torrent">torrent</a></td></tr>
+          <tr><th>Live image</th><td class="net" data-l="Internet">Not needed to try</td><td data-l="What it is">Run Debian from a USB key or disc without installing anything, then install it with the included Calamares installer.</td><td class="get"><a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-gnome.iso">GNOME</a><a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-xfce.iso">Xfce</a><a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-kde.iso">KDE</a><a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/">other desktops</a></td></tr>
+        </tbody>
+      </table>
+
+      <div class="more">
+        <div><h3>Cloud and virtual machines</h3><p>Official cloud images for OpenStack, a local QEMU virtual machine, Amazon EC2 and Microsoft Azure.</p><a href="https://cloud.debian.org/images/cloud/">Cloud images</a></div>
+        <div><h3>Install media or a ready computer</h3><p>Buy a CD, DVD or USB stick from a vendor, or a computer with Debian pre-installed.</p><a href="https://www.debian.org/CD/vendors/">Media vendors</a> · <a href="https://www.debian.org/distrib/pre-installed">Pre-installed</a></div>
+        <div><h3>Before you install</h3><p>Instructions, changes in this release, and images for other computer types.</p><a href="https://www.debian.org/releases/stable/installmanual">Installation Manual</a> · <a href="https://www.debian.org/releases/stable/releasenotes">Release notes</a> · <a href="https://www.debian.org/CD/http-ftp/#mirrors">All images</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="release" id="release">
+    <div class="wrap">
+      <h2>Debian 13 “trixie”</h2>
+      <p class="sub">Released 9 August 2025. The latest update, 13.7, came out on 12 September 2026. Its life cycle is five years.</p>
+      <div class="timeline" role="img" aria-label="Full Debian support from 9 August 2025 to 9 August 2028, then Long Term Support until 30 June 2030"><span class="full"></span><span class="lts"></span></div>
+      <div class="marks" aria-hidden="true">
+        <span class="mark" style="left:0"><b>13.0</b>9 Aug 2025</span>
+        <span class="mark mid" style="left:22.3%"><b>13.7</b>12 Sep 2026</span>
+        <span class="mark" style="left:61.4%"><b>Full support ends</b>9 Aug 2028</span>
+        <span class="mark end" style="right:0"><b>LTS ends</b>30 Jun 2030</span>
+      </div>
+      <p class="legend"><span><i style="background:#fff"></i>Full Debian support</span><span><i style="background:var(--sky)"></i>Long Term Support (fewer architectures)</span></p>
+      <p class="arch">Supported at release on 64-bit PC (amd64), 64-bit ARM (AArch64), Hard Float ABI ARM (armhf), POWER processors, RISC-V 64-bit and IBM System z. <a href="https://www.debian.org/releases/stable/">Release information</a></p>
+      <p class="credit">Background: “Ceratopsian”, the Debian 13 artwork by Elise Couper, CC BY-SA 4.0.</p>
+    </div>
+  </section>
+
+  <div class="wrap lower">
+    <section class="newsblock" id="news" aria-labelledby="news-h">
+      <h2 id="news-h">Project news</h2>
+      <ul class="news">
+        <li><time datetime="2026-09-12">12 September 2026</time><a href="https://www.debian.org/News/2026/20260912">Updated Debian 13: 13.7 released</a></li>
+        <li><time datetime="2026-08-31">31 August 2026</time><a href="https://www.debian.org/News/2026/20260831">Debian 11 Long Term Support reaches end-of-life</a></li>
+        <li><time datetime="2026-08-07">7 August 2026</time><a href="https://www.debian.org/News/2026/20260807">DebConf26 closes in Santa Fe and DebConf27 announced</a></li>
+        <li><time datetime="2026-07-12">12 July 2026</time><a href="https://www.debian.org/News/2026/20260712">Security support for Bookworm handed over to the LTS team</a></li>
+      </ul>
+    </section>
+    <section class="community" id="community" aria-labelledby="community-h">
+      <h2 id="community-h">Debian is a community of people</h2>
+      <ul>
+        <li><a href="https://www.debian.org/intro/people">People</a><span>Who we are and what we do</span></li>
+        <li><a href="https://www.debian.org/intro/philosophy">Our Philosophy</a><span>Why we do it, and how we do it</span></li>
+        <li><a href="https://www.debian.org/devel/join/">Get Involved, Contribute</a><span>How you can join us</span></li>
+        <li><a href="https://www.debian.org/support">User Support</a><span>Getting help and documentation</span></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer class="wrap">
+  <p><b>Unofficial design concept</b> made to test a design process. It is not affiliated with, produced by or endorsed by the Debian project. Debian is a registered trademark owned by Software in the Public Interest, Inc.</p>
+  <p>Debian Open Use Logo © 1999 Software in the Public Interest, Inc., LGPL-3.0-or-later or CC BY-SA 3.0. “Ceratopsian” artwork © 2024 Elise Couper, CC BY-SA 4.0 or GPL-2.0-or-later. Facts and links from www.debian.org, checked 12 November 2026.</p>
+</footer>
+</body>
+</html>

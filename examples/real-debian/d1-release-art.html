@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Debian · Direction 1, release artwork (concept)</title><style>@font-face{font-family:"Fira Sans";font-weight:400;src:url(fonts/fira-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:600;src:url(fonts/fira-sans-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:800;src:url(fonts/fira-sans-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Mono";font-weight:400;src:url(fonts/fira-mono-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Serif 4";font-weight:400;src:url(fonts/source-serif-4-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Serif 4";font-weight:600;src:url(fonts/source-serif-4-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Sans 3";font-weight:400;src:url(fonts/source-sans-3-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Sans 3";font-weight:600;src:url(fonts/source-sans-3-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Sans 3";font-weight:700;src:url(fonts/source-sans-3-latin-700-normal.woff2) format("woff2")}
+*{box-sizing:border-box}
+
+:root{--deep:#1f3d4f;--blue:#27678d;--sky:#51a1d0;--paper:#f5f8fa;--ink:#13232d;--red:#ce0056}
+body{margin:0;font:400 1.0625rem/1.55 "Fira Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper)}
+.notice{background:#0e1c25;color:#c9dbe6;font-size:.85rem;padding:8px 32px}
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 32px;background:#fff}
+header img{height:44px;display:block}
+nav a{margin-left:24px;color:var(--ink);text-decoration:none;font-weight:600}
+.hero{position:relative;color:#fff;background:var(--deep) url(brand/ceratopsian-wallpaper_1920x1200.svg) 70% 40%/cover no-repeat;padding:72px 32px 64px;min-height:560px}
+.hero .in{max-width:1180px;margin:0 auto}
+.rel{font:600 1rem/1 "Fira Sans";letter-spacing:.06em;color:#bfe0f2;margin:0 0 14px}
+h1{font:800 clamp(3rem,6vw,5.6rem)/.95 "Fira Sans";letter-spacing:-.02em;margin:0 0 18px;max-width:11ch}
+.lede{font-size:1.25rem;max-width:36ch;margin:0 0 30px;color:#e6f1f7}
+.dl{display:inline-flex;flex-direction:column;justify-content:center;min-height:64px;padding:10px 28px;background:var(--red);color:#fff;text-decoration:none;border-radius:6px;font:600 1.2rem/1.2 "Fira Sans";box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.dl small{font:400 .9rem/1.3 "Fira Sans";opacity:.92}
+.alt{display:inline-block;margin-left:20px;color:#fff;font-weight:600}
+.meta{margin:22px 0 0;font-size:.95rem;color:#cfe3ee}
+.meta code{font:400 .9rem "Fira Mono",monospace}
+.choose{max-width:1180px;margin:0 auto;padding:56px 32px}
+.choose h2{font:800 2.2rem/1.1 "Fira Sans";margin:0 0 8px;letter-spacing:-.015em}
+.choose>p{margin:0 0 28px;max-width:60ch}
+.opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.opt{background:#fff;border-top:5px solid var(--blue);padding:22px 22px 24px;border-radius:0 0 6px 6px;box-shadow:0 1px 0 #d7e2e9}
+.opt h3{font:600 1.3rem/1.2 "Fira Sans";margin:0 0 4px}.opt .for{color:var(--blue);font-weight:600;margin:0 0 10px}
+.opt p{margin:0 0 14px}.opt a{color:var(--blue);font-weight:600}
+@media(max-width:860px){.notice,header{padding-left:16px;padding-right:16px}nav{display:none}.hero{padding:40px 16px 44px;min-height:0;background-position:60% 30%}h1{font-size:2.9rem}.lede{font-size:1.1rem}.dl{display:flex;width:100%}.alt{display:block;margin:16px 0 0}.choose{padding:40px 16px}.opts{grid-template-columns:1fr}}
+</style></head><body><p class="notice">Design concept by an independent designer. Not affiliated with or endorsed by the Debian project. Debian is a registered trademark owned by Software in the Public Interest, Inc.</p>
+<header><a href="https://www.debian.org/"><img src="brand/openlogo-debian.svg" alt="Debian"></a><nav><a href="#">Why Debian</a><a href="#">Support</a><a href="#">Get involved</a></nav></header>
+<section class="hero"><div class="in"><p class="rel">DEBIAN 13 “TRIXIE” · 13.7 RELEASED 12 SEPTEMBER 2026</p>
+<h1>The universal operating system</h1><p class="lede">Debian is a complete Free Operating System, made by a community of people.</p>
+<a class="dl" href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso">Download Debian 13.7<small>64-bit PC network installer (netinst ISO)</small></a><a class="alt" href="#choose">Other ways to install</a>
+<p class="meta">Needs an Internet connection during installation. <a href="https://www.debian.org/CD/verify" style="color:#fff">Verify your download</a></p></div></section>
+<section class="choose" id="choose"><h2>Choose how to install</h2><p>All options install the same stable release, Debian 13.7.</p>
+<div class="opts">
+<div class="opt"><h3>Network installer</h3><p class="for">Small download, Internet needed</p><p>A small installation image that can be downloaded quickly. The machine needs an Internet connection to install.</p><a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso">64-bit PC netinst ISO</a></div>
+<div class="opt"><h3>Complete image</h3><p class="for">Install without Internet</p><p>A larger image with packages for all desktop environments, for machines without an Internet connection.</p><a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-13.7.0-amd64-DVD-1.iso">64-bit PC DVD-1 ISO</a></div>
+<div class="opt"><h3>Try it live first</h3><p class="for">Run Debian before installing</p><p>Boot from a USB key or disc without installing anything, then use the included Calamares installer. 64-bit PC only.</p><a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-gnome.iso">GNOME</a> · <a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-xfce.iso">Xfce</a> · <a href="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-kde.iso">KDE</a></div>
+</div></section></body></html>
