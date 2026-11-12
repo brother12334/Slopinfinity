@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radio Orchard · Thursday nights, 8 pm–midnight</title>
+<meta name="description" content="Radio Orchard is community-run late-night radio, live every Thursday from 8 pm to midnight.">
+<style>
+@font-face { font-family: "Big Shoulders Display"; font-weight: 700; font-display: swap; src: url(fonts/big-shoulders-display-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Big Shoulders Display"; font-weight: 800; font-display: swap; src: url(fonts/big-shoulders-display-latin-800-normal.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 400; font-display: swap; src: url(fonts/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 700; font-display: swap; src: url(fonts/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-display: swap; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: swap; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2"); }
+
+:root {
+  --bark: #17130f;
+  --bark-raised: #211b16;
+  --rule: #3a3129;
+  --paper: #f1e7d6;
+  --dim: #b9ab96;
+  --amber: #f2a33a;
+  --amber-press: #d98b22;
+  --error: #ff9d7a;
+  --night-start: #6d4fc2;
+  --night-mid: #3a2a73;
+  --night-end: #16122b;
+
+  --display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --gutter: clamp(20px, 5vw, 48px);
+  --max: 1120px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scrollbar-color: var(--rule) var(--bark); }
+body {
+  margin: 0;
+  background: var(--bark);
+  color: var(--paper);
+  font: 400 1.0625rem/1.55 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--amber); color: var(--bark); }
+a { color: var(--paper); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--amber); }
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* Masthead */
+.masthead {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bark);
+  border-bottom: 1px solid var(--rule);
+}
+.masthead .wrap { display: flex; align-items: center; gap: 24px; min-height: 64px; }
+.wordmark {
+  font: 800 1.6rem/1 var(--display); letter-spacing: 0.01em; text-transform: uppercase;
+  text-decoration: none; margin-right: auto; padding: 10px 0;
+}
+.wordmark:hover { color: var(--paper); }
+.nav { display: flex; gap: 20px; font-size: 0.95rem; }
+.nav a { text-decoration: none; color: var(--dim); padding: 12px 0; }
+.nav a:hover { color: var(--paper); text-decoration: underline; }
+
+/* Buttons */
+.listen {
+  display: inline-flex; align-items: center; gap: 14px;
+  border: 0; border-radius: 4px; cursor: pointer;
+  background: var(--amber); color: var(--bark);
+  font: 800 1.75rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.02em;
+  padding: 18px 30px 18px 24px; min-height: 64px;
+  transition: background-color 120ms ease-out, transform 120ms ease-out;
+}
+.listen:hover { background: #f7b65c; }
+.listen:active { background: var(--amber-press); transform: translateY(1px); }
+.listen .icon { width: 22px; height: 22px; flex: none; }
+.listen .icon-pause { display: none; }
+.listen[aria-pressed="true"] .icon-play { display: none; }
+.listen[aria-pressed="true"] .icon-pause { display: block; }
+.listen--compact {
+  font-size: 1.15rem; padding: 10px 16px 10px 12px; min-height: 44px; gap: 8px;
+}
+.listen--compact .icon { width: 16px; height: 16px; }
+.listen--compact[hidden] { display: none; }
+
+.button-secondary {
+  border: 1.5px solid var(--paper); border-radius: 4px; background: transparent; color: var(--paper);
+  font: 700 1rem/1 var(--body); padding: 14px 22px; min-height: 48px; cursor: pointer;
+}
+.button-secondary:hover { background: var(--paper); color: var(--bark); }
+.button-secondary:active { transform: translateY(1px); }
+.button-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Hero */
+.hero { padding: clamp(36px, 5vw, 64px) 0 clamp(20px, 2.5vw, 32px); }
+.hero h1 {
+  font: 800 clamp(3rem, 5.4vw, 4.75rem)/0.92 var(--display);
+  text-transform: uppercase; letter-spacing: 0.005em;
+  margin: 0 0 20px; max-width: 16ch; text-wrap: balance;
+}
+.hero .lede { font-size: clamp(1.125rem, 1.6vw, 1.3rem); color: var(--paper); max-width: 46ch; margin: 0 0 28px; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.when { font: 500 0.95rem/1.4 var(--mono); color: var(--dim); font-variant-numeric: tabular-nums; }
+.when strong { color: var(--paper); font-weight: 500; }
+.status { min-height: 1.5em; margin: 16px 0 0; font-size: 0.95rem; color: var(--dim); }
+.status[data-kind="error"] { color: var(--error); }
+.lamp {
+  display: none; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--amber); margin-right: 8px; vertical-align: 1px;
+}
+.is-playing .lamp { display: inline-block; animation: lamp 2.4s ease-in-out infinite; }
+@keyframes lamp { 50% { opacity: 0.35; } }
+
+/* Schedule */
+.schedule { padding: clamp(24px, 3vw, 32px) 0 clamp(48px, 6vw, 72px); }
+.section-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; margin-bottom: 20px; }
+.schedule h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+h2 { font: 800 clamp(2.25rem, 4.5vw, 3.25rem)/1 var(--display); text-transform: uppercase; margin: 0; }
+.section-head p { margin: 0; color: var(--dim); }
+
+.dial { position: relative; }
+.band {
+  display: grid; grid-template-columns: 2fr 3fr 3fr; gap: 3px;
+  height: 92px; border-radius: 2px; overflow: hidden;
+  /* unslop-ignore: the one violet gradient; it runs dusk to midnight across the broadcast hours */
+  background: linear-gradient(90deg, var(--night-start) 0%, var(--night-mid) 55%, var(--night-end) 100%);
+}
+.band span {
+  display: flex; align-items: flex-end; padding: 12px 14px;
+  font: 700 1.35rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.02em;
+  box-shadow: inset -3px 0 0 var(--bark);
+}
+.band span:last-child { box-shadow: none; }
+.ruler {
+  display: grid; grid-template-columns: repeat(8, 1fr); margin-top: 8px;
+  font: 400 0.8rem/1 var(--mono); color: var(--dim); font-variant-numeric: tabular-nums;
+}
+.ruler span { border-left: 1px solid var(--rule); padding: 8px 0 0 6px; height: 22px; }
+.ruler span:nth-child(even) { color: transparent; }
+.ruler span:last-child { position: relative; }
+.ruler span:last-child::after {
+  content: "12"; position: absolute; right: 0; top: 8px; color: var(--dim);
+  border-right: 1px solid var(--rule); padding-right: 6px; height: 22px; margin-top: -8px; padding-top: 8px;
+}
+
+.shows { display: grid; grid-template-columns: 2fr 3fr 3fr; gap: 0 3px; margin: 28px 0 0; padding: 0; list-style: none; }
+.show { padding: 0 24px 0 14px; border-left: 1px solid var(--rule); }
+.show:first-child { border-left: 0; padding-left: 0; }
+.show time { display: block; font: 500 0.95rem/1.4 var(--mono); color: var(--amber); font-variant-numeric: tabular-nums; margin-bottom: 6px; }
+.show h3 { font: 800 2rem/1 var(--display); text-transform: uppercase; margin: 0 0 8px; }
+.show p { margin: 0; color: var(--dim); max-width: 30ch; }
+
+/* Submit */
+.submit { padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 96px); border-top: 1px solid var(--rule); }
+.submit .wrap { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; }
+.submit-intro p { color: var(--dim); max-width: 32ch; margin: 16px 0 0; }
+form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.field { display: grid; gap: 6px; }
+.field--wide { grid-column: 1 / -1; }
+label { font-weight: 700; font-size: 0.95rem; }
+label .opt { font-weight: 400; color: var(--dim); }
+input, textarea {
+  width: 100%; font: inherit; color: var(--paper);
+  background: var(--bark-raised); border: 1px solid #5a4d40; border-radius: 4px;
+  padding: 12px 14px; min-height: 48px;
+}
+input::placeholder, textarea::placeholder { color: #8f826f; }
+input:hover, textarea:hover { border-color: var(--dim); }
+input:focus-visible, textarea:focus-visible { outline: 3px solid var(--amber); outline-offset: 1px; border-color: var(--amber); }
+input[aria-invalid="true"] { border-color: var(--error); }
+textarea { min-height: 96px; resize: vertical; }
+.error { color: var(--error); font-size: 0.9rem; min-height: 0; margin: 0; }
+.error:empty { display: none; }
+.form-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.form-done { grid-column: 1 / -1; margin: 0; color: var(--paper); }
+.form-done:empty { display: none; }
+
+/* Footer */
+footer { border-top: 1px solid var(--rule); padding: 28px 0 40px; color: var(--dim); font-size: 0.95rem; }
+footer .wrap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 32px; justify-content: space-between; }
+footer p { margin: 0; }
+footer .wordmark { padding: 0; }
+footer .wordmark { font-size: 1.25rem; margin: 0; color: var(--paper); }
+.demo-note { font-family: var(--mono); font-size: 0.8rem; }
+
+/* Mobile */
+@media (max-width: 760px) {
+  .nav { display: none; }
+  .listen { width: 100%; justify-content: center; }
+  .hero-actions { gap: 12px; }
+  .band { height: 56px; }
+  .band span { font-size: 0.95rem; padding: 8px; letter-spacing: 0.01em; }
+  .ruler { font-size: 0.75rem; }
+  .shows { grid-template-columns: 1fr; gap: 0; margin-top: 20px; }
+  .show, .show:first-child { display: grid; grid-template-columns: 7.75rem 1fr; gap: 0 12px; padding: 18px 0; border-left: 0; border-top: 1px solid var(--rule); }
+  .show time { grid-row: span 2; margin: 4px 0 0; font-size: 0.88rem; white-space: nowrap; }
+  .show h3 { font-size: 1.75rem; }
+  .submit .wrap { grid-template-columns: 1fr; gap: 24px; }
+  form { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  .is-playing .lamp { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="#top">Radio Orchard</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#schedule">Schedule</a>
+      <a href="#submit">Submit a song</a>
+    </nav>
+    <button class="listen listen--compact" type="button" aria-pressed="false" data-listen hidden>
+      <svg class="icon icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l15 8-15 8z" fill="currentColor"/></svg>
+      <svg class="icon icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></svg>
+      <span data-listen-label>Listen live</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>Four hours of community radio, every Thursday night</h1>
+      <p class="lede">New local music, stories and songs for the commute, then your requests until midnight.</p>
+      <div class="hero-actions">
+        <button class="listen" id="listen-main" type="button" aria-pressed="false" data-listen>
+          <svg class="icon icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l15 8-15 8z" fill="currentColor"/></svg>
+          <svg class="icon icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></svg>
+          <span data-listen-label>Listen live</span>
+        </button>
+        <p class="when"><span class="lamp" aria-hidden="true"></span>Live <strong>Thursdays, 8 pm–midnight</strong></p>
+      </div>
+      <p class="status" role="status" aria-live="polite" data-status></p>
+      <audio data-stream="" preload="none"></audio>
+    </div>
+  </section>
+
+  <section class="schedule" id="schedule" aria-labelledby="schedule-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="schedule-title">Thursday nights</h2>
+        <p>Three shows, back to back.</p>
+      </div>
+      <div class="dial" aria-hidden="true">
+        <div class="band"><span>First Press</span><span>Long Way Home</span><span>After Hours</span></div>
+        <div class="ruler"><span>8 pm</span><span>8:30</span><span>9</span><span>9:30</span><span>10</span><span>10:30</span><span>11</span><span>11:30</span></div>
+      </div>
+      <ol class="shows">
+        <li class="show">
+          <time>8–9 pm</time>
+          <h3>First Press</h3>
+          <p>New local music.</p>
+        </li>
+        <li class="show">
+          <time>9–10:30 pm</time>
+          <h3>Long Way Home</h3>
+          <p>Stories and songs for the commute.</p>
+        </li>
+        <li class="show">
+          <time>10:30 pm–12 am</time>
+          <h3>After Hours</h3>
+          <p>Listener requests until midnight.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="submit" id="submit" aria-labelledby="submit-title">
+    <div class="wrap">
+      <div class="submit-intro">
+        <h2 id="submit-title">Submit a song</h2>
+        <p>Heard something that belongs on a Thursday night? Send us the link.</p>
+      </div>
+      <form novalidate data-form>
+        <div class="field">
+          <label for="song">Song title</label>
+          <input id="song" name="song" autocomplete="off" required aria-describedby="song-error">
+          <p class="error" id="song-error"></p>
+        </div>
+        <div class="field">
+          <label for="artist">Artist</label>
+          <input id="artist" name="artist" autocomplete="off" required aria-describedby="artist-error">
+          <p class="error" id="artist-error"></p>
+        </div>
+        <div class="field field--wide">
+          <label for="link">Link to the song</label>
+          <input id="link" name="link" type="url" inputmode="url" placeholder="https://" required aria-describedby="link-error">
+          <p class="error" id="link-error"></p>
+        </div>
+        <div class="field field--wide">
+          <label for="note">Note to the presenters <span class="opt">(optional)</span></label>
+          <textarea id="note" name="note"></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="button-secondary" type="submit">Submit a song</button>
+        </div>
+        <p class="form-done" role="status" aria-live="polite" data-done></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="wordmark">Radio Orchard</p>
+    <p>Community-run. Live every Thursday, 8 pm–midnight.</p>
+    <p class="demo-note">Demo page: the stream and the form are not connected.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var audio = document.querySelector("audio");
+  var stream = audio.getAttribute("data-stream");
+  var buttons = document.querySelectorAll("[data-listen]");
+  var status = document.querySelector("[data-status]");
+  var compact = document.querySelector(".listen--compact");
+
+  function setPlaying(on) {
+    buttons.forEach(function (b) {
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.querySelector("[data-listen-label]").textContent = on ? "Pause" : "Listen live";
+    });
+    document.body.classList.toggle("is-playing", on);
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (!stream) {
+        status.dataset.kind = "error";
+        status.textContent = "The live stream isn't connected on this demo page.";
+        return;
+      }
+      if (audio.paused) {
+        if (!audio.src) audio.src = stream;
+        status.dataset.kind = "";
+        status.textContent = "Connecting…";
+        audio.play().then(function () {
+          setPlaying(true);
+          status.textContent = "You're listening to Radio Orchard.";
+        }).catch(function () {
+          setPlaying(false);
+          status.dataset.kind = "error";
+          status.textContent = "Couldn't reach the stream. Try again in a moment.";
+        });
+      } else {
+        audio.pause();
+        setPlaying(false);
+        status.textContent = "Paused.";
+      }
+    });
+  });
+
+  // Show the compact Listen live button only once the main one has scrolled away.
+  var main = document.getElementById("listen-main");
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      compact.hidden = entries[0].isIntersecting;
+    }).observe(main);
+  }
+
+  // Submit a song: validate on submit, then show the result.
+  var form = document.querySelector("[data-form]");
+  var done = document.querySelector("[data-done]");
+  var messages = {
+    song: "Add the song title.",
+    artist: "Add the artist.",
+    link: "Add a link that starts with http:// or https://."
+  };
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var firstBad = null;
+    ["song", "artist", "link"].forEach(function (name) {
+      var input = form.elements[name];
+      var ok = input.value.trim() !== "" && input.checkValidity();
+      input.setAttribute("aria-invalid", ok ? "false" : "true");
+      document.getElementById(name + "-error").textContent = ok ? "" : messages[name];
+      if (!ok && !firstBad) firstBad = input;
+    });
+    if (firstBad) { firstBad.focus(); done.textContent = ""; return; }
+    done.textContent = "Thanks. “" + form.elements.song.value.trim() + "” is in. (On this demo page nothing is sent.)";
+    form.reset();
+  });
+})();
+</script>
+</body>
+</html>
