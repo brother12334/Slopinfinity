@@ -108,8 +108,8 @@ this list, but the list is not a quota for the first screen (see step 2).
 **Fact sources.** Every fact the page displays (prices, addresses, hours, inclusions,
 policies, sequences) must trace to what the user supplied. When you write a test brief
 yourself, show the user the full brief before building; a fact that appears only in your
-notes counts as invented. Before delivery, list each displayed fact beside its source and
-remove or label anything without one.
+notes counts as invented. Before delivery, list each displayed fact beside its source in
+`DESIGN.md` and remove or label anything without one.
 
 ### Check the content can carry the task
 
@@ -183,6 +183,10 @@ mood) and what you will not copy (brand, photographs, exact layout).
    be obtained; what stands in until then, labeled as a stand-in. When visitors judge a
    physical place, product or person, say plainly that a stand-in cannot do that job and
    record the missing material as an unresolved content need.
+   When the brief supplies no distinguishing brand or visual material, the identity is
+   yours: call it a **proposed identity** in the concept and delivery, and justify it
+   from the subject and audience. Do not invent facts about the business (history,
+   materials, people, neighbourhood, methods) to make the proposal sound grounded.
 
 When the user has no reference and no preference, offer two or three distinct concepts, or
 pick one and say why. **Concepts must differ in art direction, not arrangement**: in the
@@ -449,8 +453,9 @@ Give the user, briefly:
 8. **Defaults departed from** in step 7, with the reason.
 9. **Anything not checked** (no browser, no real device, no network), stated plainly
    rather than implied as passing.
-10. **Fact audit.** Each displayed fact with its source in the user's brief, and
-    anything removed or labeled because it had none.
+10. **Assumptions and unresolved needs** from the fact audit. The full fact-by-fact
+    audit stays in `DESIGN.md`; the delivery names only what was assumed, labeled or
+    removed, and what the user still needs to supply.
 
 For `audit` without edits, report instead: the verdict on the central test, the visual
 gate answers, the eight-pattern table, up to three generic decisions with suggested replacements (or none), quality-check failures with
