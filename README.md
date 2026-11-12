@@ -25,9 +25,11 @@ type voice, unexplained metrics, an icon grid, glow behind the headline. The ski
 visual reference is [visual-reference.pdf](skills/antislop-design/references/visual-reference.pdf),
 which pairs each of those eight patterns with a stronger direction.
 
-Nothing is banned. A gradient, card, glass panel or glow stays when it has a stated
-reason tied to the product, and goes when it is only there because websites usually look
-that way.
+Nothing is banned. A gradient, card, glass panel or glow stays when the design concept
+records a reason tied to the product, and goes when it is only there because websites
+usually look that way. The central test throughout: does this design communicate this
+product clearly and feel specific to its audience? When it already does, the skill
+doesn't force changes.
 
 ### The workflow
 
@@ -39,9 +41,9 @@ that way.
 | 3. Build | Specific copy, labeled proof (no invented numbers), varied layouts, full theming, all interaction states |
 | 4. Render | Desktop and mobile with real copy |
 | 5. Compare | Against the eight patterns, the eight-question audit and the remove-the-logo test |
-| 6. Revise | The three most generic decisions: decision, pattern, replacement, tradeoff |
-| 7. Quality checks | Mobile layout, readability, WCAG AA contrast, interaction states, keyboard, reduced motion, scanners |
-| 8. Deliver | Concept, the three revisions, effects kept and why, placeholders to fill, anything not checked |
+| 6. Revise | Up to three decisions that are still generic (none if the design already passes): decision, pattern, replacement, tradeoff |
+| 7. Quality checks | Hard requirements (no broken mobile layout, WCAG AA contrast, keyboard focus, the states each control can enter) plus defaults checked in context (16px body, 44px targets, 45 to 75 character lines) |
+| 8. Deliver | Concept, the revisions (or why none were needed), effects kept and why, placeholders to fill, defaults departed from, anything not checked |
 
 ### Commands
 

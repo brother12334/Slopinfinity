@@ -136,6 +136,9 @@ contrast and useful content. Add restrained light only if it clarifies emphasis.
 **Reason test.** Is there at most one effect per view, and does it point at the thing
 the visitor should look at or do?
 
+Record each effect's reason in the design concept or the audit. An inline code comment
+is optional and only worth adding when it helps future maintainers.
+
 ---
 
 ## The anti-template audit
@@ -155,11 +158,13 @@ Run it on the full page, not just the hero. Answer each with yes or no and the e
 
 **Final test.** Remove the logo. Would the page still feel like the same brand?
 
-## Revising the three most generic decisions
+## Revising up to three generic decisions
 
-After the audit, rank every decision on the page (each section's structure, the hero
-claim, the palette, the type system, each effect, each proof element) by how easily it
-could appear unchanged on an unrelated product. Take the top three and for each write:
+After the audit, rank the decisions on the page (each section's structure, the hero
+claim, the palette, the type system, each effect, each proof element) by how easily each
+could appear unchanged on an unrelated product. Take up to three that genuinely fail a
+reason test or the central test (does this communicate the product clearly and feel
+specific to its audience?). For each write:
 
 1. **The decision**, as built ("six-card feature grid with icon circles").
 2. **The pattern** it matches (from the eight above).
@@ -168,4 +173,6 @@ could appear unchanged on an unrelated product. Take the top three and for each 
 4. **The tradeoff** the replacement accepts (more content to write, less scannable, a
    placeholder the user must fill).
 
-Make all three changes, re-run the audit, and report them at delivery.
+Make the changes, re-run the audit, and report them at delivery. If fewer than three
+qualify, change only those; if none do, say so. Never manufacture a revision to fill the
+count.

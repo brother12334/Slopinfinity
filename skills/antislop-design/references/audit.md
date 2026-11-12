@@ -11,7 +11,8 @@ and call out false positives.
 
 1. **Accessibility.** Contrast (body and placeholder at least 4.5:1, large text 3:1),
    visible keyboard focus, semantic elements over clickable divs, labels on inputs, alt
-   text, ARIA only where native semantics fall short, touch targets at least 44px,
+   text, ARIA only where native semantics fall short, touch targets around 44px
+   where the context allows (a default to check, not a hard rule),
    reduced-motion respected.
 2. **Performance.** Image sizes and formats, font loading (subset, `font-display`), layout
    shift, animation on compositor-friendly properties, bundle weight of UI libraries,

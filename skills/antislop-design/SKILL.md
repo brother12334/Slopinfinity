@@ -1,6 +1,6 @@
 ---
 name: antislop-design
-description: An end-to-end workflow for frontend design that does not look like an AI template. It starts from the product and audience, commits to a stated design concept, builds the page, audits it against eight generic patterns (palette as personality, the interchangeable hero, cards for everything, glass without a reason, bland type hierarchy, meaningless metrics, the endless icon grid, glow competing with content), then revises the three most generic decisions before delivery. Gradients, cards, glass and glow are allowed only with a stated reason. Demands specific copy, credible proof, varied layouts and a visual identity built for the project, plus checks for mobile layout, readability, contrast and interaction states. Use whenever building, redesigning, styling, reviewing, auditing, animating or polishing a website, landing page, web app, dashboard or component, or when the user says it looks AI-made, generic, templated or vibe-coded. Trigger even if they never say "slop".
+description: An end-to-end workflow for frontend design that does not look like an AI template. It starts from the product and audience, commits to a stated design concept, builds the page, audits it against eight generic patterns (palette as personality, the interchangeable hero, cards for everything, glass without a reason, bland type hierarchy, meaningless metrics, the endless icon grid, glow competing with content), then revises up to three decisions that are still generic, and none when the design is already specific. Gradients, cards, glass and glow are allowed when the design concept or audit records a reason. Demands specific copy, credible proof, varied layouts and a visual identity built for the project, plus checks for mobile layout, readability, contrast and interaction states. Use whenever building, redesigning, styling, reviewing, auditing, animating or polishing a website, landing page, web app, dashboard or component, or when the user says it looks AI-made, generic, templated or vibe-coded. Trigger even if they never say "slop".
 argument-hint: "[build | audit | polish | motion | libs | copy] [target]"
 ---
 
@@ -12,6 +12,10 @@ The visual reference for this skill is [references/visual-reference.pdf](referen
 this skill conflicts with the PDF, the PDF wins.**
 
 ## The rule everything else serves
+
+The central test: **does this design communicate this product clearly and feel specific
+to its audience?** Every other rule in this skill serves that question. When the answer
+is already yes, do not change things to satisfy a checklist.
 
 Design from the product, the audience and the content outward. Every visible decision
 (palette, type, layout, imagery, effects, copy, proof) needs a reason you can say in one
@@ -117,8 +121,9 @@ Build against the concept from step 2. Requirements:
 
 **Layout.**
 - One lead idea per section, secondary ideas visibly secondary.
-- Structure follows content (see step 2). No two adjacent sections share the same
-  structure unless the content really is the same shape.
+- Structure follows content (see step 2). Vary structures where the content differs;
+  repeat one in adjacent sections when the repetition helps the reader compare or
+  follow along (two parallel case studies, consecutive steps).
 - One clear primary action per view.
 
 **Identity.**
@@ -130,13 +135,18 @@ Build against the concept from step 2. Requirements:
   tabular numerals.
 
 **Effects.** Gradients, cards, glass, glow, blur and heavy shadows are allowed when their
-reason from step 2 still holds in the built page. Mark each with a comment on the same
-line, which the scanners honor, giving the reason:
-`background: linear-gradient(...); /* unslop-ignore: maps cold-to-warm across the forecast range */`.
-No reason, no effect.
+reason from step 2 still holds in the built page. The reason lives in the concept's
+effects budget (and in `DESIGN.md`); an effect with no recorded reason goes. An inline
+code comment is optional: add one only when a future maintainer would otherwise be
+tempted to remove the effect, for example
+`/* unslop-ignore: gradient maps cold-to-warm across the forecast range */`. The scanners
+skip lines carrying `unslop-ignore`.
 
-**States.** Every interactive element has hover, focus-visible, active, disabled and,
-where relevant, loading, error and empty states.
+**States.** Design the states each control actually has. Every interactive element
+needs a visible keyboard focus state. Beyond that, a link needs hover; a button needs
+hover, active and disabled if it can be disabled, and loading if it triggers slow work; a
+form field needs error and disabled where those can happen; a list or data view needs an
+empty and a loading state. Skip states a control cannot enter.
 
 **Codebase fit.** Follow the project's naming, file layout and patterns
 ([references/fitting-the-codebase.md](references/fitting-the-codebase.md)). Motion follows
@@ -158,28 +168,43 @@ section against the rendered page, the whole page and not just the hero:
 2. Run the eight-question anti-template audit.
 3. Run the final test: cover the logo. Does it still feel like this brand?
 
-## Step 6. Revise the three most generic decisions
+## Step 6. Revise up to three generic decisions
 
-Rank every decision by how easily it could appear unchanged on an unrelated product. Take
-the top three, even if the audit mostly passed, and for each write the decision, the
-pattern it matches, the specific replacement and the tradeoff. Make the changes, render
-again, and re-run step 5 on the changed sections.
+Rank the decisions by how easily each could appear unchanged on an unrelated product.
+Identify up to three that are genuinely generic: a decision qualifies only when it fails
+the central test or a pattern's reason test from step 5. For each one, write the
+decision, the pattern it matches, the specific replacement and the tradeoff, then make
+the change, render again and re-run step 5 on the changed sections.
+
+If fewer than three qualify, revise only those. If none do, say so and explain briefly
+why the design already passes. Do not manufacture revisions to fill the count; a change
+that makes a specific design less clear is a regression.
 
 ## Step 7. Quality checks
 
-All of these must pass before delivery:
+Two kinds of check. **Hard requirements** must pass. **Defaults** are starting points to
+check in context: departing from one is fine when the context justifies it, and the
+delivery note says why.
 
-- **Mobile layout.** At 390px: no horizontal scroll, no overflowing or clipped text,
-  tap targets at least 44px, the primary action visible without hunting, layouts
-  recomposed for the narrow screen rather than squeezed, images sized for the viewport.
-- **Readability.** Body text at least 16px, line length about 45 to 75 characters,
-  line height about 1.4 to 1.6 for body, clear size and weight steps between levels.
+Hard requirements:
+
+- **No broken mobile layout.** At about 390px: no horizontal page scroll, no overflowing
+  or clipped text, the primary action reachable, layouts recomposed for the narrow screen
+  rather than squeezed.
 - **Contrast.** WCAG AA: 4.5:1 for body text and placeholders, 3:1 for large text, icons
-  and control boundaries. Check text on every surface it sits on, including any image,
-  gradient or glass.
-- **Interaction states.** Hover, focus-visible, active, disabled, loading, error and
-  empty all designed. Keyboard: every control reachable in a sensible order with a
-  visible focus ring. Motion respects `prefers-reduced-motion`.
+  and control boundaries, including text over images, gradients or glass.
+- **Keyboard and focus.** Every control reachable in a sensible order with a visible
+  focus state. Motion respects `prefers-reduced-motion`.
+- **The states each control can enter** are designed (see step 3).
+
+Defaults to check in context:
+
+| Default | When departing is fine |
+|---|---|
+| Body text about 16px | Dense data tables, captions, legal text, a typeface that reads large at a smaller size |
+| Tap targets about 44px | Inline text links, dense desktop-only tools; keep enough spacing to avoid mis-taps |
+| Line length about 45 to 75 characters | Short UI strings, captions, wide data, display headlines |
+| Body line height about 1.4 to 1.6 | Headlines, labels, tight UI text |
 
 Then run the scanners from the project root (paths relative to this skill folder):
 
@@ -188,8 +213,9 @@ sh scripts/antislop_scan.sh <path>                       # styles, copy and code
 python3 scripts/devibe_scan.py <path> [--severity high]  # styles and markup only
 ```
 
-A scanner finding is a prompt to inspect, like the patterns. Fix it, or keep it and add
-an `unslop-ignore:` comment with the reason. For a fuller review, also apply the Vercel
+A scanner finding is a prompt to inspect, like the patterns. If the reason is already
+recorded in the concept or audit, leave it. If it has no reason, fix it. Add an
+`unslop-ignore` comment only when it helps future maintainers or keeps CI quiet. For a fuller review, also apply the Vercel
 Web Interface Guidelines
 (`https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md`)
 and score the five dimensions in [references/audit.md](references/audit.md).
@@ -199,12 +225,14 @@ and score the five dimensions in [references/audit.md](references/audit.md).
 Give the user, briefly:
 
 1. **The concept** in one sentence, and the palette, type and layout reasons.
-2. **The three revisions** from step 6: before, after and the tradeoff of each.
+2. **The revisions** from step 6 (up to three): before, after and the tradeoff of each,
+   or a short note that none were needed and why.
 3. **Effects kept**, each with its reason.
 4. **Placeholders** the user must fill with real proof or content.
-5. **Anything not checked** (no browser, no real device, no network), stated plainly
+5. **Defaults departed from** in step 7, with the reason.
+6. **Anything not checked** (no browser, no real device, no network), stated plainly
    rather than implied as passing.
 
-For `audit` without edits, report instead: the verdict, the eight-pattern table, the three
-most generic decisions with suggested replacements, quality-check failures with
+For `audit` without edits, report instead: the verdict on the central test, the
+eight-pattern table, up to three generic decisions with suggested replacements (or none), quality-check failures with
 `file:line`, and the scanner results.

@@ -37,15 +37,15 @@ RULES = [
      "pats": [r"\b(bg|text|from|via|to|border|ring|fill|stroke|decoration|outline)-(indigo|violet|purple|fuchsia)-(400|500|600|700|800)\b",
               r"#(6366f1|4f46e5|818cf8|7c3aed|6d28d9|8b5cf6|a855f7|9333ea|7e22ce|c026d3|d946ef)\b"]},
     {"id": "gradient-text", "label": "Gradient-filled text (heading/hero)", "sev": "high",
-     "fix": "Gradient-filled text needs a brand or content reason and must meet contrast at every point. Otherwise use solid color and get emphasis from weight or size. Keep a deliberate one with 'unslop-ignore: <reason>'.",
+     "fix": "Gradient-filled text needs a brand or content reason and must meet contrast at every point. Otherwise use solid color and get emphasis from weight or size. If the reason is recorded in the design concept, leave it.",
      "pats": [r"bg-clip-text\s+[^\"'`]*text-transparent", r"text-transparent\s+[^\"'`]*bg-clip-text",
               r"-webkit-background-clip\s*:\s*text", r"\bbackground-clip\s*:\s*text"]},
     {"id": "purple-blue-gradient", "label": "Purple-to-blue/pink gradient", "sev": "high",
-     "fix": "A palette that fits any product. Use it only if the colors come from the brand or encode something; otherwise derive colors from the subject. Keep a deliberate one with 'unslop-ignore: <reason>'.",
+     "fix": "A palette that fits any product. Use it only if the colors come from the brand or encode something; otherwise derive colors from the subject. If the reason is recorded in the design concept, leave it.",
      "pats": [r"from-(purple|violet|indigo|fuchsia)-\d+\s+(via-[a-z]+-\d+\s+)?to-(blue|indigo|pink|cyan|sky)-\d+",
               r"linear-gradient\([^)]*#(6366f1|7c3aed|8b5cf6|a855f7)[^)]*\)"]},
     {"id": "claude-default-look", "label": "Cream background / serif display (check it was chosen)", "sev": "low",
-     "fix": "Fine when the design concept calls for it. If it is there because it looks tasteful by default, derive the palette and type from the subject. Mark a deliberate choice with 'unslop-ignore: <reason>'.",
+     "fix": "Fine when the design concept calls for it. If it is there because it looks tasteful by default, derive the palette and type from the subject. If the reason is recorded in the design concept, leave it.",
      "pats": [r"#(faf8f5|f5f1e8|f3eee3|fdfbf7|f7f3ec|faf6ef|f6f1e7|fbf7f0|f4efe4)\b",
               r"\bbg-(stone|amber|orange)-(50|100)\b",
               r"\b(Instrument\s*Serif|Fraunces|Playfair\s*Display|Cormorant|Spectral|DM\s*Serif)\b"]},
@@ -64,7 +64,7 @@ RULES = [
      "pats": [r"initial=\{\{\s*opacity:\s*0", r"whileInView", r"whileHover=\{\{\s*scale",
               r"data-aos\s*=", r"\bhover:scale-1\d{2}\b"]},
     {"id": "neon-glow", "label": "Unprompted neon glow shadow", "sev": "medium",
-     "fix": "At most one effect per view, pointing at the focal point. Remove glow that only fills space. Keep a deliberate one with 'unslop-ignore: <reason>'.",
+     "fix": "At most one effect per view, pointing at the focal point. Remove glow that only fills space. If the reason is recorded in the design concept, leave it.",
      "pats": [r"shadow-\[0_0_", r"drop-shadow-\[0_0_", r"text-shadow\s*:[^;]*\d+px[^;]*(rgba|#|hsl)",
               r"box-shadow\s*:[^;]*\b0\s+0\s+\d{2,}px"]},
     {"id": "emoji-as-icons", "label": "Emoji used as icons / section bullets", "sev": "medium",
@@ -194,8 +194,10 @@ def main():
             print(f"        ... +{len(items) - args.max} more")
         print()
     top = [by_rule[rid][0]['label'] for rid in rule_ids[:3]]
-    print("  Top things to change: " + "; ".join(top))
-    print("  Layout and motion tells need eyes too. See references/ui-tells.md.\n")
+    print("  Top things to check: " + "; ".join(top))
+    print("  A finding is a prompt to inspect, not a required change. If the design concept or audit")
+    print("  already records a reason for it, leave it. Add 'unslop-ignore' to a line only when that")
+    print("  helps maintainers or CI. Layout and motion need eyes too: see references/generic-patterns.md.\n")
     sys.exit(by_sev.get("high", 0))
 
 if __name__ == "__main__":
