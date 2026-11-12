@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study rooms · North Library</title>
+<meta name="description" content="Find a study room at North Library and request it. Open Monday to Saturday, 9 am to 6 pm.">
+<style>
+@font-face { font-family: "Public Sans"; font-weight: 400; font-display: swap; src: url(fonts/public-sans-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Public Sans"; font-weight: 600; font-display: swap; src: url(fonts/public-sans-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Public Sans"; font-weight: 700; font-display: swap; src: url(fonts/public-sans-latin-700-normal.woff2) format("woff2"); }
+:root {
+  --blue: #0b4f6c;
+  --text: #1b1b1b;
+  --muted: #505a5f;
+  --panel: #eef5f8;
+  --border: #8a979c;
+  --error: #b3261e;
+  --font: "Public Sans", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #fff; color: var(--text); font: 400 1.1875rem/1.5 var(--font); }
+a { color: var(--blue); text-underline-offset: 0.15em; }
+a:hover { text-decoration-thickness: 3px; }
+:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; box-shadow: 0 0 0 6px #b8dcea; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 12px; top: 12px; background: #fff; padding: 8px 12px; z-index: 5; }
+
+header { background: var(--blue); color: #fff; }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; flex-wrap: wrap; }
+.brand { font-weight: 700; font-size: 1.4rem; color: #fff; text-decoration: none; display: inline-flex; gap: 10px; align-items: center; padding: 8px 0; }
+.brand svg { width: 28px; height: 28px; }
+.hours-strip { font-size: 1rem; font-weight: 600; margin: 0; }
+
+main.wrap { padding-top: 36px; padding-bottom: 64px; }
+h1 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; margin: 0 0 12px; }
+.lede { margin: 0 0 28px; max-width: 40em; }
+.layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+h2 { font-size: 1.5rem; line-height: 1.2; margin: 0 0 12px; }
+
+.notice { border-left: 6px solid var(--blue); background: var(--panel); padding: 12px 16px; margin: 0 0 20px; font-size: 1.0625rem; }
+
+fieldset { border: 0; margin: 0; padding: 0; }
+legend { font-weight: 700; padding: 0; margin-bottom: 8px; }
+.filters { display: flex; flex-wrap: wrap; gap: 20px 40px; padding: 16px 0 20px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.opt { display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; font-size: 1.0625rem; }
+.opt input { width: 24px; height: 24px; margin: 0; accent-color: var(--blue); }
+select, input[type=text], input[type=email], input[type=date] {
+  font: inherit; font-size: 1.0625rem; color: var(--text); border: 2px solid var(--text); border-radius: 0; padding: 8px 10px; min-height: 48px; background: #fff;
+}
+.count { font-weight: 600; margin: 12px 0 8px; }
+
+.rooms { list-style: none; margin: 0; padding: 0; }
+.room { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 20px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.room h3 { margin: 0; font-size: 1.25rem; }
+.room .meta { margin: 0; color: var(--muted); font-size: 1rem; }
+.room .sample { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--blue); border: 1.5px solid var(--blue); padding: 1px 6px; margin-left: 8px; vertical-align: 2px; }
+.room[hidden] { display: none; }
+.btn { font: 600 1.0625rem/1 var(--font); background: var(--blue); color: #fff; border: 0; border-bottom: 3px solid #062f40; padding: 0 18px; min-height: 48px; cursor: pointer; }
+.btn:hover { background: #083d54; }
+.btn:active { transform: translateY(2px); border-bottom-width: 1px; }
+.btn-ghost { background: #fff; color: var(--blue); border: 2px solid var(--blue); border-bottom-width: 2px; }
+.btn-ghost:hover { background: var(--panel); }
+.none { padding: 16px 0; margin: 0; }
+
+aside .box { border-top: 6px solid var(--blue); background: var(--panel); padding: 16px 20px 20px; margin-bottom: 24px; }
+aside table { width: 100%; border-collapse: collapse; font-size: 1.0625rem; font-variant-numeric: tabular-nums; }
+aside th, aside td { text-align: left; padding: 6px 0; border-bottom: 1px solid #c8d6dc; }
+aside td { text-align: right; }
+aside ol { margin: 0; padding-left: 1.25em; }
+aside li { margin-bottom: 8px; }
+
+.request { margin-top: 48px; padding-top: 32px; border-top: 6px solid var(--blue); max-width: 46rem; }
+.field { margin-bottom: 20px; display: grid; gap: 6px; justify-items: start; }
+.field label, .field legend { font-weight: 700; }
+.hint { color: var(--muted); font-size: 1rem; margin: 0; }
+.err { color: var(--error); font-weight: 700; margin: 0; }
+.err:empty { display: none; }
+.has-err { border-left: 5px solid var(--error); padding-left: 14px; }
+.has-err select, .has-err input { border-color: var(--error); }
+.row { display: flex; flex-wrap: wrap; gap: 16px; }
+.wide { width: min(100%, 28rem); }
+.result { border: 4px solid var(--blue); padding: 16px 20px; margin-top: 20px; }
+.result:empty { display: none; }
+.result h3 { margin: 0 0 6px; }
+.result p { margin: 0; }
+footer { border-top: 1px solid var(--border); padding: 20px 0 32px; color: var(--muted); font-size: 1rem; }
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  aside { margin-top: 24px; }
+  .room { grid-template-columns: 1fr; }
+  .room .btn { justify-self: start; margin-top: 8px; }
+  .hours-strip { font-size: 0.95rem; padding-bottom: 10px; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#main"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M3 6h9c1.5 0 2 1 2 2v16c0-1-.5-2-2-2H3zM25 6h-9c-1.5 0-2 1-2 2v16c0-1 .5-2 2-2h9z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>North Library</a>
+    <p class="hours-strip">Open Monday to Saturday, 9 am to 6 pm</p>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <h1>Find and request a study room</h1>
+  <p class="lede">Choose a room that fits your group, then send a request with the day and time you'd like it.</p>
+
+  <div class="layout">
+    <section aria-labelledby="find-title">
+      <h2 id="find-title">Study rooms</h2>
+      <p class="notice"><strong>Sample rooms.</strong> North Library's real room list hasn't been supplied, so these rooms are examples. Live availability isn't shown because no booking system is connected.</p>
+
+      <form class="filters" data-filters onsubmit="return false">
+        <fieldset>
+          <legend>How many people?</legend>
+          <select name="people" aria-label="How many people">
+            <option value="1">1 person</option>
+            <option value="2">2 people</option>
+            <option value="4">3 or 4 people</option>
+            <option value="6">5 or 6 people</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend>Room needs</legend>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="need" value="quiet"> Quiet</label>
+            <label class="opt"><input type="checkbox" name="need" value="whiteboard"> Whiteboard</label>
+            <label class="opt"><input type="checkbox" name="need" value="screen"> Screen</label>
+          </div>
+        </fieldset>
+      </form>
+      <p class="count" role="status" aria-live="polite" data-count></p>
+
+      <ul class="rooms" data-rooms>
+        <li class="room" data-id="A" data-cap="1" data-needs="quiet"><div><h3>Room A <span class="sample">Sample</span></h3><p class="meta">Up to 1 person · Quiet</p></div><button class="btn btn-ghost" type="button" data-pick="A">Request this room</button></li>
+        <li class="room" data-id="B" data-cap="2" data-needs="quiet whiteboard"><div><h3>Room B <span class="sample">Sample</span></h3><p class="meta">Up to 2 people · Quiet · Whiteboard</p></div><button class="btn btn-ghost" type="button" data-pick="B">Request this room</button></li>
+        <li class="room" data-id="C" data-cap="4" data-needs="whiteboard"><div><h3>Room C <span class="sample">Sample</span></h3><p class="meta">Up to 4 people · Whiteboard</p></div><button class="btn btn-ghost" type="button" data-pick="C">Request this room</button></li>
+        <li class="room" data-id="D" data-cap="6" data-needs="whiteboard screen"><div><h3>Room D <span class="sample">Sample</span></h3><p class="meta">Up to 6 people · Whiteboard · Screen</p></div><button class="btn btn-ghost" type="button" data-pick="D">Request this room</button></li>
+      </ul>
+      <p class="none" data-none hidden>No sample room matches. Try fewer needs or a smaller group.</p>
+    </section>
+
+    <aside>
+      <div class="box">
+        <h2>Opening hours</h2>
+        <table>
+          <tbody>
+            <tr><th scope="row">Monday to Saturday</th><td>9 am to 6 pm</td></tr>
+            <tr><th scope="row">Sunday</th><td>Closed</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box">
+        <h2>How requesting works</h2>
+        <ol>
+          <li>Choose a room that fits your group.</li>
+          <li>Pick a day and a time inside opening hours.</li>
+          <li>Send the request form.</li>
+        </ol>
+        <p class="hint">A request is not a booking.</p>
+      </div>
+    </aside>
+  </div>
+
+  <section class="request" id="request" aria-labelledby="req-title">
+    <h2 id="req-title">Request a room</h2>
+    <p class="notice"><strong>Not connected.</strong> This demo page can't send requests. You can fill in the form to check it, but nothing will be sent.</p>
+    <form novalidate data-form>
+      <div class="field" data-f="room">
+        <label for="room">Room</label>
+        <select id="room" name="room" class="wide">
+          <option value="">Choose a room</option>
+          <option value="A">Room A (sample), up to 1 person</option>
+          <option value="B">Room B (sample), up to 2 people</option>
+          <option value="C">Room C (sample), up to 4 people</option>
+          <option value="D">Room D (sample), up to 6 people</option>
+        </select>
+        <p class="err" id="room-err"></p>
+      </div>
+      <div class="field" data-f="date">
+        <label for="date">Day</label>
+        <p class="hint" id="date-hint">Monday to Saturday</p>
+        <input type="date" id="date" name="date" aria-describedby="date-hint date-err">
+        <p class="err" id="date-err"></p>
+      </div>
+      <div class="field" data-f="time">
+        <fieldset>
+          <legend>Time</legend>
+          <p class="hint">The room must be free by 6 pm, when the library closes.</p>
+          <div class="row">
+            <label>Start <select name="start" id="start">
+              <option value="9">9 am</option><option value="10">10 am</option><option value="11">11 am</option><option value="12">12 pm</option><option value="13">1 pm</option><option value="14">2 pm</option><option value="15">3 pm</option><option value="16">4 pm</option><option value="17">5 pm</option>
+            </select></label>
+            <label>For <select name="len" id="len"><option value="1">1 hour</option><option value="2">2 hours</option><option value="3">3 hours</option></select></label>
+          </div>
+        </fieldset>
+        <p class="err" id="time-err"></p>
+      </div>
+      <div class="field" data-f="name">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" class="wide" autocomplete="name">
+        <p class="err" id="name-err"></p>
+      </div>
+      <div class="field" data-f="email">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" class="wide" autocomplete="email">
+        <p class="err" id="email-err"></p>
+      </div>
+      <button class="btn" type="submit">Check and send request</button>
+      <div class="result" role="status" aria-live="polite" data-result></div>
+    </form>
+  </section>
+</main>
+<footer><div class="wrap">North Library is a fictional public library. Rooms on this page are samples; requests are not sent.</div></footer>
+
+<script>
+(function () {
+  var filters = document.querySelector("[data-filters]");
+  var rooms = [].slice.call(document.querySelectorAll(".room"));
+  var count = document.querySelector("[data-count]"), none = document.querySelector("[data-none]");
+  function filter() {
+    var people = +filters.people.value;
+    var needs = [].slice.call(filters.querySelectorAll('input[name=need]:checked')).map(function (i) { return i.value; });
+    var shown = 0;
+    rooms.forEach(function (r) {
+      var have = r.dataset.needs.split(" ");
+      var ok = +r.dataset.cap >= people && needs.every(function (n) { return have.indexOf(n) !== -1; });
+      r.hidden = !ok; if (ok) shown++;
+    });
+    count.textContent = shown + (shown === 1 ? " sample room fits" : " sample rooms fit");
+    none.hidden = shown !== 0;
+  }
+  filters.addEventListener("change", filter); filter();
+
+  var form = document.querySelector("[data-form]");
+  document.querySelectorAll("[data-pick]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      form.room.value = b.dataset.pick;
+      document.getElementById("request").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      form.room.focus({ preventScroll: true });
+    });
+  });
+
+  function set(key, msg) {
+    document.getElementById(key + "-err").textContent = msg;
+    document.querySelector('[data-f="' + key + '"]').classList.toggle("has-err", !!msg);
+    return !msg;
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var res = document.querySelector("[data-result]"); res.innerHTML = "";
+    var ok = [];
+    ok.push(set("room", form.room.value ? "" : "Choose a room."));
+    var d = form.date.value ? new Date(form.date.value + "T12:00") : null;
+    ok.push(set("date", !d ? "Choose a day." : d.getDay() === 0 ? "The library is closed on Sundays. Choose Monday to Saturday." : ""));
+    var end = +form.start.value + +form.len.value;
+    ok.push(set("time", end > 18 ? "That would run past 6 pm, when the library closes. Choose an earlier start or a shorter time." : ""));
+    ok.push(set("name", form.name.value.trim() ? "" : "Enter your name."));
+    ok.push(set("email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim()) ? "" : "Enter an email address, like name@example.com."));
+    var bad = document.querySelector(".has-err select, .has-err input");
+    if (bad) { bad.focus(); return; }
+    var fmt = function (h) { return (h > 12 ? h - 12 : h) + (h >= 12 ? " pm" : " am"); };
+    res.innerHTML = "<h3>Request checked, not sent</h3><p>Room " + form.room.value + " (sample), " +
+      d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" }) + ", " + fmt(+form.start.value) + " to " + fmt(end) +
+      ". This demo page isn't connected, so the library hasn't received it.</p>";
+  });
+})();
+</script>
+</body>
+</html>
