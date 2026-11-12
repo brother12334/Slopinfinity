@@ -34,11 +34,10 @@ header .wrap { display: flex; justify-content: space-between; align-items: cente
 .name { font: 800 1.35rem/1 var(--display); letter-spacing: -0.01em; }
 .street { font-weight: 700; font-size: 1rem; }
 
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: var(--yolk); }
-.photo { margin: 0; position: relative; min-height: 100%; display: grid; grid-template-rows: 1fr auto; background: var(--juniper); }
-.photo img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 420px; }
-.photo figcaption { font-size: 0.8rem; line-height: 1.4; color: var(--yolk); padding: 10px 16px; }
-.photo figcaption a { color: var(--yolk); display: inline-block; padding: 6px 0; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: var(--yolk); min-height: calc(100vh - 60px - 72px); }
+.hero-text { align-self: center; }
+.art { margin: 0; background: var(--juniper); display: flex; align-items: flex-end; overflow: hidden; min-height: 100%; }
+.art svg { display: block; width: 100%; height: 100%; }
 .hero-text { padding: clamp(28px, 4.5vw, 64px) clamp(20px, 4.5vw, 64px); }
 .hero h1 { font-size: clamp(2.4rem, 3.8vw, 3.6rem); line-height: 0.98; margin-bottom: 16px; max-width: 13ch; }
 .lede { font-size: 1.2rem; margin: 0 0 32px; max-width: 32ch; }
@@ -65,13 +64,15 @@ button:active { transform: translateY(1px); }
 .board { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 32px; }
 .board li { display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 3px solid var(--juniper); font: 800 clamp(1.5rem, 2.6vw, 2.1rem)/1.05 var(--display); letter-spacing: -0.02em; }
 .board svg { width: 48px; height: 48px; flex: none; }
-footer { padding: 24px 0 40px; color: var(--muted); font-size: 0.95rem; border-top: 1px solid #e3dccb; }
+footer { padding: 22px 0 26px; color: var(--muted); font-size: 0.95rem; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; }
+footer strong { color: var(--juniper); }
 
 @media (max-width: 800px) {
   .street { display: none; }
   .hero { grid-template-columns: 1fr; }
-  .photo { order: 2; }
-  .photo img { min-height: 0; aspect-ratio: 3 / 2; }
+  .art { order: 2; height: 260px; }
+  .hero { min-height: 0; }
   .board { grid-template-columns: 1fr; }
   .week .day { font-size: 0.95rem; }
   .week .t { font-size: 0.8rem; }
@@ -90,9 +91,41 @@ footer { padding: 24px 0 40px; color: var(--muted); font-size: 0.95rem; border-t
 
 <main>
   <section class="hero" aria-labelledby="offer">
-    <figure class="photo">
-      <img src="images/cardamom-buns.jpg" alt="A tray of glazed cardamom buns" width="1600" height="1102">
-      <figcaption>Illustrative photo of cardamom buns, not taken at Juniper Counter. Photo: W.carter, <a href="https://commons.wikimedia.org/wiki/File:Cardamom_buns.jpg">Wikimedia Commons</a>, CC0.</figcaption>
+    <figure class="art" aria-label="Illustration of the counter: cardamom buns on a plate, an espresso and an egg sandwich">
+      <svg viewBox="0 150 640 410" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+        <!-- back wall tiles -->
+        <g stroke="#2e3d6e" stroke-width="2">
+          <path d="M0 80h640M0 160h640M0 240h640M0 320h640"/>
+          <path d="M80 0v80M240 0v80M400 0v80M560 0v80M160 80v80M320 80v80M480 80v80M80 160v80M240 160v80M400 160v80M560 160v80M160 240v80M320 240v80M480 240v80M80 320v80M240 320v80M400 320v80M560 320v80"/>
+        </g>
+        <!-- counter -->
+        <rect x="0" y="400" width="640" height="160" fill="#4f6b25"/>
+        <rect x="0" y="392" width="640" height="16" fill="#fffaf0"/>
+        <!-- plate of buns -->
+        <ellipse cx="200" cy="388" rx="150" ry="22" fill="#fffaf0"/>
+        <ellipse cx="200" cy="384" rx="124" ry="14" fill="#efe6d2"/>
+        <g>
+          <ellipse cx="140" cy="350" rx="72" ry="44" fill="#d39a3a"/>
+          <path d="M84 350c10-30 52-40 76-22s14 44-14 46-36-24-16-34 34 2 30 14" fill="none" stroke="#9a6420" stroke-width="9" stroke-linecap="round"/>
+          <ellipse cx="262" cy="346" rx="76" ry="48" fill="#e1a947"/>
+          <path d="M202 348c12-34 58-44 84-22s14 48-16 50-40-26-18-38 38 2 32 16" fill="none" stroke="#9a6420" stroke-width="9" stroke-linecap="round"/>
+          <g fill="#fffaf0"><circle cx="120" cy="330" r="3"/><circle cx="160" cy="364" r="3"/><circle cx="242" cy="322" r="3"/><circle cx="292" cy="362" r="3"/><circle cx="276" cy="330" r="2.5"/></g>
+          <g fill="#4f6b25"><circle cx="132" cy="342" r="2.5"/><circle cx="252" cy="340" r="2.5"/></g>
+        </g>
+        <!-- espresso -->
+        <ellipse cx="468" cy="392" rx="70" ry="12" fill="#fffaf0"/>
+        <path d="M424 320h88v34a44 36 0 0 1-88 0z" fill="#fffaf0"/>
+        <path d="M512 330h14a18 18 0 0 1 0 36h-16" fill="none" stroke="#fffaf0" stroke-width="10"/>
+        <ellipse cx="468" cy="320" rx="44" ry="10" fill="#5a3a22"/>
+        <path d="M452 300c-8-14 8-22 0-36M482 300c-8-14 8-22 0-36" fill="none" stroke="#fffaf0" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+        <!-- egg sandwich, halved -->
+        <g transform="translate(588 372) scale(.55) rotate(-6)">
+          <path d="M-70 40 L0 -60 L70 40 Z" fill="#fffaf0"/>
+          <path d="M-56 22 L0 -40 L56 22 Z" fill="#f6d365"/>
+          <ellipse cx="0" cy="2" rx="22" ry="16" fill="#f2b632"/>
+          <path d="M-62 30 L62 30" stroke="#86a648" stroke-width="7" stroke-linecap="round"/>
+        </g>
+      </svg>
     </figure>
     <div class="hero-text">
       <h1 id="offer">Espresso, cardamom buns and egg sandwiches.</h1>
@@ -118,18 +151,8 @@ footer { padding: 24px 0 40px; color: var(--muted); font-size: 0.95rem; border-t
     </div>
   </section>
 
-  <section class="counter" aria-labelledby="counter-title">
-    <div class="wrap">
-      <h2 id="counter-title">On the counter</h2>
-      <ul class="board">
-        <li><svg viewBox="0 0 52 52" aria-hidden="true"><path d="M12 20h24v8a12 12 0 0 1-24 0z" fill="none" stroke="#22305a" stroke-width="3"/><path d="M36 22h4a5 5 0 0 1 0 10h-5" fill="none" stroke="#22305a" stroke-width="3"/><path d="M8 44h34" stroke="#22305a" stroke-width="3" stroke-linecap="round"/></svg>Espresso</li>
-        <li><svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="19" fill="#f6d365" stroke="#22305a" stroke-width="3"/><path d="M26 26c0-3 4-3 4 0s-4 7-8 4-2-11 6-11 12 9 7 15-17 6-18-4" fill="none" stroke="#22305a" stroke-width="3" stroke-linecap="round"/></svg>Cardamom buns</li>
-        <li><svg viewBox="0 0 52 52" aria-hidden="true"><path d="M8 24c0-8 8-12 18-12s18 4 18 12z" fill="#fffaf0" stroke="#22305a" stroke-width="3" stroke-linejoin="round"/><path d="M8 30h36" stroke="#4f6b25" stroke-width="3"/><ellipse cx="26" cy="27" rx="11" ry="3.5" fill="#f6d365" stroke="#22305a" stroke-width="2"/><path d="M8 34h36v4c0 2-2 4-4 4H12c-2 0-4-2-4-4z" fill="#fffaf0" stroke="#22305a" stroke-width="3" stroke-linejoin="round"/></svg>Egg sandwiches</li>
-      </ul>
-    </div>
-  </section>
 </main>
-<footer><div class="wrap">Juniper Counter, a neighborhood café. Fictional business, demo page.</div></footer>
+<footer><div class="wrap"><span><strong>Juniper Counter</strong> · 24 Willow Street · Wednesday to Sunday, 8 am–3 pm</span><span>Fictional café, demo page. Illustration drawn for this page.</span></div></footer>
 
 <script>
 (function () {
