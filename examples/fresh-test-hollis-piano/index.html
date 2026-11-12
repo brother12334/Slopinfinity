@@ -61,10 +61,12 @@ legend { font-weight: 600; margin-bottom: 8px; }
 .choice:hover { border-color: var(--ebony); }
 .choice input { width: 20px; height: 20px; accent-color: var(--felt); margin: 0; }
 .choice:has(input:checked) { border-color: var(--ebony); box-shadow: inset 4px 0 0 var(--felt); }
-.total { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 18px 0 4px; }
+.total { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 4px 0 4px; }
 .total strong { font: 700 2.6rem/1 var(--serif); font-variant-numeric: tabular-nums; }
 .total span { color: var(--muted); }
 .breakdown { margin: 0 0 18px; font-size: 1rem; color: var(--muted); min-height: 1.5em; }
+.est-label { margin: 16px 0 0; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.demo-note { margin: 10px 0 0; font-size: 0.95rem; color: var(--muted); }
 .btn { display: inline-flex; align-items: center; justify-content: center; font: 600 1.05rem/1 var(--sans); min-height: 52px; padding: 0 24px; background: var(--felt); color: var(--white); border: 0; text-decoration: none; cursor: pointer; }
 .btn:hover { background: var(--felt-dark); color: var(--white); }
 .btn:active { transform: translateY(1px); }
@@ -118,8 +120,8 @@ footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(
 <header>
   <div class="wrap">
     <span class="name">Hollis Piano Tuning</span>
-    <a class="m-request" href="#request" aria-label="Request a tuning">Request</a>
-    <nav class="nav" aria-label="Sections"><a href="#prices">Prices</a><a href="#area">Area and hours</a><a href="#request">Request a tuning</a></nav>
+    <a class="m-request" href="#request">Check a request</a>
+    <nav class="nav" aria-label="Sections"><a href="#prices">Prices</a><a href="#area">Area and hours</a><a href="#request">Check a request</a></nav>
   </div>
 </header>
 
@@ -136,7 +138,7 @@ footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(
       </div>
 
       <form class="estimate" aria-labelledby="est-title" onsubmit="return false">
-        <h2 id="est-title">What will it cost?</h2>
+        <h2 id="est-title">Estimate the cost</h2>
         <p>Based on when your piano was last tuned.</p>
         <fieldset>
           <legend>Last tuned</legend>
@@ -144,9 +146,11 @@ footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(
           <label class="choice"><input type="radio" name="last" value="old"> More than 2 years ago</label>
           <label class="choice"><input type="radio" name="last" value="unsure"> Not sure</label>
         </fieldset>
+        <p class="est-label">Estimated price</p>
         <div class="total" aria-live="polite"><strong data-total>$140</strong><span data-time>about 90 minutes</span></div>
-        <p class="breakdown" data-breakdown>Standard tuning.</p>
-        <a class="btn" href="#request" data-to-form>Request a tuning</a>
+        <p class="breakdown" data-breakdown>Standard tuning. An estimate based on when it was last tuned, not a confirmed price.</p>
+        <a class="btn" href="#request" data-to-form>Check a request</a>
+        <p class="demo-note">Demo: requests are checked on this page, not sent to the tuner.</p>
       </form>
     </div>
   </section>
@@ -173,8 +177,8 @@ footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(
 
   <section class="band request" id="request" aria-labelledby="req-title">
     <div class="wrap">
-      <h2 id="req-title">Request a tuning</h2>
-      <p class="hint">Tell the tuner where you are and which days suit you. In the live service the tuner replies by email to confirm a time.</p>
+      <h2 id="req-title">Check a tuning request</h2>
+      <p class="hint">Fill in where you are and which days suit you, and the page checks the details. Nothing is sent, so no one will reply.</p>
       <form novalidate data-form>
         <div class="field" data-f="name"><label for="name">Your name</label><input type="text" id="name" autocomplete="name"><p class="err" id="name-err"></p></div>
         <div class="field" data-f="email"><label for="email">Email</label><input type="email" id="email" autocomplete="email"><p class="err" id="email-err"></p></div>
@@ -186,7 +190,7 @@ footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(
             <label class="day"><input type="checkbox" value="Monday"> Mon</label><label class="day"><input type="checkbox" value="Tuesday"> Tue</label><label class="day"><input type="checkbox" value="Wednesday"> Wed</label><label class="day"><input type="checkbox" value="Thursday"> Thu</label><label class="day"><input type="checkbox" value="Friday"> Fri</label>
           </div><p class="err" id="days-err"></p></div>
         <div class="field"><label for="note">Anything the tuner should know? <span class="hint">(optional)</span></label><textarea id="note" placeholder="Type of piano, stairs, parking"></textarea></div>
-        <div class="submit-row"><button class="btn" type="submit">Check request</button><p>Demo: checking doesn't send anything to the tuner.</p></div>
+        <div class="submit-row"><button class="btn" type="submit">Check request</button></div>
         <div class="result" role="status" aria-live="polite" data-result></div>
       </form>
     </div>
@@ -197,9 +201,9 @@ footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(
 <script>
 (function () {
   var est = {
-    recent: ["$140", "about 90 minutes", "Standard tuning."],
-    old: ["$200", "about 2 hours", "Standard tuning $140 plus a $60 pitch raise."],
-    unsure: ["$140 or $200", "90 minutes to 2 hours", "$200 if it needs a pitch raise, which applies when it hasn't been tuned in over 2 years."]
+    recent: ["$140", "about 90 minutes", "Standard tuning. An estimate based on when it was last tuned, not a confirmed price."],
+    old: ["$200", "about 2 hours", "Standard tuning $140 plus a $60 pitch raise. An estimate based on when it was last tuned, not a confirmed price."],
+    unsure: ["$140 or $200", "90 minutes to 2 hours", "$200 if it needs a pitch raise, which applies when it hasn't been tuned in over 2 years. An estimate, not a confirmed price."]
   };
   var picked = "recent";
   function show(v) {
@@ -225,7 +229,7 @@ footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(
     if (ok.indexOf(false) !== -1) { res.innerHTML = ""; var bad = form.querySelector('[aria-invalid="true"]'); (bad || form.querySelector(".day input")).focus(); return; }
     var last = form.querySelector("#last").value;
     res.innerHTML = "<h3>Request checked</h3><p>" + name.value.trim() + ", " + town.value.trim() + ". " + days.join(", ") +
-      ". Estimate: " + est[last][0] + ", " + est[last][1] + ".</p>";
+      ". Estimated price: " + est[last][0] + ", " + est[last][1] + ". Not sent.</p>";
   });
 })();
 </script>
