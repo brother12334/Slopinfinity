@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Northwall Bouldering · 3 Foundry Lane</title>
-<meta name="description" content="Independent indoor bouldering gym at 3 Foundry Lane. Day pass $22, no booking needed for your first visit.">
+<title>Northwall Bouldering</title>
+<meta name="description" content="Indoor bouldering gym. Day pass $22, and no booking needed for your first visit.">
 <style>
 @font-face { font-family: "Unbounded"; font-weight: 600; font-display: swap; src: url(fonts/unbounded-latin-600-normal.woff2) format("woff2"); }
 @font-face { font-family: "Unbounded"; font-weight: 800; font-display: swap; src: url(fonts/unbounded-latin-800-normal.woff2) format("woff2"); }
@@ -90,7 +90,7 @@ footer { padding: 22px var(--pad) 36px; display: flex; justify-content: space-be
 <body>
 <header class="top">
   <p class="brand">NORTHWALL</p>
-  <p class="where">3 Foundry Lane</p>
+  <p class="where">Indoor bouldering</p>
 </header>
 
 <main>
@@ -105,18 +105,18 @@ footer { padding: 22px var(--pad) 36px; display: flex; justify-content: space-be
       <h2>Day pass</h2>
       <p class="big">$22</p>
       <p class="mid">Shoe hire $5</p>
-      <p><b>10-visit pass $190</b> · pay at the front desk</p>
+      <p>Passes sold at the front desk</p>
     </div>
     <div>
       <h2>First visit</h2>
       <p class="big blue">No booking</p>
       <p class="mid">Just walk in</p>
-      <p>15-minute safety briefing, included</p>
+      <p>15-minute safety briefing on your first visit</p>
     </div>
   </div>
 
   <div class="cta">
-    <p>Indoor bouldering at 3 Foundry Lane.</p>
+    <p>Indoor bouldering, open every day.</p>
     <a class="btn" href="#first-visit">Plan your first visit</a>
   </div>
 
@@ -125,9 +125,9 @@ footer { padding: 22px var(--pad) 36px; display: flex; justify-content: space-be
     <div class="visit-text">
       <h2>Your first visit</h2>
       <ul class="know">
-        <li><b>Walk in</b><p>No booking. Come any time during opening hours.</p></li>
-        <li><b>Pay at the desk</b><p>Day pass $22, shoe hire $5. Passes are sold at the front desk only; there's no online sale.</p></li>
-        <li><b>Safety briefing</b><p>Everyone starts with a 15-minute safety briefing. It's included in the price.</p></li>
+        <li><b>No booking needed</b><p>You don't need to book your first visit.</p></li>
+        <li><b>Passes sold at the front desk</b><p>Day pass $22, shoe hire $5. Passes are sold at the front desk only; there's no online sale.</p></li>
+        <li><b>15-minute safety briefing</b><p>Your first visit has a 15-minute safety briefing.</p></li>
       </ul>
     </div>
     <figure class="wall">
@@ -139,24 +139,16 @@ footer { padding: 22px var(--pad) 36px; display: flex; justify-content: space-be
   <section class="part" id="find">
     <h2>Find us</h2>
     <div class="body">
-      <p class="addr">3 Foundry Lane</p>
-      <button class="btn alt" type="button" id="copy">Copy address</button> <span class="copied" aria-live="polite"></span>
+      <p class="addr">Address to come</p>
+      <p class="note">The address wasn't supplied for this demo.</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <span>Northwall Bouldering · 3 Foundry Lane</span>
+  <span>Northwall Bouldering</span>
   <span>Demo page for a fictional gym. Wall illustration drawn for this page.</span>
 </footer>
 
-<script>
-document.getElementById("copy").addEventListener("click", async () => {
-  const out = document.querySelector(".copied");
-  try { await navigator.clipboard.writeText("3 Foundry Lane"); out.textContent = "Copied"; }
-  catch { out.textContent = "Copy failed"; }
-  setTimeout(() => { out.textContent = ""; }, 2500);
-});
-</script>
 </body>
 </html>

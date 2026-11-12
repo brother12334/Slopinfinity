@@ -103,7 +103,13 @@ decision depends on. They differ by site type: for a café, opening hours, addre
 what's served; for a shop, the product, its price and how to choose; for a service, the
 price, the area and the request action; for a magazine, a headline worth opening; for a
 tool, what it does and a way to try it. Every concept and every render is checked against
-this list.
+this list, but the list is not a quota for the first screen (see step 2).
+
+**Fact sources.** Every fact the page displays (prices, addresses, hours, inclusions,
+policies, sequences) must trace to what the user supplied. When you write a test brief
+yourself, show the user the full brief before building; a fact that appears only in your
+notes counts as invented. Before delivery, list each displayed fact beside its source and
+remove or label anything without one.
 
 ### Check the content can carry the task
 
@@ -171,27 +177,43 @@ mood) and what you will not copy (brand, photographs, exact layout).
    cards only for genuine peers. Vary the structures down the page.
 6. **Effects budget.** Every gradient, glass surface, glow, shadow style and animation you
    plan to use, each with its reason. At most one effect as a focal point per view.
+7. **Art direction and material plan.** The visual idea that makes this business, not its
+   category, recognizable; the real site that informed it and what it borrows; the
+   authentic material it depends on (whose photos, of what, shot how) and how that will
+   be obtained; what stands in until then, labeled as a stand-in. When visitors judge a
+   physical place, product or person, say plainly that a stand-in cannot do that job and
+   record the missing material as an unresolved content need.
 
 When the user has no reference and no preference, offer two or three distinct concepts, or
-pick one and say why. Record the chosen concept in `DESIGN.md` so later work stays
+pick one and say why. **Concepts must differ in art direction, not arrangement**: in the
+visual idea, the kind of material and how it is treated (documentary photography, a
+specific illustration hand, signage or wayfinding, found material, a typographic system
+drawn from the place). Three layouts of the same typeface, palette and artwork are one
+concept. Test: swap the layouts between two concepts; if they still look like the same
+brand, they are arrangements. Record the chosen concept in `DESIGN.md` so later work stays
 consistent.
 
 **Judge each concept as an identity and as a website.** Render every concept at desktop
 and mobile before comparing them, and score both:
 
-- *Identity:* is it specific to this subject, memorable, and still recognizable with the
-  logo covered?
-- *Usability:* are the essentials in the first screen at both sizes, set as primary or
-  secondary text (not caption-sized labels), readable without depending on what's behind
-  them, and is the primary action visible?
+- *Identity:* is it specific to this business, memorable, and still recognizable with the
+  logo covered? Could it belong to any business of this type? Polished type and a tidy
+  grid around generic artwork is not identity.
+- *Usability:* at both sizes, are the **main promise**, the **next action** and the
+  **one or two facts that decide whether to continue** easy to find and read (primary or
+  secondary text, not caption-sized labels, not dependent on what's behind them)? Is
+  there a clear path to the rest: a visible action, or the next section starting in view?
 
-A striking poster, attractive illustration or new palette does not make up for an
-essential that is buried, tiny or unreadable. Only recommend a concept that passes
-usability; identity decides between the ones that pass. If a favorite fails usability,
-revise it before recommending it. Concepts may differ in how prominent the art is, but
-not in whether the visitor can find what they came for. Where the task is exploratory
-(a portfolio, a magazine, a gallery), the essential can be a clear entry point into the
-work rather than facts. `scripts/first_screen.js` measures this:
+The first screen does not have to hold every essential. Cramming all of them in, above
+all on mobile, turns the page into an information sheet and squeezes out the visual
+idea. Put the deciding facts up front and the rest one clear step away. A striking
+poster, attractive illustration or new palette does not make up for a decisive fact that
+is buried, tiny or unreadable. Only recommend a concept that passes usability; identity
+decides between the ones that pass. If a favorite fails usability, revise it before
+recommending it. Where the task is exploratory (a portfolio, a magazine, a gallery), the
+deciding element can be a clear entry point into the work rather than facts.
+`scripts/first_screen.js` reports where each fact lands; read a "below fold" result as a
+question (is there a clear path to it?), not an automatic failure:
 
 ```bash
 node scripts/first_screen.js page.html "8 am" "Willow Street" "Copy address"
@@ -255,8 +277,9 @@ skip lines carrying `unslop-ignore`.
   request" or "Preview request", not "Send"; its result says "checked", not "sent". A
   disabled purchase becomes a working "Add to demo bag" or a "Preview" with a label that
   says what it does, rather than a dead end.
-- Don't number steps or draw a sequence the brief doesn't state. "Pay, then briefing" is
-  a claim; if the order isn't known, list the points without numbers.
+- Don't imply a sequence the brief doesn't state. Numbers, arrows, and a row of verb
+  headings ("Walk in / Pay / Briefing") all read as steps. If the order isn't known,
+  present independent facts ("No booking needed", "Passes sold at the front desk").
 - Imagery follows [references/assets.md](references/assets.md). Never invent photographs,
   people, customers or results. Never leave an empty image slot.
 - Original illustration or a concept render must have the same conviction, scale and
@@ -282,8 +305,12 @@ take screenshots and look at them. Batch your looking: note everything wrong in 
 
 Then judge the actual visual result:
 
-1. Does it feel like this kind of place or product? Compare it with the real sites you
-   studied in step 2.
+1. Does it feel like this particular place or product, not only its category? Compare it
+   with the real sites you studied in step 2. **Could this page belong to any business of
+   this type? Does it rely on generic generated artwork, repeated blocks, or typography
+   used in place of a real visual idea?** Illustration, bold type and simple layouts are
+   all fine when they carry an idea specific to this business; they fail when they are
+   the default filling for its category.
 2. Is there enough authentic visual material, or is the page leaning on decoration to
    fill the space? Does the material have a deliberate role?
 3. Inspect the full composition: is there a clear **focal point**? Is the **whitespace**
@@ -293,8 +320,9 @@ Then judge the actual visual result:
    (the next decision, detail, evidence), or does it restate each essential as its own
    identical section until the page reads like a spec sheet?
 4. Does it look good at the real viewport sizes, including what is visible before
-   scrolling? Does the opening claim, or the art, push the essentials below the fold on
-   mobile? Are the essentials set as readable text rather than small decorative labels?
+   scrolling? On mobile, are the promise, next action and deciding facts easy to find,
+   with a clear path to the rest, without the first screen collapsing into a fact sheet?
+   Are those facts set as readable text rather than small decorative labels?
 5. **Does the first screen feel finished?** If the result only passes the checklist but
    still feels unfinished (a layout awaiting a photo, a schematic standing in for a
    product, warnings louder than content), it fails.
@@ -421,6 +449,8 @@ Give the user, briefly:
 8. **Defaults departed from** in step 7, with the reason.
 9. **Anything not checked** (no browser, no real device, no network), stated plainly
    rather than implied as passing.
+10. **Fact audit.** Each displayed fact with its source in the user's brief, and
+    anything removed or labeled because it had none.
 
 For `audit` without edits, report instead: the verdict on the central test, the visual
 gate answers, the eight-pattern table, up to three generic decisions with suggested replacements (or none), quality-check failures with
