@@ -1,7 +1,7 @@
 ---
 name: antislop-text
 description: Three-pass workflow that makes any writing read as written by a person. Pass 1 does the task normally and gets the substance right. Pass 2 runs a humanizer rewrite (pin a voice, cut the known AI tells, fix rhythm, add real specifics). Pass 3 checks the result for detail, wording, grammar and context, scans it, and fixes what is wrong before delivering. Use whenever writing or rewriting prose a person will read (essays, posts, emails, messages, cover letters, bios, product copy, READMEs, replies), and whenever the user says it sounds like AI or ChatGPT, is too polished, robotic or generic, asks to humanize it, make it sound like them, or make it pass an AI detector. Trigger even if they never say "AI".
-argument-hint: "[write <task> | humanize <text or file> | check <text or file>]"
+argument-hint: "[write <task> | humanize <text or file> | check <text or file> | finish <text or file>] [--style normal|structured|academic]"
 ---
 
 # antislop-text
@@ -14,6 +14,17 @@ do not show the intermediate drafts unless asked.
 | `write <task>` (default) | Pass 1, 2, 3 |
 | `humanize <text or file>` | Pass 2, 3 on text the user supplies |
 | `check <text or file>` | Pass 3 only, report without rewriting |
+| `finish <text or file>` | Minimal-edit Pass 3 on text from an external humanizer (see below) |
+
+## Styles
+
+Pick one from the request, or ask when it is unclear. It sets the register for Pass 2.
+
+| Style | For | Register | Scanner flag |
+|---|---|---|---|
+| `normal` (default) | Blog posts, social posts, emails, product copy | A or B/C, friendly and plain | none |
+| `structured` | Reports, summaries, documentation, work updates | B/C, clean structure over vocabulary, short paragraphs, headings when long | none |
+| `academic` | Essays, papers, literature reviews | D, no contractions, a clear argument, real hedges ("arguably"), real citations only | `--formal` |
 
 ## Pass 1. Do the task normally
 
@@ -86,6 +97,26 @@ Then do one last predictability read: go through the final text and, for each se
 ask whether a model would have written exactly that next. Rewrite any that it would. The
 scripts can't measure word-level predictability, so this read is what covers it. If a flag is a deliberate choice (the user loves em dashes, a legal brief is
 formal on purpose), keep it and mark the line `unslop-ignore`.
+
+## Finishing external humanizer output
+
+Some humanizers run a model trained on human writing, which a written workflow cannot
+match. When the user runs a draft through one and brings the result back, use
+`finish`. The goal is to repair, not restyle: rewriting the output in your own words
+puts model phrasing back in.
+
+1. **Meaning lock.** Compare against the Pass 1 draft (or the user's original) and list
+   every fact, number, name, citation and claim. Restore anything lost or changed.
+2. **Real errors only.** Fix grammar mistakes, wrong words, broken sentences, mangled
+   terms of art, and wrongly swapped synonyms ("cardinal" for "key", "pecuniary" for
+   "financial").
+3. **Leave the rest.** Keep their sentence structure and word choice even where yours
+   would differ. Do not "improve" anything that is correct.
+4. **Report the edits.** List each change in one line (original, then fixed, then the
+   reason) so the user can undo any of them.
+
+Run `unslop_text_scan.py` only for em dashes and assistant boilerplate. Skip the rhythm
+checker, because rhythm is the humanizer's job here.
 
 ## Delivering
 

@@ -122,7 +122,14 @@ You get the final text without a list of every change.
 /antislop-text write <task>          all three passes (default)
 /antislop-text humanize <text|file>  passes 2 and 3 on your own text
 /antislop-text check <text|file>     pass 3 only, a report with no rewrite
+/antislop-text finish <text|file>    repair output from an external humanizer, minimal edits
 ```
+
+Add `--style normal`, `--style structured` or `--style academic` to set the register.
+
+`finish` is for pairing this skill with a humanizer that runs its own trained model.
+Write the draft here, run it through the humanizer, then bring the result back: Claude
+restores any facts it lost and fixes real errors, but leaves its wording alone.
 
 It also kicks in automatically for any writing a person will read, and when you say
 something sounds like ChatGPT, is too polished, or needs humanizing.
