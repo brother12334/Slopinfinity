@@ -1,78 +1,118 @@
 # The humanize pass
 
-A rewrite of the Pass 1 draft, done in this order because structure changes make
-line edits moot. Keep the facts. Change how they are said.
+A rewrite of the Pass 1 draft in seven stages. The order matters: structure changes
+make line edits moot, and the predictability stage only works on a draft that already
+has a speaker.
 
-## 1. Structure
+Why drafts get caught: detectors score how predictable each word is given what came
+before, and how even the text is overall. Readers feel the same two things as "smooth"
+and "flat". A draft can be free of every listed tell and still be flagged when each
+sentence is the most likely next sentence. Stages 3 to 5 are aimed at that.
 
-- Put the point first. The first sentence should do work, not warm up.
-- Order by what the reader needs next, not intro, three bodies, conclusion.
-- Cut the closing recap. If the piece needs a summary to be followed, it is too long.
-- Merge or cut paragraphs that make the same point twice.
-- Paragraph size follows content: a two-sentence paragraph next to a six-sentence one is
-  normal. Equal blocks are a tell.
-- Bullets only for content that really is a list (steps, specs, options). Arguments and
-  explanations go in paragraphs. In registers A and B, almost nothing should be bulleted.
+Keep every fact from Pass 1. Change how it is said, never what is true.
 
-## 2. Surface tells (mechanical, always fix)
+## 1. Speaker card
+
+Write this down before touching the draft (in your head, not in the output):
+
+- **Register:** A casual, B work, C expository, D formal.
+- **Who:** a specific person with a reason to write this. "A tech blogger who finds Bezos
+  more interesting than likable", not "an informative writer".
+- **To whom:** one reader. A friend, a class, a hiring manager, a forum.
+- **Stance:** what the speaker thinks about the subject. Most human writing has one, even
+  in reports. Neutral summary nobody asked for is the strongest flag there is.
+- **Habits:** if the user gave a sample, take five concrete habits from it (average
+  sentence length, how it opens, punctuation it likes, words it repeats, how blunt it
+  is). Copy them. A real sample beats every other stage in this file combined; when the
+  result has to read as one specific person's, ask for one.
+
+## 2. Structure
+
+- **Break the timeline.** Encyclopedia order (born, studied, founded, expanded, retired)
+  is the most predictable shape there is. Open on the most interesting fact or the
+  speaker's angle, then circle back for the background.
+- **Point first.** The first sentence does work. No warm-up, no "X is one of the most".
+- **Uneven paragraphs.** One long, one short. Equal blocks read as generated.
+- **No recap ending.** Close on a detail, an opinion or the last real point, not on a
+  summary of the legacy, the impact or the journey.
+- **Bullets only for real lists.** Arguments go in paragraphs.
+
+## 3. Surface tells (mechanical, always fix)
 
 | Tell | Fix |
 |---|---|
-| Em dash | Comma, period or parentheses. Rewrite the sentence if needed so it reads naturally |
-| "It's not just X, it's Y" / "not X but Y" cadence | State Y plainly |
-| delve, tapestry, testament, leverage, seamless, robust, elevate, unlock, game-changer, landscape, realm, navigate (figurative), foster | The plain verb or noun the speaker would say |
-| "In today's fast-paced world", "In an era of" openers | Delete; start with the point |
-| "In conclusion", "Ultimately", "At the end of the day" wrap-ups | Delete the recap, or end on the last real point |
-| **Bold label:** sentence | Plain sentence, or a real heading |
-| "Great question!", "Absolutely!", "I hope this helps" | Delete |
-| "Would you like me to..." / "Let me know if..." endings | Delete unless the speaker would really ask |
-| Emoji as bullets or headers | Delete |
-| "Dive in", "deep dive" | Plain wording ("look at", "a close look") |
-| Unnecessary title case in headings | Sentence case |
-| Colon-titled everything ("X: A Guide to Y") | A plain title |
+| Em dash | Comma, period, parentheses or colon, whichever the speaker would use |
+| "not just X but Y", "it's not X, it's Y" | State Y |
+| delve, tapestry, testament, leverage, seamless, robust, elevate, unlock, landscape, realm, foster, pivotal, cornerstone, transformative, multifaceted | The plain word |
+| "one of the most influential", "left an indelible mark", "a complex legacy" | A specific claim, or cut |
+| "In today's fast-paced world", "In an era of" | Cut |
+| "Ultimately", "In conclusion", "Overall" wrap-ups | Cut the recap |
+| ", signaling / highlighting / underscoring / reflecting ..." tails | Its own sentence, or cut |
+| "while also", "on one hand ... on the other" | Pick a side or say what it depends on |
+| "Moreover", "Furthermore", "Additionally" openers | Nothing, or and/but/so/also |
+| **Bold label:** sentence, emoji bullets, Title Case Headings | Plain sentences, sentence case |
+| "Great question", "I hope this helps", "Let me know if" | Cut |
 
-Do not replace a tell with its sibling (delve to dive, em dash to ellipsis, "in
-conclusion" to "all in all").
+Never swap a tell for its sibling (delve to dive, dash to ellipsis).
 
-## 3. Structural tells (judgment, fix by ear)
+## 4. Predictability (the stage that beats detectors)
 
-- **Rhythm.** Mix lengths on purpose. One long sentence that carries a whole thought,
-  then a short one. Three in a row of similar length is the cue to change one.
-- **Openers.** Vary how sentences start. Not every one opens with the subject; not three
-  in a row with "This" or "It".
-- **Commit.** Replace "can potentially help" with "helps" when it is true. Keep a hedge only
-  where the uncertainty is real, and then say what it depends on.
-- **Rule of three.** Use as many items as there are. Two is fine. Four is fine.
-- **Contractions.** Use them in registers A to C. Leave them out in D.
-- **Sycophancy.** No praising the question, the reader, or the idea before answering.
-- **Empty sentences.** If a sentence could be deleted with nothing lost, delete it.
-- **Transitions.** Cut "Moreover", "Furthermore", "Additionally" at sentence starts. Most
-  sentences need no connector; when one does, use "and", "but", "so", "also".
-- **Symmetry.** Parallel structures stacked three or four deep ("faster, smarter, better")
-  read as generated. Break the pattern.
+Go sentence by sentence. For each one ask: *if I covered this sentence and guessed it
+from the one before, would I guess it?* If yes, change it, using whichever of these fits:
 
-## 4. Texture (what makes it read like a person)
+- **Second-choice phrasing.** Write the phrase that came to mind first, then use a
+  different one that is just as natural and more specific. "Expanded into many markets"
+  becomes "started selling groceries, of all things". Not a thesaurus swap: a rarer word
+  that is wrong or stiff is worse than the common one.
+- **Concrete over abstract.** Name the actual thing. "Cloud computing" becomes "renting
+  out the servers it had built for itself". "Criticism over working conditions" becomes
+  what the criticism actually is.
+- **Collocation breaks.** Stock pairs (rapid growth, significant impact, key role, wide
+  range, stable job) are the most predictable two-word units in English. Replace the pair
+  or drop the adjective.
+- **Speaker reactions.** Where the speaker would react, let them: "which for him was small
+  change", "of all things", "oddly enough". One or two per paragraph, not every sentence.
+- **Idiom and register-native phrasing.** "kicked himself upstairs", "not bad for", "the
+  guy" in register A to C. These are low-probability for a model and normal for people.
+- **Unexpected-but-true connections.** Link two facts the draft kept apart ("he flew to
+  space two weeks after leaving the CEO job").
+- **Information-density changes.** Models put one fact in every clause. People slow
+  down on what they find interesting and race through the rest in one line.
 
-- **Specifics over categories.** "Our Tuesday standup ran 40 minutes" beats "meetings can
-  run long". Use specifics the user gave or that are true. If you need a detail you do not
-  have, write around it or ask. Never invent personal anecdotes, quotes, statistics or
-  sources and present them as real.
-- **A point of view.** Where the speaker would have an opinion, state it. Neutral
-  both-sides summaries are a strong tell when nobody asked for balance.
-- **Plain words.** "use" not "utilize", "help" not "facilitate", "about" not "approximately",
-  "start" not "commence".
-- **The speaker's own habits.** If there is a sample, copy its moves: how it opens, how long
-  its sentences run, whether it jokes, which words it likes.
-- **Some asymmetry.** Real writing has an aside, a sentence that runs a little long, a
-  paragraph that is one line. Allow it where it fits the register.
+## 5. Sentence shape
 
-## 5. Over-correction check
+Text of only plain declaratives is flagged even when the lengths vary. Use the shapes the
+speaker would actually use, and for register A to C use at least three of these in any
+piece over about eight sentences:
 
-Before moving on, make sure the rewrite has not landed in the newer default:
+- a question (rhetorical or real)
+- an aside in parentheses
+- a colon or semicolon
+- a sentence starting with And, But or So
+- a fragment that lands a point ("Not bad for a bookstore.")
+- a sentence that ends on a preposition, or uses "who" where a grammar book says "whom"
+- a long sentence that strings clauses with "and" the way speech does
 
-- not every sentence short
+Also vary openers (not subject-first every time, never three in a row with the same
+word), and mix lengths: something under 6 words and something over 30 in any piece
+over 150 words.
+
+## 6. Grammar the way people use it
+
+Correct, but not textbook-stiff. Contractions in A to C. "Who" for "whom" in casual and
+work registers. Starting with "But" or "And" is fine. A split infinitive is fine. These
+are real usage, not errors. Never add actual mistakes: misspellings, wrong words, broken
+agreement. Readers notice them and detectors look for planted ones.
+
+## 7. Over-correction check
+
+The rewrite should not land in the "trying not to sound like AI" voice:
+
+- not every sentence short, not every sentence quirky
 - no forced lowercase or dropped capitals outside register A
 - no "look,", "here's the thing", "real talk", "honestly," cold opens
-- no slang or swearing that the speaker would not use
-- no sentences visibly bent around a missing dash
-- no deliberate typos
+- no slang or swearing the speaker would not use
+- reactions and idioms are seasoning: a couple per paragraph at most
+- no invented anecdotes, quotes, numbers or first-person experiences. Opinions are
+  fine; made-up memories presented as real are not. When a personal detail would help
+  and the user hasn't given one, leave it out or ask.

@@ -11,6 +11,7 @@ Standard library only.
 Usage:
     python3 rhythm_check.py <file>            # report
     python3 rhythm_check.py <file> --json     # machine-readable
+    python3 rhythm_check.py <file> --formal   # register D: skip the voice checks
     python3 rhythm_check.py -                 # read from stdin
 
 Exit code is the number of flags raised (0 = rhythm looks varied).
@@ -59,7 +60,7 @@ def cv(values):
     return statistics.pstdev(values) / mean if mean else None
 
 
-def analyze(text):
+def analyze(text, formal=False):
     paras = prose_paragraphs(text)
     sents = [s for p in paras for s in split_sentences(p)]
     lengths = [len(WORD.findall(s)) for s in sents]
@@ -136,6 +137,61 @@ def analyze(text):
         flags.append({"id": "rule-of-three", "sev": "medium",
                       "msg": f"{triads} three-item lists in {len(sents)} sentences. Use the number of items you actually have."})
 
+    # ---- Predictability and voice (skipped with --formal) ----
+    if not formal:
+        n = len(sents)
+        joined = " ".join(sents)
+        kinds = {
+            "question": sum(s.rstrip("\"')").endswith("?") for s in sents),
+            "parenthetical": len(re.findall(r"\([^)]{3,}\)", joined)),
+            "colon/semicolon": len(re.findall(r"[;:](?!//)", joined)),
+            "conjunction start": sum(bool(re.match(r"(And|But|So|Or|Yet)\b", s)) for s in sents),
+        }
+        out["sentence_kinds"] = kinds
+        used = sum(1 for v in kinds.values() if v)
+        if n >= 8 and used <= 1:
+            flags.append({"id": "one-sentence-shape", "sev": "high",
+                          "msg": "Almost every sentence is a plain declarative. Mix in what the speaker would use: a question, an aside in parentheses, a colon, a sentence starting with But or So."})
+        elif n >= 8 and used == 2:
+            flags.append({"id": "few-sentence-shapes", "sev": "medium",
+                          "msg": f"Only {used} of 4 sentence shapes used ({', '.join(k for k, v in kinds.items() if v)})."})
+
+        words_all = WORD.findall(joined)
+        contractions = sum(1 for w in words_all if re.search(r"[a-z]'(s|t|re|ve|ll|d|m)$", w, re.I))
+        out["contractions_per_100_words"] = round(100 * contractions / max(len(words_all), 1), 1)
+        if len(words_all) >= 120 and contractions == 0:
+            flags.append({"id": "no-contractions", "sev": "medium",
+                          "msg": "No contractions. Unless the register is formal, people write don't, it's, he'd."})
+
+        tails = len(re.findall(r", (?:\w+ly )?\w+ing\b(?! (?:to|of)\b)", joined))
+        if tails >= 2 and tails / n > 0.15:
+            flags.append({"id": "participle-tails", "sev": "medium",
+                          "msg": f"{tails} sentences trail off with a ', ...ing' clause (', signaling his interest'). A model favorite; make it its own sentence or cut it."})
+
+        dated = sum(bool(re.match(r"(In|By|Since|Over) (the )?(\d{4}|following|next|late|early)", s)) for s in sents)
+        if dated >= 3:
+            flags.append({"id": "timeline-chain", "sev": "medium",
+                          "msg": f"{dated} sentences open with a date. Encyclopedia order is the most predictable shape there is; lead with what matters and tuck dates mid-sentence."})
+
+        balanced = len(re.findall(r"\b(?:while also|on the other hand|on one hand|both [a-z]+ and)\b", joined, re.I))
+        if balanced:
+            flags.append({"id": "balanced-verdict", "sev": "medium",
+                          "msg": "Even-handed 'while also' / 'on one hand' framing. Take a side or say what it depends on."})
+
+        if len(paras) >= 2:
+            last = [split_sentences(p)[-1] for p in paras if split_sentences(p)]
+            short_close = sum(1 for s in last if len(WORD.findall(s)) <= 12)
+            if len(last) >= 2 and short_close == len(last):
+                flags.append({"id": "tidy-closers", "sev": "low",
+                              "msg": "Every paragraph ends on a short, tidy line. Let at least one end mid-thought or on a detail."})
+
+        first_person = len(re.findall(r"\b(I|I'm|I've|I'd|my|me|we|our)\b", joined))
+        second_person = len(re.findall(r"\b(you|your|you're|you've)\b", joined, re.I))
+        out["first_person"], out["second_person"] = first_person, second_person
+        if len(words_all) >= 150 and first_person == 0 and second_person == 0 and kinds["question"] == 0:
+            flags.append({"id": "no-speaker", "sev": "medium",
+                          "msg": "No I, we, you or question anywhere. Nobody seems to be talking to anybody. Fine for a formal piece; for anything else, let the speaker show."})
+
     return out
 
 
@@ -143,9 +199,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
     ap.add_argument("path")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--formal", action="store_true", help="register D: skip voice and sentence-shape checks")
     args = ap.parse_args()
     text = sys.stdin.read() if args.path == "-" else open(args.path, encoding="utf-8").read()
-    res = analyze(text)
+    res = analyze(text, formal=args.formal)
     if args.json:
         print(json.dumps(res, indent=2))
     else:
@@ -157,6 +214,10 @@ def main():
             print(f"  mean sentence: {res['mean_sentence_words']} words   range: {res['shortest']}-{res['longest']}"
                   f"   length CV: {res['sentence_length_cv']}" +
                   (f"   paragraph CV: {res['paragraph_size_cv']}" if "paragraph_size_cv" in res else ""))
+            if "sentence_kinds" in res:
+                k = res["sentence_kinds"]
+                print("  shapes: " + "   ".join(f"{a} {b}" for a, b in k.items()) +
+                      f"   contractions/100w: {res['contractions_per_100_words']}")
             if not res["flags"]:
                 print("  verdict: rhythm looks varied\n")
             for f in res["flags"]:

@@ -40,6 +40,17 @@ Anything that made you slow down or wince is a problem even if no item below nam
 - [ ] At least one short sentence and one long one in any piece over about 8 sentences.
 - [ ] No streak of three sentences with the same opener.
 - [ ] Paragraphs vary in size.
+- [ ] At least three sentence shapes in registers A to C (question, parenthetical,
+      colon/semicolon, And/But/So opener). `rhythm_check.py` prints the counts.
+- [ ] Not in date order unless the order is the point.
+- [ ] No ", ...ing" tails, no "while also" balance.
+
+## Predictability
+
+- [ ] A speaker with a stance is audible. Somebody is talking to somebody.
+- [ ] Each sentence, read alone after the one before it, is not the obvious next sentence.
+- [ ] No stock pairs left (wide range, key role, significant impact, rapid growth).
+- [ ] At least one concrete detail per paragraph where the draft had an abstraction.
 
 ## Context
 

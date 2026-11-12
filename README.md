@@ -102,10 +102,13 @@ Every piece of writing goes through three passes before you see it.
 1. **Write it normally.** Claude does the task the usual way and puts all its effort into
    getting the content right: facts, coverage, order. It also notes the register (casual,
    work, essay, formal), who is speaking and what the main point is.
-2. **Humanize it.** Claude rewrites the draft. The point goes first and the recap
-   ending is cut. Next come the word-level tells (em dashes, "it's not just X, it's Y",
-   overused chatbot words, bold lead-in labels), then the sentence rhythm gets uneven on
-   purpose, hedges get committed to, and vague claims become concrete details.
+2. **Humanize it.** Claude rewrites the draft in seven stages: a speaker card (who's
+   talking, to whom, what they think), structure (break date order, point first, no recap),
+   surface tells (em dashes, "not just X but Y", overused chatbot words), predictability
+   (any sentence you could guess from the one before gets rewritten), sentence shapes
+   (questions, asides, colons, But/So openers), everyday grammar (contractions, who for
+   whom) and an over-correction check. Detectors mostly score predictability, so stages
+   4 and 5 do the heavy lifting.
 3. **Check it and fix it.** Two scanners run on the rewrite. Then the whole piece gets
    read for detail (no fact lost, nothing invented), wording, grammar and context (does it
    answer the request, in one consistent voice). Claude fixes what it finds and checks
@@ -131,9 +134,11 @@ python3 skills/antislop-text/scripts/unslop_text_scan.py draft.md   # word-level
 python3 skills/antislop-text/scripts/rhythm_check.py draft.md       # sentence rhythm
 ```
 
-`rhythm_check.py` is new in this repo. It measures how much sentence length varies,
-flags runs of same-length sentences, repeated openers, same-size paragraphs, repeated
-phrases and three-item lists everywhere. On a typical AI paragraph it reports a length
+`rhythm_check.py` is new in this repo. It measures how much sentence length varies and
+which sentence shapes get used (questions, asides, colons, conjunction openers). It flags
+runs of same-length sentences, repeated openers, same-size paragraphs, repeated phrases,
+three-item lists, date-ordered openings, ", ...ing" tails, "while also" balance and text
+with no speaker in it. Pass `--formal` for papers and specs to skip the voice checks. On a typical AI paragraph it reports a length
 variation of 0.13. A human-written paragraph of the same size scored 0.65.
 
 ### On AI detectors

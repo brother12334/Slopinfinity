@@ -34,23 +34,25 @@ Before writing, note four things (silently, unless the user needs to weigh in):
 
 ## Pass 2. Humanize
 
-Rewrite the Pass 1 draft with [references/humanize-pass.md](references/humanize-pass.md).
-In order:
+Rewrite the Pass 1 draft through the seven stages in
+[references/humanize-pass.md](references/humanize-pass.md):
 
-1. Restructure so the order follows the point, not intro, three even bodies, conclusion.
-   Cut the summary ending and the warm-up opening.
-2. Remove the surface tells in [references/tells.md](references/tells.md) Part A: em dashes,
-   "it's not just X, it's Y", delve/tapestry/leverage diction, bolded lead-in labels,
-   hollow openers, trailing offers, emoji bullets, needless bullet lists.
-3. Fix the structural tells in Part B: uneven the rhythm on purpose, commit instead of
-   hedging, drop the reflexive rule of three, use contractions where the register allows,
-   cut sycophancy, delete any sentence that says nothing.
-4. Add real texture: concrete specifics in place of generalities, an actual opinion where
-   the speaker would have one, the plain word over the impressive one.
-
-Do not over-correct into the "trying not to sound like AI" voice: all-short fragments,
-forced lowercase, bolted-on slang, a "look," or "honestly," cold open, ellipses where
-dashes were. That is a newer default and reads as fake just as fast.
+1. **Speaker card.** Register, who is talking, to whom, their stance, their habits. A
+   writing sample from the user beats everything else; ask for one when the text has to
+   pass as a specific person's.
+2. **Structure.** Break encyclopedia order, put the point first, make paragraphs uneven,
+   cut the recap ending.
+3. **Surface tells.** The mechanical fixes from [references/tells.md](references/tells.md)
+   Part A: em dashes, "not just X but Y", the diction memes, ", signaling..." tails,
+   "while also" balance, wrap-ups.
+4. **Predictability.** Sentence by sentence: if you could guess it from the sentence
+   before, change it. Second-choice phrasing, concrete nouns, broken stock pairs, speaker
+   reactions, register-native idiom, uneven information density.
+5. **Sentence shape.** Questions, asides in parentheses, colons, And/But/So openers,
+   fragments, long run-on-style sentences, varied openers and lengths.
+6. **Grammar the way people use it.** Contractions, who for whom, conjunction starts.
+   Never real errors.
+7. **Over-correction check.** No costume casualness, no invented anecdotes or quotes.
 
 ## Pass 3. Check and fix
 
@@ -58,7 +60,8 @@ Run both scanners on the Pass 2 text (write it to a scratch file first if needed
 
 ```bash
 python3 scripts/unslop_text_scan.py <file>   # word-level tells; exit code = high-severity count
-python3 scripts/rhythm_check.py <file>       # sentence rhythm, openers, repetition; exit code = flags
+python3 scripts/rhythm_check.py <file>       # rhythm, sentence shapes, voice, predictable structure; exit code = flags
+python3 scripts/rhythm_check.py <file> --formal   # register D: skips the voice checks
 ```
 
 Then read the whole piece against [references/review-checklist.md](references/review-checklist.md),
@@ -75,9 +78,13 @@ through four lenses:
 - **Context.** It answers the actual request, fits the medium and length, holds one
   register throughout, and means the same thing the Pass 1 draft meant.
 
-Fix every problem found, then rerun both scanners. Stop when the high-severity count is 0,
-the rhythm checker has no high flags, and the checklist passes. Two fix rounds is normally
-enough. If a flag is a deliberate choice (the user loves em dashes, a legal brief is
+Fix every problem found, then rerun both scanners. Stop when the word scanner shows 0
+high-severity findings, the rhythm checker shows no HIGH flag and at most one MEDIUM, and
+the checklist passes. Allow up to three rounds.
+
+Then do one last predictability read: go through the final text and, for each sentence,
+ask whether a model would have written exactly that next. Rewrite any that it would. The
+scripts can't measure word-level predictability, so this read is what covers it. If a flag is a deliberate choice (the user loves em dashes, a legal brief is
 formal on purpose), keep it and mark the line `unslop-ignore`.
 
 ## Delivering
@@ -88,10 +95,20 @@ narrate the passes, list what you changed, or offer more versions unless asked.
 
 ## About AI detectors
 
-Detectors mostly measure predictability: very common word choices, even sentence lengths,
-uniform structure. This workflow targets the same properties, because they are also what
-make readers say "this sounds like AI". It cannot promise any detector's verdict.
-Detectors disagree with each other, change often and misflag plenty of human writing.
+Detectors mostly measure predictability: how expected each word is, how even the
+sentences are, how uniform the structure is. Stages 4 and 5 target exactly that, and so
+do the voice and shape checks in `rhythm_check.py`. No workflow can promise any detector's
+verdict, though. Detectors disagree with each other, change often and misflag plenty of
+human writing. Three things make a flag more likely whatever you do:
+
+- **Short texts.** Under about 250 words, detectors are unreliable either way.
+- **Encyclopedic topics.** A factual bio or definition reads like reference text even
+  when a person wrote it, so it needs a stronger speaker and stance.
+- **No real voice.** Without a sample from the user, the speaker is still one the model
+  invented. A paragraph or two of the user's own writing to copy is the best upgrade.
+
+When the user reports a flag, ask which detector it was and rerun Pass 2 from stage 1
+with a stronger stance, rather than tweaking words.
 
 Do not use tricks aimed only at detectors: invisible or zero-width characters, look-alike
 Unicode letters, deliberate typos, random synonym swaps. They corrupt the text, readers
