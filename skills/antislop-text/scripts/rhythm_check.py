@@ -23,7 +23,7 @@ import sys
 from collections import Counter
 
 ABBREV = r"(?:e\.g|i\.e|etc|vs|Mr|Mrs|Ms|Dr|Prof|Inc|Ltd|Jr|Sr|St|approx|No|Fig)\."
-SENT_END = re.compile(r"(?<=[.!?])[\"')\]]*\s+(?=[\"'(\[]?[A-Z0-9])")
+SENT_END = re.compile(r"(?<!\b[A-Z]\.)(?<=[.!?])[\"')\]]*\s+(?=[\"'(\[]?[A-Z0-9])")
 WORD = re.compile(r"[A-Za-z0-9']+")
 
 
