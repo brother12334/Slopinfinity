@@ -255,6 +255,8 @@ skip lines carrying `unslop-ignore`.
   request" or "Preview request", not "Send"; its result says "checked", not "sent". A
   disabled purchase becomes a working "Add to demo bag" or a "Preview" with a label that
   says what it does, rather than a dead end.
+- Don't number steps or draw a sequence the brief doesn't state. "Pay, then briefing" is
+  a claim; if the order isn't known, list the points without numbers.
 - Imagery follows [references/assets.md](references/assets.md). Never invent photographs,
   people, customers or results. Never leave an empty image slot.
 - Original illustration or a concept render must have the same conviction, scale and
@@ -287,6 +289,9 @@ Then judge the actual visual result:
 3. Inspect the full composition: is there a clear **focal point**? Is the **whitespace**
    intentional, or are there large empty fields? Do **hierarchy** and the **first task**
    read in that order? Are scale, rhythm, imagery and type balanced across the whole page?
+   Once the essentials lead the first screen, does the rest of the page add something
+   (the next decision, detail, evidence), or does it restate each essential as its own
+   identical section until the page reads like a spec sheet?
 4. Does it look good at the real viewport sizes, including what is visible before
    scrolling? Does the opening claim, or the art, push the essentials below the fold on
    mobile? Are the essentials set as readable text rather than small decorative labels?

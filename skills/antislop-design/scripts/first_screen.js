@@ -8,8 +8,9 @@
  * of the primary action), reports at 1440x900 and 390x844:
  *   - whether it is visible in the first screen
  *   - its top position, font size and weight
- *   - its contrast against the nearest solid background (images and gradients behind it
- *     are reported as "over image" because contrast can't be computed reliably)
+ *   - its contrast against what is painted behind it (an image, SVG or gradient behind the
+ *     text is reported as "over image" because contrast can't be computed reliably; a solid
+ *     panel sitting on top of an image counts as solid)
  * It also reports how much of the first screen is taken by images, SVG or canvas.
  *
  * Needs Playwright (preinstalled in Claude Code cloud sessions). Exit code is the number
@@ -34,23 +35,31 @@ function ratio(a, b) { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); re
     await page.goto(url); await page.evaluate(() => document.fonts.ready); await page.waitForTimeout(200);
     const res = await page.evaluate(({ needles, h }) => {
       const parse = s => (s.match(/[\d.]+/g) || []).slice(0, 4).map(Number);
-      function bgOf(el) {
-        for (let e = el; e; e = e.parentElement) {
+      // Walk down the paint stack at the text's centre: the first opaque background wins;
+      // an image, SVG, canvas, video or CSS background image first means "over image".
+      function behind(el) {
+        const r = el.getBoundingClientRect();
+        const x = Math.min(Math.max(r.left + r.width / 2, 0), innerWidth - 1), y = r.top + r.height / 2;
+        const stack = y >= 0 && y < innerHeight ? document.elementsFromPoint(x, y) : [];
+        for (const e of stack) {
+          if (/^(IMG|CANVAS|VIDEO)$/.test(e.tagName) || e.closest("svg")) return null;
           const cs = getComputedStyle(e);
           if (cs.backgroundImage && cs.backgroundImage !== "none" && !cs.backgroundImage.startsWith("url(\"data:image/svg")) return null;
           const c = parse(cs.backgroundColor);
+          if (c.length >= 3 && (c.length < 4 || c[3] > 0.9)) {
+            // an image inside this box paints over its background (pseudo-element overlays
+            // also report as this box), so the colour isn't what's behind the text
+            const covered = [...e.querySelectorAll("img, svg, canvas, video")].some(m => {
+              const q = m.getBoundingClientRect(); return !m.contains(el) && q.left <= x && q.right >= x && q.top <= y && q.bottom >= y;
+            });
+            return covered ? null : c.slice(0, 3);
+          }
+        }
+        for (let e = el; e; e = e.parentElement) {  // below the fold: fall back to ancestors
+          const c = parse(getComputedStyle(e).backgroundColor);
           if (c.length >= 3 && (c.length < 4 || c[3] > 0.9)) return c.slice(0, 3);
         }
         return [255, 255, 255];
-      }
-      function overImage(el) {
-        const r = el.getBoundingClientRect();
-        return [...document.querySelectorAll("img, svg, canvas, video")].some(m => {
-          if (m.closest("button, a") && m.closest("button, a").contains(el)) return false;
-          const q = m.getBoundingClientRect();
-          return q.width > 200 && q.left < r.right && q.right > r.left && q.top < r.bottom && q.bottom > r.top &&
-            !m.contains(el) && getComputedStyle(m).position !== "static" || (q.width > 200 && m.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING && q.top < r.top && q.bottom > r.bottom && q.left < r.left && q.right > r.right);
-        });
       }
       const out = needles.map(n => {
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -62,7 +71,7 @@ function ratio(a, b) { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); re
           if (!r.width || getComputedStyle(el).visibility === "hidden") continue;
           if (!best || r.top < best.top) {
             const cs = getComputedStyle(el); const fg = parse(cs.color).slice(0, 3);
-            best = { top: Math.round(r.top + scrollY), size: parseFloat(cs.fontSize), weight: cs.fontWeight, fg, bg: overImage(el) ? null : bgOf(el) };
+            best = { top: Math.round(r.top + scrollY), size: parseFloat(cs.fontSize), weight: cs.fontWeight, fg, bg: behind(el) };
           }
         }
         return { n, best };

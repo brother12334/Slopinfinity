@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northwall Bouldering · 3 Foundry Lane</title>
+<meta name="description" content="Independent indoor bouldering gym at 3 Foundry Lane. Day pass $22, no booking needed for your first visit.">
+<style>
+@font-face { font-family: "Unbounded"; font-weight: 600; font-display: swap; src: url(fonts/unbounded-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Unbounded"; font-weight: 800; font-display: swap; src: url(fonts/unbounded-latin-800-normal.woff2) format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 500; font-display: swap; src: url(fonts/manrope-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 700; font-display: swap; src: url(fonts/manrope-latin-700-normal.woff2) format("woff2"); }
+:root {
+  --black: #161616; --chalk: #f6f5f1; --cobalt: #2448b8; --muted: #4f4c46; --line: 3px solid var(--black);
+  --disp: "Unbounded", system-ui, sans-serif; --body: "Manrope", system-ui, sans-serif; --pad: 40px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font: 500 1.0625rem/1.55 var(--body); color: var(--black); background: var(--chalk); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--black); color: var(--chalk); font: 700 1rem/1 var(--body); text-decoration: none; cursor: pointer; transition: background .15s, transform .15s; }
+.btn:hover { background: var(--cobalt); }
+.btn:active { transform: translateY(1px); }
+.btn.alt { background: transparent; color: var(--black); box-shadow: inset 0 0 0 2px var(--black); min-height: 44px; padding: 0 18px; }
+.btn.alt:hover { background: var(--black); color: var(--chalk); }
+
+/* top bar */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px var(--pad); border-bottom: var(--line); }
+.brand { font: 800 1.4rem/1 var(--disp); letter-spacing: .01em; margin: 0; }
+.where { margin: 0; font-weight: 700; }
+.copied { margin-left: 12px; font-weight: 700; color: var(--cobalt); }
+
+/* the board */
+.board { display: grid; grid-template-columns: 1.25fr 1fr 1fr; border-bottom: var(--line); }
+.board > div { padding: 26px var(--pad) 30px; border-right: var(--line); }
+.board > div:last-child { border-right: 0; }
+.board h2 { font: 700 .82rem/1 var(--body); text-transform: uppercase; letter-spacing: .1em; margin: 0 0 14px; color: var(--muted); }
+.big { font: 800 clamp(2.3rem, 3.9vw, 3.9rem)/1 var(--disp); letter-spacing: -.035em; margin: 0 0 6px; white-space: nowrap; }
+.mid { font: 600 clamp(1.15rem, 1.6vw, 1.5rem)/1.2 var(--disp); letter-spacing: -.02em; margin: 0 0 10px; }
+.board p { margin: 0; }
+.big.blue { color: var(--cobalt); }
+
+.cta { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 22px var(--pad); border-bottom: var(--line); }
+.cta p { margin: 0; font: 600 clamp(1.15rem, 1.8vw, 1.6rem)/1.2 var(--disp); letter-spacing: -.02em; }
+
+/* first visit */
+.visit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border-bottom: var(--line); }
+.visit-text { padding: 40px var(--pad) 48px; border-right: var(--line); }
+.visit h2 { margin: 0 0 28px; font: 800 clamp(1.8rem, 3vw, 2.8rem)/1.05 var(--disp); letter-spacing: -.03em; }
+.know { display: grid; gap: 26px; margin: 0; padding: 0; list-style: none; }
+.know li { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); border-top: var(--line); padding-top: 14px; }
+.know li::before { content: ""; width: 18px; height: 18px; margin-top: 4px; border-radius: 50% 40% 55% 45%; background: var(--cobalt); }
+.know b { display: block; font: 600 1.3rem/1.2 var(--disp); letter-spacing: -.02em; margin-bottom: 6px; }
+.know p { margin: 0; max-width: 42ch; grid-column: 2; }
+.wall { position: relative; margin: 0; min-height: 420px; overflow: hidden; }
+.wall img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wall figcaption { position: absolute; right: 12px; bottom: 10px; background: var(--chalk); padding: 4px 8px; font-size: .85rem; }
+/* sections */
+section.part { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border-bottom: var(--line); }
+section.part > h2 { margin: 0; padding: 34px var(--pad); border-right: var(--line); font: 800 clamp(1.6rem, 2.6vw, 2.4rem)/1.05 var(--disp); letter-spacing: -.03em; }
+.body { padding: 34px var(--pad) 40px; }
+table { width: 100%; max-width: 640px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 14px 0; border-bottom: 1px solid #cfcbc1; font-weight: 500; }
+td:last-child { text-align: right; font: 800 1.35rem/1 var(--disp); letter-spacing: -.02em; }
+.note { margin: 16px 0 0; color: var(--muted); max-width: 60ch; }
+.addr { font: 800 clamp(1.8rem, 3vw, 2.6rem)/1.05 var(--disp); letter-spacing: -.03em; margin: 0 0 18px; }
+footer { padding: 22px var(--pad) 36px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; font-size: .9rem; color: var(--muted); }
+
+@media (max-width: 860px) {
+  :root { --pad: 20px; }
+  .top { padding-top: 14px; padding-bottom: 14px; }
+  .brand { font-size: 1.15rem; }
+  .board { grid-template-columns: 1fr; }
+  .board > div { border-right: 0; border-bottom: var(--line); padding: 16px var(--pad) 18px; }
+  .board > div:last-child { border-bottom: 0; }
+  .board h2 { margin-bottom: 8px; }
+  .big { font-size: 2.1rem; }
+  .mid { font-size: 1.1rem; margin-bottom: 4px; }
+  .visit { grid-template-columns: 1fr; }
+  .visit-text { border-right: 0; border-bottom: var(--line); padding: 28px var(--pad) 32px; }
+  .wall { min-height: 220px; }
+  section.part { grid-template-columns: 1fr; }
+  section.part > h2 { border-right: 0; padding: 28px var(--pad) 0; }
+  .body { padding-top: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <p class="brand">NORTHWALL</p>
+  <p class="where">3 Foundry Lane</p>
+</header>
+
+<main>
+  <div class="board">
+    <div>
+      <h2>Open every day</h2>
+      <p class="big">7 am–10 pm</p>
+      <p class="mid">Monday to Friday</p>
+      <p><b>9 am–8 pm</b> Saturday and Sunday</p>
+    </div>
+    <div>
+      <h2>Day pass</h2>
+      <p class="big">$22</p>
+      <p class="mid">Shoe hire $5</p>
+      <p><b>10-visit pass $190</b> · pay at the front desk</p>
+    </div>
+    <div>
+      <h2>First visit</h2>
+      <p class="big blue">No booking</p>
+      <p class="mid">Just walk in</p>
+      <p>15-minute safety briefing, included</p>
+    </div>
+  </div>
+
+  <div class="cta">
+    <p>Indoor bouldering at 3 Foundry Lane.</p>
+    <a class="btn" href="#first-visit">Plan your first visit</a>
+  </div>
+
+
+  <section class="visit" id="first-visit">
+    <div class="visit-text">
+      <h2>Your first visit</h2>
+      <ul class="know">
+        <li><b>Walk in</b><p>No booking. Come any time during opening hours.</p></li>
+        <li><b>Pay at the desk</b><p>Day pass $22, shoe hire $5. Passes are sold at the front desk only; there's no online sale.</p></li>
+        <li><b>Safety briefing</b><p>Everyone starts with a 15-minute safety briefing. It's included in the price.</p></li>
+      </ul>
+    </div>
+    <figure class="wall">
+      <img src="art/wall-tall.svg" alt="Illustration of a plywood bouldering wall with coloured holds">
+      <figcaption>Illustration, not a picture of this gym's wall</figcaption>
+    </figure>
+  </section>
+
+  <section class="part" id="find">
+    <h2>Find us</h2>
+    <div class="body">
+      <p class="addr">3 Foundry Lane</p>
+      <button class="btn alt" type="button" id="copy">Copy address</button> <span class="copied" aria-live="polite"></span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Northwall Bouldering · 3 Foundry Lane</span>
+  <span>Demo page for a fictional gym. Wall illustration drawn for this page.</span>
+</footer>
+
+<script>
+document.getElementById("copy").addEventListener("click", async () => {
+  const out = document.querySelector(".copied");
+  try { await navigator.clipboard.writeText("3 Foundry Lane"); out.textContent = "Copied"; }
+  catch { out.textContent = "Copy failed"; }
+  setTimeout(() => { out.textContent = ""; }, 2500);
+});
+</script>
+</body>
+</html>
