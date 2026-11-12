@@ -30,16 +30,20 @@ a { color: var(--ebony); text-underline-offset: 0.2em; }
 h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01em; margin: 0; }
 
 /* A strip of keys: the one decorative element, taken from the subject. */
-.keys { height: 18px; background:
-  repeating-linear-gradient(90deg, var(--white) 0 26px, var(--ebony) 26px 27px); border-bottom: 1px solid var(--ebony); position: relative; }
-.keys::after { content: ""; position: absolute; inset: 0 0 6px 0; background:
-  repeating-linear-gradient(90deg, transparent 0 18px, var(--ebony) 18px 34px, transparent 34px 45px, var(--ebony) 45px 61px, transparent 61px 99px, var(--ebony) 99px 115px, transparent 115px 126px, var(--ebony) 126px 142px, transparent 142px 153px, var(--ebony) 153px 169px, transparent 169px 189px); }
+.keys { height: 22px; border-bottom: 1px solid var(--ebony); background:
+  linear-gradient(90deg, var(--ebony) 0 14px, transparent 14px) 19px 0 / 182px 13px repeat-x,
+  linear-gradient(90deg, var(--ebony) 0 14px, transparent 14px) 45px 0 / 182px 13px repeat-x,
+  linear-gradient(90deg, var(--ebony) 0 14px, transparent 14px) 97px 0 / 182px 13px repeat-x,
+  linear-gradient(90deg, var(--ebony) 0 14px, transparent 14px) 123px 0 / 182px 13px repeat-x,
+  linear-gradient(90deg, var(--ebony) 0 14px, transparent 14px) 149px 0 / 182px 13px repeat-x,
+  repeating-linear-gradient(90deg, var(--white) 0 25px, var(--ebony) 25px 26px); }
 
 header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
 .name { font: 700 1.3rem/1 var(--serif); }
 .nav { display: flex; gap: 22px; }
 .nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 12px 0; }
 .nav a:hover { text-decoration: underline; }
+.m-request { display: none; }
 
 .hero { padding: clamp(32px, 6vw, 72px) 0 clamp(40px, 6vw, 72px); }
 .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
@@ -72,7 +76,7 @@ table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nu
 th, td { text-align: left; padding: 14px 0; border-bottom: 1px solid var(--keyline); vertical-align: top; }
 th { font-weight: 600; }
 td.num { text-align: right; font: 700 1.25rem/1.2 var(--serif); white-space: nowrap; }
-td small { display: block; color: var(--muted); font-size: 0.95rem; font-weight: 400; }
+th small, td small { display: block; color: var(--muted); font-size: 0.95rem; font-weight: 400; margin-top: 2px; }
 .where p { margin: 0 0 12px; }
 .where strong { font-family: var(--serif); font-size: 1.3rem; }
 
@@ -99,8 +103,12 @@ footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(
 
 @media (max-width: 860px) {
   .nav { display: none; }
+  .m-request { display: inline-flex; align-items: center; white-space: nowrap; min-height: 44px; padding: 0 16px; background: var(--felt); color: var(--white); font-weight: 600; font-size: 0.95rem; text-decoration: none; }
   .hero .wrap, .two { grid-template-columns: 1fr; }
   .estimate { padding: 22px 20px; }
+  .hero { padding-top: 24px; }
+  .hero h1 { font-size: 2.1rem; }
+  .lede { font-size: 1.1rem; margin-bottom: 16px; }
   .btn { width: 100%; }
 }
 </style>
@@ -110,6 +118,7 @@ footer { border-top: 1px solid var(--keyline); padding: 22px 0 36px; color: var(
 <header>
   <div class="wrap">
     <span class="name">Hollis Piano Tuning</span>
+    <a class="m-request" href="#request" aria-label="Request a tuning">Request</a>
     <nav class="nav" aria-label="Sections"><a href="#prices">Prices</a><a href="#area">Area and hours</a><a href="#request">Request a tuning</a></nav>
   </div>
 </header>
