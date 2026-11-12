@@ -39,7 +39,7 @@ h1 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; margin: 0 0 12px; }
 .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
 h2 { font-size: 1.5rem; line-height: 1.2; margin: 0 0 12px; }
 
-.notice { border-left: 6px solid var(--blue); background: var(--panel); padding: 12px 16px; margin: 0 0 20px; font-size: 1.0625rem; }
+.note { color: var(--muted); font-size: 1rem; margin: -4px 0 16px; }
 
 fieldset { border: 0; margin: 0; padding: 0; }
 legend { font-weight: 700; padding: 0; margin-bottom: 8px; }
@@ -56,7 +56,6 @@ select, input[type=text], input[type=email], input[type=date] {
 .room { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 20px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); }
 .room h3 { margin: 0; font-size: 1.25rem; }
 .room .meta { margin: 0; color: var(--muted); font-size: 1rem; }
-.room .sample { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--blue); border: 1.5px solid var(--blue); padding: 1px 6px; margin-left: 8px; vertical-align: 2px; }
 .room[hidden] { display: none; }
 .btn { font: 600 1.0625rem/1 var(--font); background: var(--blue); color: #fff; border: 0; border-bottom: 3px solid #062f40; padding: 0 18px; min-height: 48px; cursor: pointer; }
 .btn:hover { background: #083d54; }
@@ -113,7 +112,7 @@ footer { border-top: 1px solid var(--border); padding: 20px 0 32px; color: var(-
   <div class="layout">
     <section aria-labelledby="find-title">
       <h2 id="find-title">Study rooms</h2>
-      <p class="notice"><strong>Sample rooms.</strong> North Library's real room list hasn't been supplied, so these rooms are examples. Live availability isn't shown because no booking system is connected.</p>
+      <p class="note">Sample rooms for this demo. Availability isn't shown.</p>
 
       <form class="filters" data-filters onsubmit="return false">
         <fieldset>
@@ -137,12 +136,12 @@ footer { border-top: 1px solid var(--border); padding: 20px 0 32px; color: var(-
       <p class="count" role="status" aria-live="polite" data-count></p>
 
       <ul class="rooms" data-rooms>
-        <li class="room" data-id="A" data-cap="1" data-needs="quiet"><div><h3>Room A <span class="sample">Sample</span></h3><p class="meta">Up to 1 person · Quiet</p></div><button class="btn btn-ghost" type="button" data-pick="A">Request this room</button></li>
-        <li class="room" data-id="B" data-cap="2" data-needs="quiet whiteboard"><div><h3>Room B <span class="sample">Sample</span></h3><p class="meta">Up to 2 people · Quiet · Whiteboard</p></div><button class="btn btn-ghost" type="button" data-pick="B">Request this room</button></li>
-        <li class="room" data-id="C" data-cap="4" data-needs="whiteboard"><div><h3>Room C <span class="sample">Sample</span></h3><p class="meta">Up to 4 people · Whiteboard</p></div><button class="btn btn-ghost" type="button" data-pick="C">Request this room</button></li>
-        <li class="room" data-id="D" data-cap="6" data-needs="whiteboard screen"><div><h3>Room D <span class="sample">Sample</span></h3><p class="meta">Up to 6 people · Whiteboard · Screen</p></div><button class="btn btn-ghost" type="button" data-pick="D">Request this room</button></li>
+        <li class="room" data-id="A" data-cap="1" data-needs="quiet"><div><h3>Room A</h3><p class="meta">Up to 1 person · Quiet</p></div><button class="btn btn-ghost" type="button" data-pick="A">Request this room</button></li>
+        <li class="room" data-id="B" data-cap="2" data-needs="quiet whiteboard"><div><h3>Room B</h3><p class="meta">Up to 2 people · Quiet · Whiteboard</p></div><button class="btn btn-ghost" type="button" data-pick="B">Request this room</button></li>
+        <li class="room" data-id="C" data-cap="4" data-needs="whiteboard"><div><h3>Room C</h3><p class="meta">Up to 4 people · Whiteboard</p></div><button class="btn btn-ghost" type="button" data-pick="C">Request this room</button></li>
+        <li class="room" data-id="D" data-cap="6" data-needs="whiteboard screen"><div><h3>Room D</h3><p class="meta">Up to 6 people · Whiteboard · Screen</p></div><button class="btn btn-ghost" type="button" data-pick="D">Request this room</button></li>
       </ul>
-      <p class="none" data-none hidden>No sample room matches. Try fewer needs or a smaller group.</p>
+      <p class="none" data-none hidden>No room matches. Try fewer needs or a smaller group.</p>
     </section>
 
     <aside>
@@ -169,16 +168,16 @@ footer { border-top: 1px solid var(--border); padding: 20px 0 32px; color: var(-
 
   <section class="request" id="request" aria-labelledby="req-title">
     <h2 id="req-title">Request a room</h2>
-    <p class="notice"><strong>Not connected.</strong> This demo page can't send requests. You can fill in the form to check it, but nothing will be sent.</p>
+    <p class="note">Demo: this form checks your request but doesn't send it.</p>
     <form novalidate data-form>
       <div class="field" data-f="room">
         <label for="room">Room</label>
         <select id="room" name="room" class="wide">
           <option value="">Choose a room</option>
-          <option value="A">Room A (sample), up to 1 person</option>
-          <option value="B">Room B (sample), up to 2 people</option>
-          <option value="C">Room C (sample), up to 4 people</option>
-          <option value="D">Room D (sample), up to 6 people</option>
+          <option value="A">Room A , up to 1 person</option>
+          <option value="B">Room B , up to 2 people</option>
+          <option value="C">Room C , up to 4 people</option>
+          <option value="D">Room D , up to 6 people</option>
         </select>
         <p class="err" id="room-err"></p>
       </div>
@@ -211,12 +210,12 @@ footer { border-top: 1px solid var(--border); padding: 20px 0 32px; color: var(-
         <input type="email" id="email" name="email" class="wide" autocomplete="email">
         <p class="err" id="email-err"></p>
       </div>
-      <button class="btn" type="submit">Check and send request</button>
+      <button class="btn" type="submit">Check request</button>
       <div class="result" role="status" aria-live="polite" data-result></div>
     </form>
   </section>
 </main>
-<footer><div class="wrap">North Library is a fictional public library. Rooms on this page are samples; requests are not sent.</div></footer>
+<footer><div class="wrap">North Library is a fictional public library.</div></footer>
 
 <script>
 (function () {
@@ -232,7 +231,7 @@ footer { border-top: 1px solid var(--border); padding: 20px 0 32px; color: var(-
       var ok = +r.dataset.cap >= people && needs.every(function (n) { return have.indexOf(n) !== -1; });
       r.hidden = !ok; if (ok) shown++;
     });
-    count.textContent = shown + (shown === 1 ? " sample room fits" : " sample rooms fit");
+    count.textContent = shown + (shown === 1 ? " room fits" : " rooms fit");
     none.hidden = shown !== 0;
   }
   filters.addEventListener("change", filter); filter();
@@ -265,9 +264,9 @@ footer { border-top: 1px solid var(--border); padding: 20px 0 32px; color: var(-
     var bad = document.querySelector(".has-err select, .has-err input");
     if (bad) { bad.focus(); return; }
     var fmt = function (h) { return (h > 12 ? h - 12 : h) + (h >= 12 ? " pm" : " am"); };
-    res.innerHTML = "<h3>Request checked, not sent</h3><p>Room " + form.room.value + " (sample), " +
+    res.innerHTML = "<h3>Your request is ready</h3><p>Room " + form.room.value + ", " +
       d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" }) + ", " + fmt(+form.start.value) + " to " + fmt(end) +
-      ". This demo page isn't connected, so the library hasn't received it.</p>";
+      ". On this demo page it stops here.</p>";
   });
 })();
 </script>

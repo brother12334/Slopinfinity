@@ -27,3 +27,7 @@ Layout, balance and mobile passed on the first render.
 
 - Every story link opens a dialog saying its text and author have not been supplied, with a
   "Back to the stories" button. Each card also says so under its headline.
+
+## Review pass (five-site-review.pdf)
+
+The 'not yet supplied' line removed from every card; the limitation is stated once beside the story index and in the dialog. Still needs one approved story (real, or approved sample copy) to be readable.

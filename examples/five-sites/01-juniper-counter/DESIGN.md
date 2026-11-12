@@ -28,3 +28,7 @@
 
 - Copy address works (clipboard), with a fallback message.
 - No booking, ordering or live status on this page.
+
+## Review pass (five-site-review.pdf)
+
+Hero recomposed: one wide, detailed counter scene (morning light, espresso machine, glazed buns, espresso with crema, halved egg sandwich) at hero scale, with the information as a sign panel on the wall. Seven-day strip replaced by one hours line. Mobile shows the panel first, then the scene cropped to the food.

@@ -29,3 +29,7 @@
   update. Reset demo restores the board.
 - Try a handoff scrolls to and focuses the first actionable task.
 - Request access says it isn't connected.
+
+## Review pass (five-site-review.pdf)
+
+Claim shortened to 'Know who has it next.' so the board rises (first task and its action are on the first mobile screen). Each task now shows its relay path, previous holder, current holder (lit) and next owner, and the light moves on handoff. Request access carries a demo tag before it is clicked.

@@ -54,6 +54,9 @@ a { color: inherit; text-decoration: none; }
 
 .index { padding: 28px 0 56px; }
 .index h2 { font: 800 1rem/1 var(--sans); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 8px; }
+.index-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 24px; margin-bottom: 8px; }
+.index-head h2 { margin: 0; }
+.index-head p { margin: 0; color: var(--grey); font-size: 1rem; }
 .index ol { list-style: none; margin: 0; padding: 0; counter-reset: s; }
 .index li { counter-increment: s; border-top: 1px solid var(--rule); }
 .index li:last-child { border-bottom: 1px solid var(--rule); }
@@ -117,7 +120,6 @@ dialog button:hover { background: var(--sign); }
         </svg>
         <p class="kicker">Places</p>
         <h2>The last independent cinema</h2>
-        <p class="status">Article text and author not yet supplied</p>
       </a>
     </article>
 
@@ -138,7 +140,6 @@ dialog button:hover { background: var(--sign); }
           </svg>
           <p class="kicker">People</p>
           <h3>Who keeps the night market running</h3>
-          <p class="status">Article text and author not yet supplied</p>
         </a>
       </article>
       <article class="story">
@@ -155,14 +156,13 @@ dialog button:hover { background: var(--sign); }
           </svg>
           <p class="kicker">Places</p>
           <h3>A garden above the train tracks</h3>
-          <p class="status">Article text and author not yet supplied</p>
         </a>
       </article>
     </div>
   </section>
 
   <section class="index" aria-labelledby="index-title">
-    <h2 id="index-title">All stories</h2>
+    <div class="index-head"><h2 id="index-title">All stories</h2><p>Story text isn't available in this preview yet.</p></div>
     <ol>
       <li><a href="#" data-story="The last independent cinema"><span class="t">The last independent cinema</span><span class="k">Places</span></a></li>
       <li><a href="#" data-story="Who keeps the night market running"><span class="t">Who keeps the night market running</span><span class="k">People</span></a></li>
@@ -171,11 +171,11 @@ dialog button:hover { background: var(--sign); }
   </section>
 </main>
 
-<footer><div class="wrap">Side Street is a fictional magazine. Story graphics are drawn for this page; article text and authors were not supplied.</div></footer>
+<footer><div class="wrap">Side Street is a fictional magazine. Story graphics are drawn for this page.</div></footer>
 
 <dialog data-dialog aria-labelledby="dlg-title">
   <h2 id="dlg-title" data-dlg-title>Story</h2>
-  <p>This story's text and author haven't been supplied, so there's nothing to read on this demo page yet.</p>
+  <p>This story isn't available in the preview yet.</p>
   <form method="dialog"><button>Back to the stories</button></form>
 </dialog>
 

@@ -27,3 +27,7 @@
 
 - Choosing an object works (desk or list, mouse or keyboard).
 - Add to bag is disabled and says checkout isn't connected. The header says the same.
+
+## Review pass (five-site-review.pdf)
+
+Disabled Add to bag replaced by a working Add to demo bag with a bag count, disclosed once at the button. Close-up insets of each material (wood grain and edge, glaze rim, brushed brass and hole). Repeated warnings removed. Still needs real photos and dimensions for true scale cues.

@@ -29,3 +29,7 @@
 - "Request this room" fills the form with that room and moves to it.
 - The form validates and, when valid, shows "Request checked, not sent". A notice above the
   form says the page can't send requests.
+
+## Review pass (five-site-review.pdf)
+
+Two long notices replaced by one short note at the room list and one at the form. Per-row Sample badges removed. 'Check and send request' became 'Check request', and the result says 'Your request is ready ... On this demo page it stops here.'
