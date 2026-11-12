@@ -1,144 +1,162 @@
 # The plain profile
 
-Derived from comparing one academic paragraph with the output of Clever AI Humanizer
-(a humanizer that runs a model trained on human-written text). The input, a polished
-argumentative piece, was flagged as 100% AI. The output used the same facts in plain,
-student-style explanatory prose. Use this profile when the text is academic or
-informational and has to read as an ordinary person's writing rather than a polished
-writer's.
+Derived from seven input/output pairs run through Clever AI Humanizer, a humanizer that
+runs a model trained on human-written text. The inputs were typical model-written
+paragraphs in six registers: academic history, science explanation, opinion essay,
+casual blog, business report, personal statement, plus an academic argument that a
+detector had flagged at 100%. The pairs live in `research/clever-samples/`, and
+`python3 research/compare_pairs.py` re-measures them whenever more are added.
 
-This is one sample, so treat the numbers as targets to aim near, not laws.
+## What it changes, measured
 
-## What changed, measured
+| Signal | Input mean | Output mean | Pairs that moved this way |
+|---|---|---|---|
+| Commas per sentence | 1.56 | 0.46 | 7 of 7 (every output at 0.71 or below) |
+| Serial commas ("X, Y, and Z") | 1.4 | 0 | 7 of 7 |
+| Formal words (moreover, pivotal, facilitated...) | 4.3 | 0 | every pair that had any |
+| ", ...ing" clauses | 1.4 | 0.1 | 6 of 7 |
+| Average word length | 5.55 | 5.06 | 7 of 7 |
+| Words with 3+ syllables | 24% | 16% | 6 of 7 |
+| Average sentence length | 21.5 | 17.9 | 5 of 7 |
+| Sentence-length variation (CV) | 0.30 | 0.29 | no consistent change |
+| Word count | 155 | 149 | about 4% shorter |
 
-| | Input (flagged) | Output |
-|---|---|---|
-| Average sentence | 23 words | 17 words |
-| Longest sentence | 51 words | 34 words |
-| Sentence length variation (CV) | 0.58 | 0.43 |
-| Commas per sentence | 1.5 | 0.6 |
-| Semicolons | 2 | 0 |
-| Same facts, same length | 294 words | 292 words |
+## What it does not change
 
-Polish and syntactic sophistication were the giveaway, not evenness. The output is
-*flatter* than the input.
+This matters as much as what it does change. Clever does not:
+
+- reorder the paragraph or restructure the argument
+- add a voice, opinions, asides, questions or personal detail
+- make sentence lengths more varied
+- add or remove ideas on purpose (it does lose some, see the meaning lock)
+
+It rewrites **sentence by sentence, in the original order**, mostly one sentence to one
+sentence, sometimes splitting one into two. The polish comes out; the content and shape
+stay.
 
 ## The transformations
 
-Apply in this order, sentence by sentence. Keep every fact (see the meaning lock below).
+Apply in order, one sentence at a time.
 
-### 1. One idea per sentence
+### 1. Strip the commas
 
-- Split at semicolons. Split two independent clauses joined by "and" or "but" when
-  each carries its own fact.
-- Long sentences (over about 30 words) become two or three.
-- Keep sentence length mostly in the 9 to 25 word band. A couple of longer ones are fine.
+The strongest signal by far. Target: under 0.8 commas per sentence.
 
-> *"Bezos founded Blue Origin in 2000 and bought The Washington Post in 2013 for $250
-> million; in July 2021, ... he flew to the edge of space"*
-> → *"Bezos started his own aerospace company called Blue Origin in 2000. He also
-> purchased The Washington Post in 2013 for $250 million. In July 2021, ..."*
+- **Unpack appositives and tucked-in clauses** into plain main clauses or their own sentence.
+  - *"chloroplasts, specialized organelles containing the green pigment chlorophyll, which
+    absorbs light"* → *"the chloroplast organelles, where there is a green pigment called
+    chlorophyll. Chlorophyll absorbs light"*
+- **Drop the serial comma.** *"concentration, mood, and academic performance"* →
+  *"concentration, mood and overall grades"*
+- **Drop optional commas after short opening phrases.** *"When I first moved out on my
+  own, I relied"* → *"When I first moved out I would often"*; *"Overall the printing press"*
+- Keep commas that prevent a misreading.
 
-### 2. Unpack embedded clauses
+### 2. Turn ", ...ing" tails into plain links
 
-Appositives, participle phrases and clauses tucked between commas become plain main
-clauses. Aim for well under one comma per sentence on average.
-
-> *"Bezos, born in Albuquerque in 1964, had trained in ..."*
-> → *"Bezos was born in Albuquerque in 1964 and had trained in ..."*
-
-> *"Amazon Web Services, launched in 2006 to rent out computing infrastructure the
-> company had first developed for its own use."*
-> → what it is, where it came from, when it launched, who used it: four short sentences
-> in that order.
-
-### 3. Replace literary moves with plain explanation
-
-Polished rhetorical constructions are what a model produces when asked to write well.
-Swap them for the plain statement of what they mean.
-
-| Polished | Plain |
+| Input | Output |
 |---|---|
-| "accurate as far as it goes, but it obscures more than it explains" | "While this is technically true, it omits key details" |
-| "Nor was X the most consequential thing" | "While X was important, arguably the most impactful thing ..." |
-| "If X is now better understood as Y, the shift began there" | "This is where X can now be seen as more of a Y" |
-| "complicate any single characterization" | cut, or "people have different views of him" |
-| "diverge sharply ... divide along lines of" | "There are mixed opinions about" |
-| "a question less about X than about Y" | "This is less to do with X and more to do with Y" |
-| "not a leap in the dark" | "This was a strategic risk" |
+| ", demonstrating strong operational resilience" | ". This means they had a high level of resiliency." |
+| ", making it biologically difficult for them to" | "meaning that they cannot naturally" |
+| ", allowing scholars in different countries to work from" | "as scientists across the world were working off" |
+| ", indicating areas for improvement" | cut |
 
-Also drop: inversions ("Nor was", "Rarely has"), "as far as it goes", "in the long run",
-"to be sure", antithesis pairs ("less X than Y"), and closing sentences built as aphorisms.
+### 3. Replace formal and abstract words with everyday ones
 
-### 4. Everyday vocabulary
+Every sample removed every formal connector and most abstract nouns. Real swaps from the
+samples:
 
-Keep the technical terms the subject needs. Replace the abstract, literary ones with the
-words a student or professional would use in ordinary writing.
-
-| Literary | Everyday |
+| Formal | Everyday |
 |---|---|
-| consequential | impactful, important |
-| characterization | view, description |
-| distinction | difference, credit |
-| accumulated | gained, built up |
-| complicate | make it harder to |
-| documented | highlighted, reported |
-| bought, founded | purchased, started (either is fine; match the register) |
+| fundamentally transformed the circulation of knowledge | had a huge impact on the sharing of knowledge |
+| This proliferation of printed material | The increase in printed books |
+| facilitated the development of modern science | meant that modern science could develop |
+| was primarily driven by | was due to |
+| inquiries related to invoice formatting | questions about the way the invoicing was laid out |
+| temporarily reallocating two agents | temporarily moving 2 agents |
+| chronically sleep-deprived | not get enough sleep |
+| Critics argue that | Some people say that |
+| these logistical concerns, while valid, | despite this being true |
+| collaboration, perseverance, and creative problem-solving | teamwork, perseverance and creative thinking |
+| I am eager to bring this dedication | I am excited to bring this enthusiasm |
+| certain bacteria / specialized organelles | some bacteria / organelles |
+| developed by | invented by |
+| expensive | costly |
 
-Do not swap in rarer synonyms. The direction is toward common words, not unusual ones.
+Cut outright: *Moreover, Furthermore, Ultimately, Additionally, consistently,
+dramatically, significantly.* Keep *However*. A closing sentence starting with
+*Overall* is normal in this profile (3 of 7 samples added one).
 
-### 5. Explicit links between sentences
+Not every swap is shorter or simpler ("sluggish" became "lethargic"). The direction is
+toward the word an ordinary writer reaches for, not the shortest one.
 
-Short sentences need visible connections. Use the simple cohesion devices ordinary
-writers use:
+### 4. Put a person or a thing, not an abstraction, in the subject
 
-- "This" or "They" opening a sentence that refers back to the previous one
-  (up to about a quarter of sentences is normal in this profile).
-- "While", "However", "Also" at the start of a sentence.
-- Spelled-out reasons: "as he expected ...", "due to ...", "This is seen as ...".
+- *"Learning to cook has been one of the most rewarding experiences of my adult life"*
+  → *"One of the most rewarding things I have learnt as an adult is cooking"*
+- *"My passion for environmental engineering began during"* → *"I became interested in
+  environmental engineering when I"*
+- *"The printing press, developed by Johannes Gutenberg around 1440, fundamentally
+  transformed"* → *"The printing press was invented by Johannes Gutenberg in around 1440
+  which had a huge impact"*
 
-Make sure every "This" and "They" has a clear referent. Clever's output had two that
-did not (see the meaning lock).
+### 5. Plain intensifiers and evaluations
 
-### 6. Explain in sequence
+Outputs used everyday emphasis the inputs avoided: *huge, extremely, really, very, quite,
+actually, definitely, much quicker, a lot*. One or two per paragraph, never stacked.
 
-When a passage covers a thing, an event or a process, order it the way someone explains
-it out loud: what it is, where it came from, when it happened, what came of it.
+### 6. Split only where a sentence carries two ideas
 
-### 7. Ordinary conventions
+Average length dropped in 5 of 7 pairs, but one stayed flat and one got longer when two
+short sentences merged. Length is not the target; commas and formality are. Do not chop
+everything into short sentences, and do not try to vary length on purpose.
 
-These are acceptable variants that polished model prose tends to avoid. Use them where
-they fit the register and stay consistent:
+### 7. Everyday conventions
 
-- numerals for small numbers ("2 weeks")
-- the writer's own spelling convention (UK or US), applied throughout
-- no serial comma
-- common phrasings like "from a customer perspective", "things cheaper and easier"
-
-Do not add actual errors. Clever's output contained some ("There is mixed opinions",
-"high level job", "the Blue Origin New Shepard Capsule"); the `finish` pass corrected
-them, and errors can cost marks in graded work.
+- Numbers as numerals: *fifty years* → *50 years*, *two agents* → *2 agents*.
+- Common abbreviations: *in the third quarter* → *during Q3*; *11 p.m.* → *11pm*.
+- One spelling convention throughout. Clever defaulted to UK English (learnt,
+  civilisation, flavouring, takeaways); match the writer's own convention instead.
+- Simple sentence openers repeat freely: *The ... The ...*, *This ... This ...*, the topic
+  word twice. Do not vary openers for the sake of it.
 
 ## Meaning lock: what not to copy
 
-Clever's output also did these, and the plain profile must not:
+Clever lost or bent something in 6 of 7 samples. The plain profile keeps the
+simplification and refuses the damage:
 
-- **Dropped a fact** (Bezos becoming executive chair).
-- **Overstated** a claim ("he knew the web would be growing" for "a calculated bet").
-- **Lost attribution** ("This is seen as the trade-off", with no one doing the seeing).
-- **Changed a term of art** ("antitrust doctrine" became "anti-trust laws").
-- **Left unclear referents** ("rent their computing resources", where "their" pointed to
-  the wrong noun).
+| Sample | What Clever did | Rule |
+|---|---|---|
+| History | dropped "an estimated" (20 million became a hard fact); dropped literacy being confined to clergy and the elite | keep hedges that carry real uncertainty; keep every fact |
+| Science | "Making it one of the most important processes." as a fragment; "earth" lowercase | no fragments in academic register; keep proper nouns |
+| Opinion | "8:30 or later" became "8.30am"; "reported improvements" became "have seen"; "because, research"; "students concentration" | keep ranges and attributions exact; no punctuation errors |
+| Blog | none found | |
+| Business | "the team experienced an increase in ticket volume" became "Customer Support increased ticket volume" (the team did not cause it); dropped "slightly" | keep who did what; keep qualifiers that change the meaning |
+| Personal statement | dropped "make a meaningful impact in my community"; "highschool"; "how important teamwork ... is" | keep every point the writer makes; spelling and agreement correct |
+| Bezos | dropped "executive chair"; "knew" for "a calculated bet"; "doctrine" became "laws"; unclear "their" | keep terms of art; every pronoun needs a clear referent |
 
-After the rewrite, check every fact, claim, attribution, technical term and pronoun
-against the original.
+After the rewrite, check every fact, number, range, qualifier, attribution, technical
+term and pronoun against the input. Optional commas may go; real errors may not.
 
-## Targets for the checker
+## Checker targets
 
-`python3 scripts/rhythm_check.py <file> --profile plain` checks:
+`python3 scripts/rhythm_check.py <file> --profile plain` flags, from the sample data:
 
-- no semicolons
-- commas per sentence at or below about 0.9
-- no sentence over 35 words
-- none of the literary moves from section 3
-- no voice or burstiness flags (this profile skips them on purpose)
+| Check | Target | Severity |
+|---|---|---|
+| Commas per sentence | 0.8 or less | MEDIUM over 0.8, HIGH over 1.3 |
+| Serial commas | 0 | MEDIUM |
+| Formal words | 0 | MEDIUM, HIGH at 3+ |
+| ", ...ing" clauses | 0 | LOW for 1, MEDIUM for 2+ |
+| Semicolons | 0 | MEDIUM |
+| Sentences over 35 words | none | MEDIUM |
+| Literary moves (Nor was, as far as it goes...) | none | MEDIUM |
+| Words with 3+ syllables | 24% or less | LOW |
+
+On the seven samples, every input gets at least two HIGH or MEDIUM flags and every Clever
+output gets none. The thresholds were tuned on those same samples, so treat new pairs as
+the real test and re-run `research/compare_pairs.py` as they come in.
+
+The voice-profile checks (sentence-length variety, sentence shapes, repeated openers,
+contractions) are switched off in this profile, because the samples show Clever does not
+do any of them.

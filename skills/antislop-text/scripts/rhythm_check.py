@@ -198,9 +198,9 @@ def analyze(text, formal=False, profile="voice"):
         skip = {"uniform-length", "flat-length", "even-run", "no-short", "no-long",
                 "one-sentence-shape", "few-sentence-shapes", "no-contractions", "no-speaker",
                 "tidy-closers"}
-        flags[:] = [f for f in flags if f["id"] not in skip and not (
-            f["id"] == "repeated-opener" and f["msg"].split('"')[1] in {"this", "they", "he", "she", "it"}
-            and int(f["msg"].split()[0]) / len(sents) <= 0.3)]
+        # Humanized samples repeat plain subject openers (The, This, the topic word) freely.
+        skip |= {"repeated-opener"}
+        flags[:] = [f for f in flags if f["id"] not in skip]
         joined = " ".join(sents)
         semis = joined.count(";")
         if semis:
@@ -208,9 +208,32 @@ def analyze(text, formal=False, profile="voice"):
                           "msg": f"{semis} semicolon(s). Split into separate sentences."})
         cps = joined.count(",") / len(sents)
         out["commas_per_sentence"] = round(cps, 2)
-        if cps > 0.9:
+        if cps > 0.8:
             flags.append({"id": "embedded-clauses", "sev": "high" if cps > 1.3 else "medium",
-                          "msg": f"{cps:.2f} commas per sentence. Unpack appositives and tucked-in clauses into plain main clauses (aim for 0.9 or less)."})
+                          "msg": f"{cps:.2f} commas per sentence. Unpack appositives and tucked-in clauses into plain main clauses (humanized samples averaged 0.46; aim for 0.8 or less)."})
+        serial = sum(len(re.findall(r", (?:and|or) ", s_)) for s_ in sents if s_.count(",") >= 2)
+        out["serial_commas"] = serial
+        if serial:
+            flags.append({"id": "serial-comma", "sev": "medium",
+                          "msg": f"{serial} serial comma(s) (\"X, Y, and Z\"). Every humanized sample dropped them: write \"X, Y and Z\"."})
+        formal_hits = re.findall(r"\b(?:moreover|furthermore|additionally|ultimately|consequently|thus|hence|pivotal|fundamentally|facilitat\w*|demonstrat\w*|primarily|consistently|dramatically|significantly|proliferation|utiliz\w*|landscape|chronically|logistical|reallocat\w*|inquiries|firsthand|deepen\w*|meaningful|specialized|certain)\b", joined, re.I)
+        out["formal_words"] = len(formal_hits)
+        if formal_hits:
+            flags.append({"id": "formal-words", "sev": "high" if len(formal_hits) >= 3 else "medium",
+                          "msg": f"{len(formal_hits)} formal word(s): {', '.join(sorted(set(w.lower() for w in formal_hits))[:6])}. Every humanized sample removed all of them; use the everyday word or cut."})
+        ing = len(re.findall(r", (?!including\b|according\b)\w+ing\b", joined))
+        if ing:
+            flags.append({"id": "ing-tail", "sev": "medium" if ing >= 2 else "low",
+                          "msg": f"{ing} ', ...ing' clause(s). Make each its own sentence (\"This means ...\") or join with \"meaning\"/\"which\"."})
+        words_all = WORD.findall(joined)
+        def syl(w):
+            w = w.lower(); n = len(re.findall(r"[aeiouy]+", w))
+            return max(n - (1 if w.endswith("e") and n > 1 and not w.endswith("le") else 0), 1)
+        poly = 100 * sum(syl(w) >= 3 for w in words_all) / max(len(words_all), 1)
+        out["polysyllabic_pct"] = round(poly, 1)
+        if poly > 24:
+            flags.append({"id": "long-words", "sev": "low",
+                          "msg": f"{poly:.0f}% of words have 3+ syllables (humanized samples averaged 16%). Swap abstract words for everyday ones where the meaning holds."})
         longs = [i + 1 for i, n in enumerate(lengths) if n > 35]
         if longs:
             flags.append({"id": "long-sentence", "sev": "medium",
@@ -249,7 +272,8 @@ def main():
                 print("  shapes: " + "   ".join(f"{a} {b}" for a, b in k.items()) +
                       f"   contractions/100w: {res['contractions_per_100_words']}")
             if "commas_per_sentence" in res:
-                print(f"  commas per sentence: {res['commas_per_sentence']}")
+                print(f"  commas/sentence: {res['commas_per_sentence']}   serial commas: {res['serial_commas']}"
+                      f"   formal words: {res['formal_words']}   3+ syllable words: {res['polysyllabic_pct']}%")
             if not res["flags"]:
                 print("  verdict: no flags\n")
             for f in res["flags"]:

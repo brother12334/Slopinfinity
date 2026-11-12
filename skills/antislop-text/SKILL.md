@@ -53,10 +53,11 @@ matter and it is unclear.
 | `voice` (default) | Varied rhythm, a speaker with a stance, asides, questions | Posts, emails, essays with a point of view, copy | stages 1 to 7 below |
 | `plain` | One idea per sentence, few embedded clauses, everyday words, explicit links | Academic and informational text, reports, anything that should read as an ordinary person's writing rather than a polished writer's | [references/plain-rewrite.md](references/plain-rewrite.md) |
 
-The `plain` profile comes from comparing an academic paragraph that detectors flagged at
-100% with Clever AI Humanizer's rewrite of it. The rewrite was flatter and simpler, not
-more varied: polish was the giveaway. For academic text where detector scores matter,
-prefer `plain`.
+The `plain` profile comes from seven paragraphs in six registers compared with Clever AI
+Humanizer's rewrites of them (`research/clever-samples/`). In every pair Clever cut the
+commas, the serial commas and the formal words, kept the order and the ideas, and did
+not add voice or rhythm variety. For academic or informational text where detector
+scores matter, prefer `plain`.
 
 With `plain`, run stages 1 to 3 below, then replace stages 4 and 5 with the seven
 transformations in plain-rewrite.md, then stages 6 and 7.

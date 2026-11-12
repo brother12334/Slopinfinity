@@ -134,8 +134,9 @@ You get the final text without a list of every change.
 Add `--style normal`, `--style structured` or `--style academic` to set the register.
 Add `--profile plain` for academic or informational text. It rewrites into simple
 one-idea sentences with everyday words instead of adding voice and variety. It's based
-on comparing a paragraph detectors flagged with Clever AI Humanizer's rewrite of it
-([plain-rewrite.md](skills/antislop-text/references/plain-rewrite.md)).
+on seven paragraphs compared with Clever AI Humanizer's rewrites of them
+([plain-rewrite.md](skills/antislop-text/references/plain-rewrite.md); the samples and a
+script to re-measure them are in [research/](research/)).
 
 `finish` is for pairing this skill with a humanizer that runs its own trained model.
 Write the draft here, run it through the humanizer, then bring the result back: Claude
