@@ -64,7 +64,40 @@ compared with a polished one. Neither change alters this page. Here the borrowed
 still the hero, and the repair-tag direction (B) was set aside after one rough execution
 without that refinement.
 
-## Fact audit
+## Repair-tag revision (`b2-repair-tag.html`)
+
+A deliberate craft revision of direction B, using only the brief. Proposed identity.
+
+- **The tag now organises the information.** The main sheet holds the work and prices
+  plus "Ready" and "Payment" fields; a perforated stub holds drop-off logistics (address,
+  phone, hours). The date stamp carries the opening hours. The non-functional checkboxes
+  are gone.
+- **Type:** IBM Plex Sans for reading and Plex Sans Condensed for the headline and form
+  labels, replacing all-Courier text.
+- **Composition:** the ticket fills the desktop screen instead of floating in kraft; the
+  whole page fits in one desktop screen.
+- **Headline:** two sentences set as separate lines, each on one line at 390px and
+  wider (the second wraps at 360px).
+- **Mobile:** stamp, headline, lede and call button, then prices; the address is in the
+  header line.
+
+### Comparison (`screenshots/lowgear-comparison.png`)
+
+| | A, photo page | B, first draft | B, revised |
+|---|---|---|---|
+| Visual quality | Rich, but the richness is the borrowed photo | Weak: costume type, empty field, orphan word | Clean and coherent; flatter and quieter than A |
+| Usability | Good | Mixed | Best: every deciding fact and the call in the first screen at both sizes |
+| Feels like Lowgear without borrowing | No: reads as Bicycle Kitchen | Own idea, poorly made | Own idea, nothing borrowed |
+
+**Verdict: improved, but not a clear pass.** The revision fixes the craft and usability
+failures and is the most honest Lowgear page. It still only partly answers "could this
+belong to any business of this type?": a repair ticket is a category-wide idea, and
+with no Lowgear mark, material or voice beyond the name, any repair workshop could use
+this page. On desktop the stub leaves an empty area below the hours, and the red stamp
+(textured, slightly transparent) carries the hours on mobile with a little less contrast
+than plain text would.
+
+
 
 | Displayed | Source in the brief |
 |---|---|

@@ -220,10 +220,10 @@ poster, attractive illustration or new palette does not make up for a decisive f
 is buried, tiny or unreadable. Only recommend a concept that passes usability; identity
 decides between the ones that pass. If a favorite fails usability, revise it before
 recommending it. Don't discard a direction with an idea of its own because its first
-execution is weak: refine its typography, composition and mobile treatment until it is
-as finished as the other options, then compare. That is a craft iteration only; it adds
-no business facts. Where the task is exploratory (a portfolio, a magazine, a gallery), the
-deciding element can be a clear entry point into the work rather than facts.
+execution is weak: give it a deliberate revision of its typography, composition and
+mobile treatment, then compare it with the other options. If it still fails after that
+revision, reject it and say why. The revision is craft only; it adds no business facts.
+Where the task is exploratory (a portfolio, a magazine, a gallery), the deciding element can be a clear entry point into the work rather than facts.
 `scripts/first_screen.js` reports where each fact lands; read a "below fold" result as a
 question (is there a clear path to it?), not an automatic failure:
 
