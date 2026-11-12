@@ -164,8 +164,6 @@ footer { border-top: 1px solid var(--line); padding: 20px 0 32px; color: var(--g
           <symbol overflow="visible" id="side-cup" viewBox="0 0 200 230">
             <ellipse cx="100" cy="214" rx="74" ry="10" fill="#5d574c" opacity=".25"/>
             <path d="M34 34 L166 34 L160 196 Q160 206 150 206 L50 206 Q40 206 40 196 Z" fill="#dfe7e9"/>
-            <path d="M40 186 L160 186 L160 196 Q160 206 150 206 L50 206 Q40 206 40 196 Z" fill="#c8ad8a"/>
-            <path d="M40 186 Q100 194 160 186" fill="none" stroke="#a9b9bd" stroke-width="3"/>
             <rect x="58" y="44" width="10" height="132" rx="5" fill="#ffffff" opacity=".6"/>
             <ellipse cx="100" cy="34" rx="66" ry="14" fill="#c4d0d3"/>
             <ellipse cx="100" cy="35" rx="56" ry="10" fill="#7d9197"/>
@@ -206,7 +204,7 @@ footer { border-top: 1px solid var(--line); padding: 20px 0 32px; color: var(--g
           <text class="tag" x="768" y="520">Brass bookmark</text><text class="tag-price" x="768" y="538">$24</text>
         </g>
       </svg>
-      <p class="desk-note">Concept drawings, not photographs. Not to scale: dimensions haven't been supplied.</p>
+      <p class="desk-note">Concept drawings, not photographs. They show the kind of object, not its real size, finish or color: photos and dimensions haven't been supplied.</p>
     </div>
 
     <aside class="detail" aria-live="polite">
@@ -270,9 +268,9 @@ footer { border-top: 1px solid var(--line); padding: 20px 0 32px; color: var(--g
     });
   });
   var views = {
-    tray: [["Top", "Top view", "sym-tray", "-10 -10 460 320", 440, 300], ["Side", "Three-quarter view: rim and depth", "side-tray", "-10 90 460 170", 440, 300], ["Detail", "Close-up: corner and walnut grain", "close-tray", "0 0 120 120", 120, 120]],
-    cup: [["Top", "Top view", "sym-cup", "-30 -30 260 260", 200, 200], ["Side", "Side view: glaze and unglazed foot", "side-cup", "-50 10 300 230", 200, 230], ["Detail", "Close-up: glazed rim", "close-cup", "0 0 120 120", 120, 120]],
-    bookmark: [["Flat", "Flat view", "sym-bookmark", "-70 -10 220 240", 80, 220], ["In use", "In use: marking a page", "use-bookmark", "0 0 300 240", 300, 240], ["Detail", "Close-up: hole and brushed brass", "close-bookmark", "0 0 120 120", 120, 120]]
+    tray: [["Top", "Concept: top view", "sym-tray", "-10 -10 460 320", 440, 300], ["Side", "Concept: three-quarter view", "side-tray", "-10 90 460 170", 440, 300], ["Detail", "Concept: corner", "close-tray", "0 0 120 120", 120, 120]],
+    cup: [["Top", "Concept: top view", "sym-cup", "-30 -30 260 260", 200, 200], ["Side", "Concept: side view", "side-cup", "-50 10 300 230", 200, 230], ["Detail", "Concept: rim", "close-cup", "0 0 120 120", 120, 120]],
+    bookmark: [["Flat", "Concept: flat view", "sym-bookmark", "-70 -10 220 240", 80, 220], ["In use", "Concept: in a book", "use-bookmark", "0 0 300 240", 300, 240], ["Detail", "Concept: top end", "close-bookmark", "0 0 120 120", 120, 120]]
   };
   function renderViews(id, i) {
     var v = views[id][i], use = document.querySelector("[data-view]"), svg = document.querySelector("[data-view-svg]");

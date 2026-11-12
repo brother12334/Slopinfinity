@@ -35,3 +35,7 @@ Disabled Add to bag replaced by a working Add to demo bag with a bag count, disc
 ## Content and imagery pass
 
 What a visitor couldn't assess: form and finish from a single top view. Fix: three concept views per object, switchable in the panel (tray: top, three-quarter, corner and grain; cup: top, side with glaze and unglazed foot, rim; bookmark: flat, in use in a book, hole and brushed brass). Labeled as concept drawings, not to scale because dimensions haven't been supplied.
+
+## Critical review: view vs evidence
+
+The three concept views help a visitor picture the kind of object, but they are not evidence of size, finish or color. Captions that stated unsupplied facts ('unglazed foot', 'brushed brass', 'rim and depth', 'walnut grain') were removed, and the drawn unglazed foot band was taken out. Unresolved: product photos and dimensions.

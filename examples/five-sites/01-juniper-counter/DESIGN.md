@@ -36,3 +36,7 @@ Hero recomposed: one wide, detailed counter scene (morning light, espresso machi
 ## Content and imagery pass
 
 What a visitor couldn't see: the food up close, and the counter front was an empty band. Fix: three close-up menu tiles (cut bun showing the cardamom swirl, espresso from above with crema, halved egg sandwich showing its layers) on the counter front; mobile crop tightened to the food. Online photo: one attempt at the CC0 Wikimedia Commons file 'Cardamom buns.jpg' (W.carter) returned HTTP 429 with Retry-After 600, so no photo was used. A real photo of the café's own food would be the authentic upgrade and has to come from the owner.
+
+## Critical review: view vs evidence
+
+The menu tiles are a new view of the menu, not evidence about the food: they repeat the item names and show nothing about quality or portion. Unresolved: real food photos (see ../UNRESOLVED.md).

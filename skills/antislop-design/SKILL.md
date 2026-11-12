@@ -284,9 +284,19 @@ still cannot **see, assess, read or complete**. Fix the most important gap first
 fixed well beats several touched lightly. These are prompts to check, not rules every
 design must satisfy:
 
+- **Is it a new view, or new evidence?** Ask what the visitor needs to judge (quality,
+  size, finish, taste, condition, credibility) and whether the material on the page can
+  show it. A drawing, a concept render or sample copy can show the *kind* of thing and
+  how the page will work; it cannot show the real thing's quality, material, finish or
+  size. Adding more drawings adds views, not evidence. When the decision depends on
+  evidence you don't have (real photos, dimensions, real editorial copy, real data),
+  record it as an **unresolved content need** in the delivery and in `DESIGN.md`. Do not
+  claim the illustration solved it.
+- **Do captions state only supplied facts?** A drawing captioned "unglazed foot" or
+  "brushed brass" invents a product fact. Caption concept imagery as concept imagery.
 - **Can they assess what's offered?** A single view rarely lets someone judge an object
-  they might buy. Real photos are best; otherwise several labeled concept views (top,
-  side, detail, in use) answer more than one. Never imply a scale you don't know: ask
+  they might buy. Real photos are best; several labeled concept views can help a visitor
+  picture the object, but they remain views. Never imply a scale you don't know: ask
   for dimensions.
 - **Can they read what's promised?** When reading is the task, at least one complete
   piece should be readable: real content, or sample content the user approved and that
@@ -378,8 +388,9 @@ Give the user, briefly:
 5. **The revisions** from step 6 (up to three): before, after and the tradeoff of each,
    or a short note that none were needed and why.
 6. **Effects kept**, each with its reason.
-7. **Demo states and placeholders.** Every action that is not connected, and every piece
-   of real proof, content or imagery the user must supply.
+7. **Demo states, placeholders and unresolved content needs.** Every action that is not
+   connected, and every piece of real proof, content or imagery the user must supply,
+   with the visitor decision each one blocks.
 8. **Defaults departed from** in step 7, with the reason.
 9. **Anything not checked** (no browser, no real device, no network), stated plainly
    rather than implied as passing.

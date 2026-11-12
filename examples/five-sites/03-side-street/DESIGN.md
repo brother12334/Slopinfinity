@@ -35,3 +35,7 @@ The 'not yet supplied' line removed from every card; the limitation is stated on
 ## Content and imagery pass
 
 What a visitor couldn't do: read anything. Fix: a complete sample story, 'The last independent cinema' (article-cinema.html), labeled at the top as written for this demo, with a fictional cinema, people and quotes. The lead card and index link to it; the notice now says one sample story is readable.
+
+## Critical review: view vs evidence
+
+The sample story shows the reading experience, not the magazine's journalism. Unresolved: real story text and authors.

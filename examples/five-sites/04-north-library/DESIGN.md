@@ -37,3 +37,7 @@ Two long notices replaced by one short note at the room list and one at the form
 ## Content and imagery pass
 
 What a visitor couldn't trust: instructions that said send and request while the form only checks. Fix: heading, lede, room buttons ('Choose this room'), steps, form heading ('Check a room request'), button and result ('Request checked') all describe checking; the demo note sits once beside the button. Fixed 'Room C ,' and the other room labels.
+
+## Critical review: view vs evidence
+
+The request process is now consistent and honest. Unresolved: the real room list.

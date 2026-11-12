@@ -37,3 +37,7 @@ Claim shortened to 'Know who has it next.' so the board rises (first task and it
 ## Content and imagery pass
 
 What a visitor couldn't scan on mobile: four repeated path diagrams. Fix: on mobile the path is one line of names ('Path: Leo → You → Priya') with the current holder highlighted; the full diagram stays on desktop.
+
+## Critical review: view vs evidence
+
+The working demo is real evidence of the mechanism. Nothing essential is unresolved for a product demo.
